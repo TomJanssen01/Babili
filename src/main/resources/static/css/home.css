@@ -1,3 +1,25 @@
+body{
+    display: grid;
+    grid-template-columns: [start] 100% [end] !important;
+}
+
+header{
+    grid-column: start / end !important;
+}
+
+main{
+    grid-column: start / end !important;
+    text-align: center;
+}
+
+footer{
+    grid-column: start / end !important;
+}
+
+#logo{
+    width: 100%;
+}
+
 .tile{
     border: var(--color-logo-dark) solid 10px;
     border-radius: 15px;

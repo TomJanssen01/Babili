@@ -36,8 +36,9 @@ footer{
     grid-column: sidebar / end;
 }
 
-#logo{
-    width: 500px;
+.logo {
+    max-width: 500px;
+    min-width: 120px;
 }
 
 #sidebar #logo{
