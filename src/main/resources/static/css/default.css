@@ -37,8 +37,7 @@ footer{
 }
 
 #logo{
-    width: 300px;
-    margin: 100px;
+    width: 500px;
 }
 
 #sidebar #logo{
@@ -66,4 +65,8 @@ hr {
 
 .title {
     font-size: 3.5em;
+}
+
+footer {
+    margin: 10px 40px 10px 40px;
 }
