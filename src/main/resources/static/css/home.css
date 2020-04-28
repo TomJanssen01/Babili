@@ -1,0 +1,14 @@
+.tile{
+    /*align-content: center;*/
+    border: var(--color-logo-dark) solid 10px;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+}
+
+.tile * {
+    display: block;
+    margin: 10px;
+}

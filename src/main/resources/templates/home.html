@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/home.css"/>
+    <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
 </head>
 <body>
-<p>Wijziging</p>
-<p>Placeholder</p>
+<header></header>
+<div id="sidebar">
+    <div>
+        <!--img id="logo" th:src="'images/babiligroen300.png'">
+        <h1>Navigatie</h1-->
+        <nav id="navbar"></nav>
+        <!--nav id="navbar">
+            <a class="navbarItem btn"><img class="navbarIcon"
+                                       th:src="'images/icons/outline_home_black_18dp.png'"><span
+                    class="navbarName">Startpagina</span></a>
+            <a class="navbarItem btn"><img class="navbarIcon"
+                                       th:src="'images/icons/outline_collections_bookmark_black_18dp.png'"><span
+                    class="navbarName">Cursussen</span></a>
+            <a class="navbarItem btn"><img class="navbarIcon"
+                                       th:src="'images/icons/outline_account_circle_black_18dp.png'"><span
+                    class="navbarName">Mijn account</span></a>
+            <a class="navbarItem btn"><img class="navbarIcon"
+                                       th:src="'images/icons/outline_exit_to_app_black_18dp.png'"><span
+                    class="navbarName">Afmelden</span></a>
+        </nav-->
+    </div>
+</div>
+<main>
+    <img id="logo" th:src="'images/babiligroen300.png'" alt="Babili logo">
+    <h1 class="title">WELKOM!</h1>
+    <p>Wij wensen je alvast heel veel succes!</p>
+    <!--hr-->
+    <h2>IK BEN EEN:</h2>
+    <div id="student" class="tile"><i class="material-icons md-small md-dark">school</i><span>Cursist</span></div>
+    <div id="docent" class="tile"><i class="material-icons md-small md-dark">vpn_key</i><span>Docent</span></div>
+</main>
+<footer></footer>
 </body>
 </html>
