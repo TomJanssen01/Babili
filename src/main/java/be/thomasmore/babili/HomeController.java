@@ -21,7 +21,7 @@ public class HomeController {
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     private String naam = "home";
-    private String hallo = "hallo";
+    private String pw;
 
     @EnableWebSecurity
     public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -35,12 +35,13 @@ public class HomeController {
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception{
-//            auth.inMemoryAuthentication().withUser("admin")
-//                    .password("\\A\\$2(a|y|b)?\\$(\\d\\d)\\$[./0-9A-Za-z]{53}")
-//                    .roles("ADMIN");
             auth.inMemoryAuthentication().withUser("admin")
-                    .password(passwordEncoder().encode("admin"))
+                    .password("$2a$10$fNEP0vLPDboAhB7ZM1vUxOzsj2Wt5IsY1hH3FYLUaE4YyQYFAZVOC")
                     .roles("ADMIN");
+            auth.inMemoryAuthentication().withUser("talha")
+                    .password("$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy")
+                    .roles("USER");
+            pw = passwordEncoder().encode("hallo");
         }
 
         @Bean
@@ -52,9 +53,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(Principal principal, Model model){
         String loggedInName = principal != null ? principal.getName() : "nobody";
-//        String loggedInPassword = principal.toString();
         logger.info("logged in: " + loggedInName);
-//        logger.info(loggedInPassword);
+        logger.info(pw);
         model.addAttribute("name", naam);
         model.addAttribute("login", loggedInName);
         return "home";
