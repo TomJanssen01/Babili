@@ -49,6 +49,7 @@ a{
 
 a.tile{
     text-decoration: none;
+    text-transform: capitalize;
 }
 
 a:hover{
