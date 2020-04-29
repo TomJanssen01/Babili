@@ -13,8 +13,14 @@ public class Opdracht {
     private String task;
     private String example;
     private String review;
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Cursus cursus;
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Inlevering inlevering;
+
 
     public Opdracht() {
+
     }
 
     @Override
@@ -26,6 +32,22 @@ public class Opdracht {
                 ", example='" + example + '\'' +
                 ", review='" + review + '\'' +
                 '}';
+    }
+
+    public Inlevering getInlevering() {
+        return inlevering;
+    }
+
+    public void setInlevering(Inlevering inlevering) {
+        this.inlevering = inlevering;
+    }
+
+    public Cursus getCursus() {
+        return cursus;
+    }
+
+    public void setCursus(Cursus cursus) {
+        this.cursus = cursus;
     }
 
     public Integer getId() {

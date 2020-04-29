@@ -1,40 +1,41 @@
-insert into user
-(ID, USERNAME, PASSWORD, NAME, EMAILADDRESS)
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 0 minvalue 0;
+insert into BABILIUSER
+(ID, USERNAME, PASSWORD, NAAM, EMAILADDRESS)
 values
 (nextval ('HIBERNATE_SEQUENCE'), 'tojan', 'QsDf01', 'Tom Janssen', 'tom.janssen@student.thomasmore.be');
 
-insert into user
-(ID, USERNAME, PASSWORD, NAME, EMAILADDRESS)
+insert into BABILIUSER
+(ID, USERNAME, PASSWORD, NAAM, EMAILADDRESS)
 values
 (nextval ('HIBERNATE_SEQUENCE'), 'stdel', 'AeZrPo78514', 'Stefaan Delplanque', 'stefaan.delplanque@student.thomasmore.be');
 
-insert into user
-(ID, USERNAME, PASSWORD, NAME, EMAILADDRESS)
+insert into BABILIUSER
+(ID, USERNAME, PASSWORD, NAAM, EMAILADDRESS)
 values
 (nextval ('HIBERNATE_SEQUENCE'), 'tabay', 'ApKNklINyt87965', 'Talha Bayansar', 'talha.bayansar@student.thomasmore.be');
 
-insert into user
-(ID, USERNAME, PASSWORD, NAME, EMAILADDRESS)
+insert into BABILIUSER
+(ID, USERNAME, PASSWORD, NAAM, EMAILADDRESS)
 values
 (nextval ('HIBERNATE_SEQUENCE'), 'lihae', 'OJuYtoNNv7842@u2', 'Lies Van der Haegen', 'lies.van.der.haegen@student.thomasmore.be');
 
 insert into cursus
-(ID, DOCENTID, CURSISTID, NAME, DESCRIPTION)
+(ID, DOCENTID, CURSISTID, NAAM, DESCRIPTION)
 values
 (nextval ('cursus_seq'), 0, 1, 'Nederlands voor beginners', 'dit is een cursus nederlands voor beginners');
 
 insert into cursus
-(ID, DOCENTID, CURSISTID,NAME, DESCRIPTION)
+(ID, DOCENTID, CURSISTID,NAAM, DESCRIPTION)
 values
 (nextval ('cursus_seq'), 1, 1, 'Nederlands voor beginners', 'dit is een cursus nederlands voor beginners');
 
 insert into cursus
-(ID, DOCENTID, CURSISTID,NAME, DESCRIPTION)
+(ID, DOCENTID, CURSISTID,NAAM, DESCRIPTION)
 values
 (nextval ('cursus_seq'), 2, 0, 'Nederlands voor intermediairs', 'dit is een cursus nederlands voor gemiddeld niveau');
 
 insert into cursus
-(ID, DOCENTID, CURSISTID, NAME, DESCRIPTION)
+(ID, DOCENTID, CURSISTID, NAAM, DESCRIPTION)
 values
 (nextval ('cursus_seq'),0, 3,  'Nederlands voor gevorderden', 'dit is een cursus nederlands voor gevorderden');
 

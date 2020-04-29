@@ -1,9 +1,9 @@
 package be.thomasmore.babili.model;
 
 public class Docent {
-    private User user;
+    private BabiliUser user;
 
-    public Docent(User user) {
+    public Docent(BabiliUser user) {
         this.user = user;
     }
 
@@ -14,11 +14,11 @@ public class Docent {
                 '}';
     }
 
-    public User getUser() {
+    public BabiliUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(BabiliUser user) {
         this.user = user;
     }
 }

@@ -1,9 +1,12 @@
 package be.thomasmore.babili.model;
 
-public class Cursist {
-    private User user;
+import javax.persistence.Entity;
 
-    public Cursist(User user) {
+
+public class Cursist {
+    private BabiliUser user;
+
+    public Cursist(BabiliUser user) {
         this.user = user;
     }
 
@@ -14,11 +17,11 @@ public class Cursist {
                 '}';
     }
 
-    public User getUser() {
+    public BabiliUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(BabiliUser user) {
         this.user = user;
     }
 }

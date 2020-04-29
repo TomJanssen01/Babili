@@ -9,7 +9,7 @@ public class Cursus {
             initialValue = 0, allocationSize = 1)
     @Id
     private Integer id;
-    private String name;
+    private String naam;
     private String description;
 
     public Cursus() {
@@ -19,7 +19,7 @@ public class Cursus {
     public String toString() {
         return "Cursus{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + naam + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
@@ -32,12 +32,12 @@ public class Cursus {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNaam() {
+        return naam;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNaam(String name) {
+        this.naam = name;
     }
 
     public String getDescription() {

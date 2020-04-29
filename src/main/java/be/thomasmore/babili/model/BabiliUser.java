@@ -1,18 +1,20 @@
 package be.thomasmore.babili.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-public class User {
+public class BabiliUser {
     @GeneratedValue
     @Id
     private Integer id;
     private String userName;
     private String password;
-    private String name;
+    private String naam;
     private String emailAddress;
 
-    public User() {
+    public BabiliUser() {
     }
 
     @Override
@@ -21,7 +23,7 @@ public class User {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", Name='" + name + '\'' +
+                ", Name='" + naam + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 '}';
     }
@@ -50,12 +52,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getNaam() {
+        return naam;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNaam(String name) {
+        this.naam = name;
     }
 
     public String getEmailAddress() {

@@ -1,5 +1,8 @@
 package be.thomasmore.babili.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Inlevering {
 
     private String audiopath;
@@ -9,7 +12,9 @@ public class Inlevering {
         this.audiopath = audiopath;
         this.feedback = feedback;
     }
+public Inlevering (){
 
+}
     @Override
     public String toString() {
         return "Inlevering{" +

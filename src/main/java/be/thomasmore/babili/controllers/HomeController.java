@@ -1,6 +1,5 @@
 package be.thomasmore.babili.controllers;
 
-import be.thomasmore.babili.model.*;
 import be.thomasmore.babili.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-@Autowired
-private UserRepository userRepository;
+    @Autowired
+    private BabiliUserRepository babiliUserRepository;
     @Autowired
     private CursistRepository cursistRepository;
     @Autowired
@@ -19,10 +18,11 @@ private UserRepository userRepository;
     private DocentRepository docentRepository;
     @Autowired
     private InleveringRepository inleveringRepository;
-    @Autowired OpdrachtRepository opdrachtRepository;
+    @Autowired
+    private OpdrachtRepository opdrachtRepository;
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model) {
 
         return "home";
     }
