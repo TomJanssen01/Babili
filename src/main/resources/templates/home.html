@@ -6,10 +6,10 @@
 </head>
 <body>
 <h1 th:text="${name}">name</h1>
-<div th:if="${loggin == 'nobody'}">
+<div th:if="${login == 'nobody'}">
     <a href="/login">login</a>
 </div>
-<div th:unless="${loggin == 'nobody'}">
+<div th:unless="${login == 'nobody'}">
     <a href="/logout">logout</a>
 </div>
 <p>Wijziging</p>

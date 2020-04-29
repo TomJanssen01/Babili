@@ -1,8 +1,13 @@
 package be.thomasmore.babili;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +31,32 @@ public class HomeController {
             http.csrf().ignoringAntMatchers("/h2-console/**").and()
                     .headers().frameOptions().sameOrigin();
         }
+
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth)
+            throws Exception{
+//            auth.inMemoryAuthentication().withUser("admin")
+//                    .password("\\A\\$2(a|y|b)?\\$(\\d\\d)\\$[./0-9A-Za-z]{53}")
+//                    .roles("ADMIN");
+            auth.inMemoryAuthentication().withUser("admin")
+                    .password(passwordEncoder().encode("admin"))
+                    .roles("ADMIN");
+        }
+
+        @Bean
+        public PasswordEncoder passwordEncoder(){
+            return new BCryptPasswordEncoder();
+        }
     }
 
     @GetMapping("/")
     public String home(Principal principal, Model model){
         String loggedInName = principal != null ? principal.getName() : "nobody";
+//        String loggedInPassword = principal.toString();
         logger.info("logged in: " + loggedInName);
+//        logger.info(loggedInPassword);
         model.addAttribute("name", naam);
-        model.addAttribute("loggin", loggedInName);
+        model.addAttribute("login", loggedInName);
         return "home";
     }
 
