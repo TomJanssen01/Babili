@@ -10,6 +10,7 @@
     <a href="/login">login</a>
 </div>
 <div th:unless="${login == 'nobody'}">
+    <p>hallo <span th:text="${login}"></span></p>
     <a href="/logout">logout</a>
 </div>
 <p>Wijziging</p>

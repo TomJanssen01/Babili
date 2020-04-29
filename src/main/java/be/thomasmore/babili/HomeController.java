@@ -15,13 +15,17 @@ import java.security.Principal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.DataSource;
+
 
 @Controller
 public class HomeController {
-    private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+    @Autowired
+    private DataSource dataSource;
+
+    private Logger logger = LoggerFactory.getLogger(HomeController.class);
     private String naam = "home";
-    private String pw;
 
     @EnableWebSecurity
     public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -35,13 +39,10 @@ public class HomeController {
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception{
-            auth.inMemoryAuthentication().withUser("admin")
-                    .password("$2a$10$fNEP0vLPDboAhB7ZM1vUxOzsj2Wt5IsY1hH3FYLUaE4YyQYFAZVOC")
-                    .roles("ADMIN");
-            auth.inMemoryAuthentication().withUser("talha")
-                    .password("$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy")
-                    .roles("USER");
-            pw = passwordEncoder().encode("hallo");
+            auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(
+                    "select username,password,true from user where username = ?")
+                    .authoritiesByUsernameQuery(
+                    "select username, role from user where username = ?");
         }
 
         @Bean
@@ -54,7 +55,6 @@ public class HomeController {
     public String home(Principal principal, Model model){
         String loggedInName = principal != null ? principal.getName() : "nobody";
         logger.info("logged in: " + loggedInName);
-        logger.info(pw);
         model.addAttribute("name", naam);
         model.addAttribute("login", loggedInName);
         return "home";
