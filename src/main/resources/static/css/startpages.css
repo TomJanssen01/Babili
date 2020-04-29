@@ -52,13 +52,19 @@ a.tile{
 }
 
 a:hover{
-    /*text-decoration: none;*/
     color: var(--color-logo-dark);
 }
 
 @media screen and (min-width: 576px) {
     form{
         width: 80%;
+    }
+
+    form#formRegister{
         max-width: 800px;
+    }
+
+    form#formLogin{
+        max-width: 500px;
     }
 }

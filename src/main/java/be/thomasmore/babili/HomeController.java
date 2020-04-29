@@ -13,12 +13,12 @@ public class HomeController {
 
     @GetMapping("/login/student")
     public String loginStudent(){
-        return "login-student";
+        return "login/login-student";
     }
 
     @GetMapping("/login/teacher")
     public String loginTeacher(){
-        return "login-teacher";
+        return "login/login-teacher";
     }
 
     @GetMapping("/register")
@@ -28,16 +28,26 @@ public class HomeController {
 
     @GetMapping("/register/student")
     public String registerStudent(){
-        return "register-student";
+        return "register/register-student";
     }
 
     @GetMapping("/register/teacher")
     public String registerTeacher(){
-        return "register-teacher";
+        return "register/register-teacher";
     }
 
     @GetMapping("/overview-tasks")
     public String overviewTasks(){
         return "overview-tasks";
+    }
+
+    @GetMapping("/teacher/overview-students")
+    public String overviewStudents(){
+        return "teacher/overview-students";
+    }
+
+    @GetMapping("/teacher/create-task")
+    public String createTask(){
+        return "teacher/create-task";
     }
 }
