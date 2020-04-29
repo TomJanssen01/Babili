@@ -12,6 +12,11 @@ main{
     text-align: center;
 }
 
+form{
+    margin: auto;
+    text-align: left;
+}
+
 footer{
     grid-column: start / end !important;
 }
@@ -21,7 +26,7 @@ footer{
 }
 
 .tile{
-    border: var(--color-logo-dark) solid 10px;
+    border: var(--color-logo-dark-transparant) solid 10px;
     border-radius: 15px;
     margin: 10px;
     text-align: center;
@@ -29,7 +34,31 @@ footer{
     padding: 5px;
 }
 
-.tile * {
+.tile:hover{
+    border-color: var(--color-logo-dark);
+}
+
+.tile *{
     display: block;
     margin: 10px;
+}
+
+a{
+    color: var(--color-logo-dark);
+}
+
+a.tile{
+    text-decoration: none;
+}
+
+a:hover{
+    /*text-decoration: none;*/
+    color: var(--color-logo-dark);
+}
+
+@media screen and (min-width: 576px) {
+    form{
+        width: 80%;
+        max-width: 800px;
+    }
 }

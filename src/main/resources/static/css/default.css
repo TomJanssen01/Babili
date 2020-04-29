@@ -1,6 +1,8 @@
 :root{
-    --color-logo-dark: #4d6162;
-    --color-logo-light: #f1ca00;
+    --color-logo-dark: rgba(77, 97, 98, 1);
+    --color-logo-light: rgba(241, 202, 0, 1);
+    --color-logo-dark-transparant: rgba(77, 97, 98, 0.8);
+    --color-logo-light-transparant: rgba(241, 202, 0, 0.8);
 }
 
 html, body{
@@ -36,7 +38,7 @@ footer{
     grid-column: sidebar / end;
 }
 
-.logo {
+.logo{
     max-width: 500px;
     min-width: 120px;
 }
@@ -45,11 +47,11 @@ footer{
     width: 200px;
 }
 
-#sidebar nav a {
+#sidebar nav a{
     display: block;
 }
 
-hr {
+hr{
     border-radius: 90px;
     background-color: var(--color-logo-dark);
     width: 90%;
@@ -62,11 +64,11 @@ hr {
 .material-icons.md-medium { font-size: 60px; }
 .material-icons.md-large { font-size: 96px; }
 
-.title {
+.title{
     font-size: 3.5em;
 }
 
-.task-card {
+.task-card{
     border: var(--color-logo-dark) solid 5px;
     background-color: white;
     min-height: 60px;
@@ -74,23 +76,23 @@ hr {
     display: flex;
 }
 
-.task-card .task-number, .task-content {
+.task-card .task-number, .task-content{
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 20px;
 }
 
-.task-card .task-number {
+.task-card .task-number{
     text-align: center;
     align-self: center;
     font-weight: bold;
 }
 
-.task-card .task-content {
+.task-card .task-content{
     text-align: left;
     align-self: center;
 }
 
-footer {
+footer{
     margin: 10px 40px 10px 40px;
 }
