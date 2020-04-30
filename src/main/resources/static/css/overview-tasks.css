@@ -15,12 +15,6 @@
     display: flex;
     padding: 10px;
 }
-
-.task-card .task-number, .task-content{
-    /*margin-top: auto;
-    margin-bottom: auto;*/
-}
-
 .task-card :first-child{
     margin-right: 10px;
 }
