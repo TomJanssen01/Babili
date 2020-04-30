@@ -1,19 +1,17 @@
-package be.thomasmore.babili;
+package be.thomasmore.babili.controller;
 
 import be.thomasmore.babili.recording.JavaSoundRecorder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HomeController {
+public class SoundController {
 
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("rec", "Klik op start om de taak op te nemen.");
-        return "home";
+        return "homeBeta";
     }
 
     @GetMapping("/start")
