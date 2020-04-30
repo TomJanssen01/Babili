@@ -18,31 +18,21 @@ html, body{
 
 body{
     display: grid;
-    grid-template-columns: [sidebar] 300px [content] auto [end];
-    grid-template-rows: [header] 80px [content] auto [footer] 80px [end];
 }
 
 header{
     background-color: var(--color-logo-dark);
-    grid-row: header / content;
-    grid-column: sidebar / end;
 }
 
 main{
-    grid-row: content / footer;
-    grid-column: content / end;
     padding: 30px 20px 10px 20px;
 }
 
 footer{
-    grid-row: footer / end;
-    grid-column: sidebar / end;
     margin: 10px 40px 10px 40px;
 }
 
 #sidebar{
-    grid-row: content / footer;
-    grid-column: sidebar / content;
     padding-left: 15px;
 }
 
@@ -56,10 +46,73 @@ footer{
 }
 
 #sidebar nav a{
-    display: block;
+    display: flex;
     width: fit-content;
+}
+
+#sidebar nav a *{
+    align-self: center;
+}
+
+#sidebar nav a i{
+    margin-right: 6px;
 }
 
 .title{
     font-size: 3.5em;
+}
+
+@media screen and (min-width: 768px) {
+    body{
+        grid-template-columns: [sidebar] auto [content] auto [end];
+        grid-template-rows: [header] 80px [content] auto [footer] 80px [end];
+    }
+
+    header{
+        grid-row: header / content;
+        grid-column: sidebar / end;
+    }
+
+    main{
+        grid-row: content / footer;
+        grid-column: content / end;
+    }
+
+    footer{
+        grid-row: footer / end;
+        grid-column: sidebar / end;
+    }
+
+    #sidebar{
+        grid-row: content / footer;
+        grid-column: sidebar / content;
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    body{
+        grid-template-columns: [start] auto [end];
+        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] 80px [end];
+    }
+
+    header{
+        grid-row: header / navbar;
+        grid-column: start / end;
+    }
+
+    main{
+        grid-row: content / footer;
+        grid-column: start / end;
+    }
+
+    footer{
+        grid-row: footer / end;
+        grid-column: start / end;
+    }
+
+    #sidebar{
+        grid-row: navbar / content;
+        grid-column: start / end;
+    }
 }

@@ -16,30 +16,48 @@
     <a href="/"><img id="logo" th:src="'images/babiligroen300.png'"></a>
     <h1>Navigatie</h1>
     <nav id="navbar">
-        <a class="navbarItem btn"><img class="navbarIcon"
-                                       th:src="'images/icons/outline_home_black_18dp.png'"><span
-                class="navbarName">Startpagina</span></a>
-        <a class="navbarItem btn"><img class="navbarIcon"
-                                       th:src="'images/icons/outline_collections_bookmark_black_18dp.png'"><span
-                class="navbarName">Opdrachten</span></a>
-        <a class="navbarItem btn"><img class="navbarIcon"
-                                       th:src="'images/icons/outline_account_circle_black_18dp.png'"><span
-                class="navbarName">Mijn account</span></a>
-        <a class="navbarItem btn"><img class="navbarIcon"
-                                       th:src="'images/icons/outline_exit_to_app_black_18dp.png'"><span
-                class="navbarName">Afmelden</span></a>
+        <a class="navbarItem btn">
+            <i class="material-icons md-small md-dark">home</i>
+            <span class="navbarName">Startpagina</span>
+        </a>
+        <a class="navbarItem btn">
+            <i class="material-icons md-small md-dark">list_alt</i>
+            <span class="navbarName">Opdrachten</span>
+        </a>
+        <a class="navbarItem btn">
+            <i class="material-icons md-small md-dark">account_circle</i>
+            <span class="navbarName">Mijn account</span>
+        </a>
+        <a class="navbarItem btn">
+            <i class="material-icons md-small md-dark">exit_to_app</i>
+            <span class="navbarName">Afmelden</span>
+        </a>
     </nav>
 </div>
 <main>
-    <h1>Afgewerkte opdrachten</h1><span>10/30</span>
-    <div class="task-card"><span class="task-number">01</span><span class="task-content">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+    <h1>Week 3: opdrachten</h1>
+    <span>10/30</span>
+    <div class="task">
+        <i class="task-state material-icons md-small md-dark">radio_button_unchecked</i>
+        <div class="task-card"><span class="task-number">01</span><span class="task-content">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        </div>
     </div>
-    <div class="task-card"><span class="task-number">02</span><span class="task-content">Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
+    <div class="task">
+        <i class="task-state material-icons md-small md-dark">radio_button_unchecked</i>
+        <div class="task-card"><span class="task-number">02</span><span class="task-content">Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
+        </div>
     </div>
-    <div class="task-card"><span class="task-number">03</span><span
-            class="task-content">Vraag aan een persoon ...</span></div>
-    <div class="task-card"><span class="task-number">04</span><span
-            class="task-content">Maak een wandeling en ...</span></div>
+    <div class="task">
+        <i class="task-state material-icons md-small md-dark">radio_button_unchecked</i>
+        <div class="task-card"><span class="task-number">03</span><span
+                class="task-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam placerat ligula nec fermentum condimentum. Curabitur sollicitudin efficitur mauris id tristique. Aliquam vitae risus at erat malesuada aliquam id id lectus. Curabitur neque risus, elementum a vulputate vitae, luctus eget dolor. Vivamus nec nisl aliquet, ornare ex vitae, scelerisque sem. Ut quis ligula nisl. Maecenas et tincidunt ex.</span>
+        </div>
+    </div>
+    <div class="task">
+        <i class="task-state material-icons md-small md-dark">radio_button_unchecked</i>
+        <div class="task-card"><span class="task-number">04</span><span
+                class="task-content">Maak een wandeling en ...</span></div>
+    </div>
 </main>
 <footer>&copy; Babili, 2020</footer>
 </body>

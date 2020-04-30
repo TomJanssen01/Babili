@@ -10,3 +10,7 @@ main{
 footer{
     background-color: orange;
 }
+
+#sidebar nav a{
+    background-color: greenyellow;
+}
