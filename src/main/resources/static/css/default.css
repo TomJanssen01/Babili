@@ -40,13 +40,13 @@ footer{
     margin: 10px 40px 10px 40px;
 }
 
-#sidebar{
-    padding-left: 15px;
-}
-
 .logo{
     max-width: 500px;
     min-width: 120px;
+}
+
+#sidebar{
+    padding-left: 15px;
 }
 
 #sidebar #logo{

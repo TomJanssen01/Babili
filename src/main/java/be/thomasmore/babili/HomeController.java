@@ -40,14 +40,4 @@ public class HomeController {
     public String overviewTasks(){
         return "overview-tasks";
     }
-
-    @GetMapping("/teacher/overview-students")
-    public String overviewStudents(){
-        return "teacher/overview-students";
-    }
-
-    @GetMapping("/teacher/create-task")
-    public String createTask(){
-        return "teacher/create-task";
-    }
 }
