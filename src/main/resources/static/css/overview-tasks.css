@@ -1,0 +1,31 @@
+.task{
+    display: flex;
+}
+
+.task-state{
+    align-self: center;
+    margin-right: 5px;
+}
+
+.task-card{
+    border: var(--color-logo-dark) solid 5px;
+    background-color: white;
+    min-height: 60px;
+    margin-bottom: 5px;
+    display: flex;
+    padding: 10px;
+}
+.task-card :first-child{
+    margin-right: 10px;
+}
+
+.task-card .task-number{
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+}
+
+.task-card .task-content{
+    text-align: justify;
+    align-self: center;
+}
