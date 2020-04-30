@@ -18,35 +18,12 @@ import java.security.Principal;
 
 @Controller
 public class LoginController {
-    @Autowired
-    private DataSource dataSource;
+
 
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
     private String naam = "home";
 
-    @EnableWebSecurity
-    public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-        protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                    .anyRequest().permitAll().and().formLogin();
-            http.csrf().ignoringAntMatchers("/h2-console/**").and()
-                    .headers().frameOptions().sameOrigin();
-        }
 
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth)
-                throws Exception{
-            auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(
-                    "select username,password,true from user where username = ?")
-                    .authoritiesByUsernameQuery(
-                            "select username, role from user where username = ?");
-        }
-
-        @Bean
-        public PasswordEncoder passwordEncoder(){
-            return new BCryptPasswordEncoder();
-        }
-    }
 
 //    @GetMapping("/")
 //    public String home(Principal principal, Model model){

@@ -6,20 +6,30 @@
     <title>Register</title>
 </head>
 <body>
-<form>
-    <label>
-        username
-        <input type="text">
-    </label>
-    <label>
-        password
-        <input type="password">
-    </label>
-    <label>
-        nickname
-        <input type="text">
-    </label>
-    <input type="submit">
+<form th:action="|/user/register|" method="post">
+
+    <div class="venueinfo">
+        <div class="infoLine">
+            <div class="infoLineName"><label for="name">username:</label></div>
+            <div class="infoLineValue">
+                <input id="name" name="userName" />
+            </div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName"><label for="password">password:</label></div>
+            <div class="infoLineValue">
+                <input id="password" name="password" type="password"/>
+            </div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName"><label for="nickname">nickname:</label></div>
+            <div class="infoLineValue">
+                <input id="nickname" name="nickname" />
+            </div>
+        </div>
+    </div>
+    <input class="buttonLook editButton horizontal" type="submit" value="register"/>
+    <a href="/" class="buttonLook editButton horizontal">cancel</a>
 </form>
 </body>
 </html>
