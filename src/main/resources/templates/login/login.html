@@ -3,16 +3,16 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>login</title>
 </head>
 <body>
-<form th:action="|/user/register|" method="post">
+<form th:action="@{/user/login}" method="post">
 
     <div class="venueinfo">
         <div class="infoLine">
-            <div class="infoLineName"><label for="email">email:</label></div>
+            <div class="infoLineName"><label for="name">username:</label></div>
             <div class="infoLineValue">
-                <input id="email" name="email" />
+                <input id="name" name="username" />
             </div>
         </div>
         <div class="infoLine">
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <input class="buttonLook editButton horizontal" type="submit" value="register"/>
+    <input class="buttonLook editButton horizontal" type="submit" value="login"/>
     <a href="/" class="buttonLook editButton horizontal">cancel</a>
 </form>
 </body>

@@ -9,4 +9,4 @@ VALUES
 INSERT INTO USER
 (ID, USERNAME, PASSWORD, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talha', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'USER');
+(nextval('USER_SEQ'), 'talha@talha.talha', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'TEACHER');

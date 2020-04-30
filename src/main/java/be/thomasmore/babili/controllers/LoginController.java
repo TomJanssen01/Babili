@@ -24,6 +24,30 @@ public class LoginController {
     private String naam = "home";
 
 
+//    @GetMapping("/login/student")
+//    public String loginStudent() {
+//        return "login/login-student";
+//    }
+
+//    @GetMapping("/login/teacher")
+//    public String loginTeacher() {
+//        return "login/login-teacher";
+//    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping("/register/student")
+    public String registerStudent() {
+        return "register/register-student";
+    }
+
+    @GetMapping("/register/teacher")
+    public String registerTeacher() {
+        return "register/register-teacher";
+    }
 
 //    @GetMapping("/")
 //    public String home(Principal principal, Model model){
@@ -33,22 +57,22 @@ public class LoginController {
 //        model.addAttribute("login", loggedInName);
 //        return "home";
 //    }
-
-    @GetMapping("/test1")
-    public String test1(Principal principal, Model model){
-        String loggedInName = principal != null ? principal.getName() : "nobody";
-        logger.info("logged in: " + loggedInName);
-        model.addAttribute("name", naam);
-        model.addAttribute("login", loggedInName);
-        return "test1";
-    }
-
-    @GetMapping("/admin/test2")
-    public String test2(Principal principal, Model model){
-        String loggedInName = principal != null ? principal.getName() : "nobody";
-        logger.info("logged in: " + loggedInName);
-        model.addAttribute("name", naam);
-        model.addAttribute("login", loggedInName);
-        return "test2";
-    }
+//
+//    @GetMapping("/test1")
+//    public String test1(Principal principal, Model model){
+//        String loggedInName = principal != null ? principal.getName() : "nobody";
+//        logger.info("logged in: " + loggedInName);
+//        model.addAttribute("name", naam);
+//        model.addAttribute("login", loggedInName);
+//        return "test1";
+//    }
+//
+//    @GetMapping("/admin/test2")
+//    public String test2(Principal principal, Model model){
+//        String loggedInName = principal != null ? principal.getName() : "nobody";
+//        logger.info("logged in: " + loggedInName);
+//        model.addAttribute("name", naam);
+//        model.addAttribute("login", loggedInName);
+//        return "test2";
+//    }
 }
