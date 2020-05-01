@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SoundController {
 
-    @GetMapping("/")
-    public String home(Model model) {
+    @GetMapping("/homeBeta")
+    public String homeBeta(Model model) {
         model.addAttribute("rec", "Klik op start om de taak op te nemen.");
         return "homeBeta";
     }
