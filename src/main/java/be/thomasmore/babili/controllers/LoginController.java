@@ -44,30 +44,4 @@ public class LoginController {
         return "register/register-teacher";
     }
 
-//    @GetMapping("/")
-//    public String home(Principal principal, Model model){
-//        String loggedInName = principal != null ? principal.getName() : "nobody";
-//        logger.info("logged in: " + loggedInName);
-//        model.addAttribute("name", naam);
-//        model.addAttribute("login", loggedInName);
-//        return "home";
-//    }
-//
-//    @GetMapping("/test1")
-//    public String test1(Principal principal, Model model){
-//        String loggedInName = principal != null ? principal.getName() : "nobody";
-//        logger.info("logged in: " + loggedInName);
-//        model.addAttribute("name", naam);
-//        model.addAttribute("login", loggedInName);
-//        return "test1";
-//    }
-//
-//    @GetMapping("/admin/test2")
-//    public String test2(Principal principal, Model model){
-//        String loggedInName = principal != null ? principal.getName() : "nobody";
-//        logger.info("logged in: " + loggedInName);
-//        model.addAttribute("name", naam);
-//        model.addAttribute("login", loggedInName);
-//        return "test2";
-//    }
 }
