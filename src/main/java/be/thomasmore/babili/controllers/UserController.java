@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/register/teacher")
     public String registerTeacher(Principal principal, Model model){
         if (principal != null){
-            return "redirect:/";
+            return "redirect:/overview-tasks";
         }
         return "register/register-teacher";
     }
@@ -94,7 +94,7 @@ public class UserController {
                 autologin(userName, password);
             }
         }
-        return "redirect:/";
+        return "redirect:/overview-tasks";
     }
 
     private void autologin(String userName, String password) {
