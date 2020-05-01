@@ -19,11 +19,6 @@ import java.security.Principal;
 @Controller
 public class LoginController {
 
-
-    private Logger logger = LoggerFactory.getLogger(HomeController.class);
-    private String naam = "home";
-
-
 //    @GetMapping("/login/student")
 //    public String loginStudent() {
 //        return "login/login-student";
