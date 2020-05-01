@@ -1,4 +1,4 @@
-package be.thomasmore.babili.controller;
+package be.thomasmore.babili.controllers;
 
 import be.thomasmore.babili.recording.JavaSoundRecorder;
 import org.springframework.stereotype.Controller;
