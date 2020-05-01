@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Startpagina</title>
@@ -16,7 +17,7 @@
     <a href="/"><img id="logo" class="logo" th:src="'images/babiligroen300.png'" alt="Babili logo"></a>
     <h1 class="title">Account aanmaken</h1>
     <h2>IK BEN EEN:</h2>
-    <a id="student" class="tile" href="/register/student"><div class="tile-icon"><i class="material-icons-round md-small md-dark">school</i></div><span>Cursist</span></a>
+    <a id="student" class="tile" href="/user/register/student"><div class="tile-icon"><i class="material-icons-round md-small md-dark">school</i></div><span>Cursist</span></a>
     <a id="docent" class="tile" href="/register/teacher"><div class="tile-icon"><i class="material-icons-round md-small md-dark">vpn_key</i></div><span>Docent</span></a>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

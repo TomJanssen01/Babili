@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>logout</title>
+</head>
+<body>
+
+<div class="row1">
+    <div class="row1content">
+        <h2>Logout</h2>
+        <form th:action="@{/user/logout}" method="post">
+            <div>Confirm to logout.</div>
+            <input class="buttonLook editButton horizontal" type="submit" value="logout"/>
+            <a href="/" class="buttonLook editButton horizontal">cancel</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

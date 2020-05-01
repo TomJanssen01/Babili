@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Inloggen als docent</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/default.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/startpages.css"/>
     <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
 </head>
 <body>
@@ -15,14 +16,14 @@
 <main>
     <a href="/"><img id="logo" class="logo" th:src="'../images/babiligroen300.png'" alt="Babili logo"></a>
     <h1 class="title">Inloggen als docent</h1>
-    <form id="formLogin">
+    <form id="formLogin" th:action="@{/user/login}" method="post">
         <div class="form-group">
             <label for="inputEmail">E-mail</label>
-            <input type="email" class="form-control" id="inputEmail">
+            <input type="email" name="username" class="form-control" id="inputEmail">
         </div>
         <div class="form-group">
             <label for="inputPassword1">Paswoord</label>
-            <input type="password" class="form-control" id="inputPassword1" placeholder="••••••••">
+            <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="••••••••">
         </div>
         <button type="submit" class="btn btn-primary">Registreren</button>
     </form>
