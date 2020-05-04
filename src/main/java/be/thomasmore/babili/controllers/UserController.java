@@ -47,8 +47,10 @@ public class UserController {
 
     @PostMapping("/register/student")
     public String registerStudentPost(@RequestParam String userName,
-                               @RequestParam String password,
-                               Principal principal, Model model){
+                                      @RequestParam String password,
+                                      @RequestParam String name,
+                                      @RequestParam String email,
+                                      Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
             if(!userWithUserName.isPresent()){
@@ -58,13 +60,15 @@ public class UserController {
                 logger.info(String.format("password %s\n", encode));
                 newUser.setPassword(encode);
                 newUser.setUsername(userName);
+                newUser.setName(name);
+                newUser.setEmail(email);
                 newUser.setRole("STUDENT");
                 userRepository.save(newUser);
 
                 autologin(userName, password);
             }
         }
-        return "redirect:/";
+        return "redirect:/overview-tasks";
     }
 
     @GetMapping("/register/teacher")
@@ -77,8 +81,10 @@ public class UserController {
 
     @PostMapping("/register/teacher")
     public String registerTeacherPost(@RequestParam String userName,
-                               @RequestParam String password,
-                               Principal principal, Model model){
+                                      @RequestParam String password,
+                                      @RequestParam String name,
+                                      @RequestParam String email,
+                                      Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
             if(!userWithUserName.isPresent()){
@@ -88,6 +94,8 @@ public class UserController {
                 logger.info(String.format("password %s\n", encode));
                 newUser.setPassword(encode);
                 newUser.setUsername(userName);
+                newUser.setName(name);
+                newUser.setEmail(email);
                 newUser.setRole("TEACHER");
                 userRepository.save(newUser);
 
