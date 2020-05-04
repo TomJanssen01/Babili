@@ -47,6 +47,8 @@ footer{
     border: none;
     background-color: transparent;
     color: var(--color-logo-dark);
+    padding: 0;
+    margin: auto;
 }
 
 a{
