@@ -6,7 +6,7 @@ values
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(0, 'bakker', 'ga naar een test', 'bestel een brood', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', 'bestel een brood', 'moeilijk', 0);
 
 insert into inlevering
 (ID, AUDIO_PATH, FEEDBACK, OPDRACHT_Id)
