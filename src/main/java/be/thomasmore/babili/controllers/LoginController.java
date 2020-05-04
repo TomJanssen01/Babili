@@ -34,14 +34,14 @@ public class LoginController {
         return "register";
     }
 
-    @GetMapping("/register/student")
-    public String registerStudent() {
-        return "register/register-student";
-    }
-
-    @GetMapping("/register/teacher")
-    public String registerTeacher() {
-        return "register/register-teacher";
-    }
+//    @GetMapping("/register/student")
+//    public String registerStudent() {
+//        return "register/register-student";
+//    }
+//
+//    @GetMapping("/register/teacher")
+//    public String registerTeacher() {
+//        return "register/register-teacher";
+//    }
 
 }
