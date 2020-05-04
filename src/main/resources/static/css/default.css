@@ -74,6 +74,37 @@ footer{
     display: flex;
 }
 
+.tile{
+    border: var(--color-logo-dark-transparant) solid 10px;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+}
+
+.tile:hover{
+    border-color: var(--color-logo-dark);
+}
+
+.tile *{
+    display: block;
+    margin: 10px;
+}
+
+.tile input{
+    border: none;
+    background-color: transparent;
+    color: var(--color-logo-dark);
+    padding: 0;
+    margin: auto;
+}
+
+a.tile{
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
 @media screen and (min-width: 768px) {
     body{
         grid-template-columns: [sidebar] auto [content] auto [end];

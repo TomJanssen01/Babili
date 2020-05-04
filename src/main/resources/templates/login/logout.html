@@ -18,14 +18,13 @@
     <i class="material-icons-round md-large md-dark">exit_to_app</i>
     <h1 class="title">Afmelden</h1>
     <p>Ben je zeker dat je wilt afmelden?</p>
-
-    <div class="tile">
+    <div id="logout" class="tile">
         <form th:action="@{/user/logout}" method="post">
             <div class="tile-icon"><i class="material-icons-round md-small md-dark">check</i></div>
             <input class="buttonLook editButton horizontal" type="submit" value="logout"/>
         </form>
     </div>
-    <a id="cancel" class="buttonLook editButton horizontal tile" href="/user/logout">
+    <a id="cancel" class="buttonLook editButton horizontal tile" href="/">
         <div class="tile-icon"><i class="material-icons-round md-small md-dark">close</i></div>
         <span>Nee</span>
     </a>

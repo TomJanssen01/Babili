@@ -24,4 +24,9 @@ public class HomeController {
     public String overviewTasks() {
         return "overview-tasks";
     }
+
+    @GetMapping("/task-details")
+    public String task(){
+        return "task-details";
+    }
 }
