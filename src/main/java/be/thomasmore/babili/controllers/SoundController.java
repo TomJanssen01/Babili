@@ -1,6 +1,6 @@
 package be.thomasmore.babili.controllers;
 
-import be.thomasmore.babili.recording.JavaSoundRecorder;
+import be.thomasmore.babili.audio.JavaSoundRecorder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
