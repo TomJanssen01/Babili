@@ -1,10 +1,12 @@
 package be.thomasmore.babili.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cursus {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cursus_generator")
+    @SequenceGenerator(name = "cursus_generator", sequenceName = "cursus_seq",
+            initialValue = 0, allocationSize = 1)
     @Id
     private Integer id;
     private String naam;
