@@ -1,11 +1,12 @@
 package be.thomasmore.babili.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Opdracht {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "opdracht_generator")
+    @SequenceGenerator(name = "opdracht_generator", sequenceName = "opdracht_seq",
+            initialValue = 0, allocationSize = 1)
     @Id
     private Integer Id;
     private String titel;

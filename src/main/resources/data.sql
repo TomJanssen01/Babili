@@ -11,4 +11,4 @@ values
 insert into inlevering
 (ID, AUDIO_PATH, FEEDBACK, OPDRACHT_Id)
 values
-(0, '/audio/bakker.wav', 'dit is feedback', 0);
+(nextval ('inlevering_seq'), '/audio/bakker.wav', 'dit is feedback', 0);
