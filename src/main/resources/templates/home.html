@@ -18,7 +18,7 @@
     <h1 class="title">WELKOM!</h1>
     <p>Wij wensen je alvast heel veel succes!</p>
     <!--hr-->
-    <form id="formLogin" th:action="@{/}" method="post">
+    <form id="formLogin" sec:authorize="!isAuthenticated()" th:action="@{/}" method="post">
         <div class="form-group">
             <label for="inputUsername">Gebruikersnaam</label>
             <input type="text" name="username" class="form-control" id="inputUsername">
@@ -27,11 +27,9 @@
             <label for="inputPassword1">Paswoord</label>
             <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="••••••••">
         </div>
-        <button type="submit" class="btn btn-primary">Registreren</button>
+        <button type="submit" class="btn btn-primary">Aanmelden</button>
     </form>
-    <h2>IK BEN EEN:</h2>
-    <a id="student" class="tile" href="/user/login"><div class="tile-icon"><i class="material-icons-round md-small md-dark">school</i></div><span>Cursist</span></a>
-    <a id="docent" class="tile" href="/user/logout"><div class="tile-icon"><i class="material-icons-round md-small md-dark">vpn_key</i></div><span>Docent</span></a>
+    <a id="docent" class="tile" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
     <p>Heb je nog geen account?<br>
         <a href="/register">Account aanmaken</a>
     </p>
