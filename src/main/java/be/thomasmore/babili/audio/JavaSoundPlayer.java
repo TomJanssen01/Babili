@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 
 public class JavaSoundPlayer {
-    public static synchronized void play(final String fileName)
+    public static synchronized void play(String fileName)
     {
         // Note: use .wav files
         new Thread(new Runnable() {
