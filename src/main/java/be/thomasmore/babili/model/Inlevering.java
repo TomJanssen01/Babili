@@ -1,11 +1,12 @@
 package be.thomasmore.babili.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Inlevering {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inlevering_generator")
+    @SequenceGenerator(name = "inlevering_generator", sequenceName = "inlevering_seq",
+            initialValue = 0, allocationSize = 1)
     @Id
     private Integer Id;
     private String audioPath;
