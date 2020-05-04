@@ -13,6 +13,7 @@ public class Cursus {
     private String beschrijving;
     private Integer docentId;
 
+
     public Cursus() {
     }
 

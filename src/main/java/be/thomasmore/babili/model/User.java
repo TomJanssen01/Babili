@@ -1,13 +1,14 @@
 package be.thomasmore.babili.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class User {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
     @SequenceGenerator(name = "user_generator", sequenceName = "user_seq",
-    initialValue = 0, allocationSize = 1)
+            initialValue = 0, allocationSize = 1)
     @Id
     private int id;
 
@@ -16,8 +17,18 @@ public class User {
     private String name;
     private String email;
     private String role;
+    @ManyToMany
+    private Collection<Cursus> cursus;
 
     public User() {
+    }
+
+    public Collection<Cursus> getCursus() {
+        return cursus;
+    }
+
+    public void setCursus(Collection<Cursus> cursus) {
+        this.cursus = cursus;
     }
 
     public int getId() {
