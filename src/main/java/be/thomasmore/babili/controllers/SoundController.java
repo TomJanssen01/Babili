@@ -1,6 +1,7 @@
 package be.thomasmore.babili.controllers;
 
-import be.thomasmore.babili.recording.JavaSoundRecorder;
+import be.thomasmore.babili.audio.JavaSoundPlayer;
+import be.thomasmore.babili.audio.JavaSoundRecorder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,12 @@ public class SoundController {
         model.addAttribute("rec", "Rec stopped.");
         JavaSoundRecorder.stopRec();
         return "stopRec";
+    }
+
+    @GetMapping("/startExample")
+    public String startExample(Model model){
+        model.addAttribute("rec", "Example");
+        JavaSoundPlayer.play("D:/Test/Audio/Examples/opdracht1.wav");
+        return "homeBeta";
     }
 }

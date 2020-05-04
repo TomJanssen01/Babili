@@ -1,4 +1,4 @@
-package be.thomasmore.babili.recording;
+package be.thomasmore.babili.audio;
 
 import javax.sound.sampled.*;
 import java.io.*;
