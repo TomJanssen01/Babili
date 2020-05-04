@@ -43,6 +43,12 @@ footer{
     margin: 10px;
 }
 
+.tile input{
+    border: none;
+    background-color: transparent;
+    color: var(--color-logo-dark);
+}
+
 a{
     color: var(--color-logo-dark);
 }
