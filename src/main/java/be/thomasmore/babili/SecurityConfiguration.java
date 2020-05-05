@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll();
         http.formLogin()
-                .loginPage("/user/login");
+                .loginPage("/").defaultSuccessUrl("/overview-tasks");
         http.logout()
                 .logoutUrl("/user/logout")
                 .logoutSuccessUrl("/");

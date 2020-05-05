@@ -120,10 +120,10 @@ public class UserController {
     }
 
     // Login form
-    @RequestMapping("/login")
+    @RequestMapping("/")
     public String login(Principal principal, Model model){
         if (principal != null) return "redirect:/";
-        return "login/login-student";
+        return "home";
     }
 
     // Logout form
