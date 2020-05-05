@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
+import java.util.Optional;
 
 
 @Controller
@@ -33,8 +35,14 @@ public class HomeController {
         return "overview-tasks";
     }
 
-    @GetMapping("/task-details")
-    public String task() {
+    @GetMapping("/task-details/{id}")
+    public String task(@PathVariable(required = false) int id, Model model) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        Opdracht opdrachtFromDB = null;
+        if (optionalOpdracht.isPresent()){
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        model.addAttribute("opdracht", opdrachtFromDB);
         return "task-details";
     }
 
