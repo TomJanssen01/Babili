@@ -20,7 +20,7 @@
             <i class="material-icons-round md-small md-dark">home</i>
             <span class="navbarName">Startpagina</span>
         </a>
-        <a class="navbarItem btn active">
+        <a class="navbarItem btn active" href="/task-details">
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Opdrachten</span>
         </a>
@@ -35,7 +35,10 @@
     </nav>
 </div>
 <main>
-    <h1>Week 3: opdracht 2</h1>
+    <div class="tile-icon float-right">
+        <i class="tile-icon material-icons-round md-medium md-dark">help</i>
+    </div>
+    <h1 id="taskName">Week 3: opdracht 2</h1>
     <h2>Een vraag stellen</h2>
     <div class="task">
         <div class="task-card"><span class="task-number">02</span><span class="task-content">
@@ -46,13 +49,19 @@
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic</i>
         </div>
-        <span>Record</span>
+        <span>Opnemen</span>
+    </div>
+    <div id="stopRecording" class="tile">
+        <div class="tile-icon">
+            <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
+        </div>
+        <span>Stop opname</span>
     </div>
     <div id="file" hidden>
         Ingeleverd bestand: <span id="bestandsnaam"></span>
     </div>
     <br>
-    <input id="hand-in" class="btn btn-primary" type="submit" value="Inleveren">
+    <input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren">
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

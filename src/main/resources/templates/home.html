@@ -33,10 +33,6 @@
     <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
         <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>
     </p>
-    <h3>Admin links</h3>
-    <p>
-        <a href="/overview-tasks">Overview tasks</a>
-    </p>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

@@ -110,7 +110,7 @@ a.tile{
     color: var(--color-logo-dark);
 }
 
-.btn-primary{
+.btn-primary-outline{
     background-color: transparent;
     border-color: var(--color-logo-dark);
     color: var(--color-logo-dark);
@@ -118,10 +118,14 @@ a.tile{
     margin: 10px;
 }
 
-.btn-primary:hover{
+.btn-primary-outline:hover{
     background-color: var(--color-logo-dark);
     border-color: var(--color-logo-dark);
     color: white;
+}
+
+#taskName{
+    width: 60%;
 }
 
 @media screen and (min-width: 768px) {
