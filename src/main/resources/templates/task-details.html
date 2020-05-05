@@ -45,17 +45,19 @@
         <div class="task-card"><span class="task-number">02</span><span class="task-content" th:text="${opdracht.getOpgave()}"></span>
         </div>
     </div>
-    <div id="record" class="tile">
+    <div id="record" class="tile"><a th:href="'start/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic</i>
         </div>
         <span>Opnemen</span>
+    </a>
     </div>
-    <div id="stopRecording" class="tile">
+    <div id="stopRecording" class="tile"><a th:href="'stop/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
         </div>
         <span>Stop opname</span>
+    </a>
     </div>
     <div id="file" hidden>
         Ingeleverd bestand: <span id="bestandsnaam"></span>

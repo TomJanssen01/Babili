@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -23,18 +24,27 @@ public class SoundController {
         return "homeBeta";
     }
 
-    @GetMapping("/start")
-    public String startRec(Model model) {
-        model.addAttribute("rec", "Rec");
-        JavaSoundRecorder.startRec("D:/Test/Audio/test.wav");
-        return "start";
+    @GetMapping("/task-details/start/{id}")
+    public String startRec(@PathVariable(required = false) int id, Model model, Principal principal) {
+        String user = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        Opdracht opdrachtFromDB = null;
+        if (optionalOpdracht.isPresent()){
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        if (principal != null){
+           user = principal.getName();
+        }
+        System.out.println(user);
+        String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+user+".wav";
+        JavaSoundRecorder.startRec(pathName);
+        return "redirect:/task-details/" + id;
     }
 
-    @GetMapping("/stopRec")
-    public String stopRec(Model model) {
-        model.addAttribute("rec", "Rec stopped.");
+    @GetMapping("/task-details/stop/{id}")
+    public String stopRec(@PathVariable(required = false) int id,Model model) {
         JavaSoundRecorder.stopRec();
-        return "stopRec";
+        return "redirect:/task-details/" + id;
     }
 
     @GetMapping("/task-details/startExample/{id}")
