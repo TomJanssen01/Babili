@@ -11,15 +11,18 @@ public class JavaSoundRecorder {
     // record duration, in milliseconds
     //static final long RECORD_TIME = 10000;  // 1 minute
     static final JavaSoundRecorder recorder = new JavaSoundRecorder();
+    public String pathName;
+
 
     // path of the wav file
-    File wavFile = new File("D:/Test/RecordAudio.wav");
+
 
     // format of audio file
     AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
 
     // the line from which audio data is captured
     TargetDataLine line;
+
 
     /**
      * Defines an audio format
@@ -38,8 +41,9 @@ public class JavaSoundRecorder {
     /**
      * Captures the sound and record into a WAV file
      */
-    void start() {
+    void start(String pathName) {
         try {
+            File wavFile = new File(pathName);
             AudioFormat format = getAudioFormat();
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 
@@ -80,8 +84,8 @@ public class JavaSoundRecorder {
     /**
      * Entry to run the program
      */
-    public static void startRec(){
-        recorder.start();
+    public static void startRec(String pathNameFromApp){
+       recorder.start(pathNameFromApp);
     }
 
     public static void stopRec(){

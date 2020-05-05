@@ -26,7 +26,7 @@ public class SoundController {
     @GetMapping("/start")
     public String startRec(Model model) {
         model.addAttribute("rec", "Rec");
-        JavaSoundRecorder.startRec();
+        JavaSoundRecorder.startRec("D:/Test/Audio/test.wav");
         return "start";
     }
 
