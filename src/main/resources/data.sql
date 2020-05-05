@@ -20,7 +20,7 @@ values
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', 'bestel een brood', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', 'D:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
 
 insert into inlevering
 (ID, AUDIO_PATH, FEEDBACK, OPDRACHT_Id, user_Id)
