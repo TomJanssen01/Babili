@@ -30,8 +30,8 @@
         <button type="submit" class="btn btn-primary">Aanmelden</button>
     </form>
     <a id="docent" class="tile" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
-    <p>Heb je nog geen account?<br>
-        <a href="/register">Account aanmaken</a>
+    <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
+        <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>
     </p>
     <h3>Admin links</h3>
     <p>
