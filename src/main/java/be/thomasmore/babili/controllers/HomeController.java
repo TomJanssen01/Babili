@@ -15,6 +15,8 @@ import java.security.Principal;
 @Controller
 public class HomeController {
 
+    @Autowired
+    private OpdrachtRepository opdrachtRepository;
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/")
