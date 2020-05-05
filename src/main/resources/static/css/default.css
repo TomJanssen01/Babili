@@ -108,7 +108,7 @@ a.tile{
 @media screen and (min-width: 768px) {
     body{
         grid-template-columns: [sidebar] auto [content] auto [end];
-        grid-template-rows: [header] 80px [content] auto [footer] 80px [end];
+        grid-template-rows: [header] 80px [content] auto [footer] auto [end];
     }
 
     header{
@@ -136,7 +136,7 @@ a.tile{
 @media screen and (max-width: 767px) {
     body{
         grid-template-columns: [start] auto [end];
-        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] 80px [end];
+        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] auto [end];
     }
 
     header{
