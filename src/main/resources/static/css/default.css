@@ -81,6 +81,7 @@ footer{
     text-align: center;
     display: inline-block;
     padding: 5px;
+    transition: border-color .15s ease-in-out;
 }
 
 .tile:hover{
@@ -105,9 +106,27 @@ a.tile{
     text-transform: capitalize;
 }
 
+.tile span{
+    color: var(--color-logo-dark);
+}
+
+.btn-primary{
+    background-color: transparent;
+    border-color: var(--color-logo-dark);
+    color: var(--color-logo-dark);
+    border-width: 3px;
+    margin: 10px;
+}
+
+.btn-primary:hover{
+    background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
+    color: white;
+}
+
 @media screen and (min-width: 768px) {
     body{
-        grid-template-columns: [sidebar] auto [content] auto [end];
+        grid-template-columns: [sidebar] max-content [content] auto [end];
         grid-template-rows: [header] 80px [content] auto [footer] auto [end];
     }
 
@@ -119,6 +138,7 @@ a.tile{
     main{
         grid-row: content / footer;
         grid-column: content / end;
+        min-height: 600px;
     }
 
     footer{
@@ -135,7 +155,7 @@ a.tile{
 
 @media screen and (max-width: 767px) {
     body{
-        grid-template-columns: [start] auto [end];
+        grid-template-columns: [start] 100% [end];
         grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] auto [end];
     }
 

@@ -48,7 +48,12 @@
         </div>
         <span>Record</span>
     </div>
+    <div id="file" hidden>
+        Ingeleverd bestand: <span id="bestandsnaam"></span>
+    </div>
+    <br>
+    <input id="hand-in" class="btn btn-primary" type="submit" value="Inleveren">
 </main>
-<footer>&copy; Babili, 2020</footer>
+<footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
 </html>
