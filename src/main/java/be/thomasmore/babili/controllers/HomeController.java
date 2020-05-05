@@ -1,8 +1,12 @@
 package be.thomasmore.babili.controllers;
 
+import be.thomasmore.babili.model.Opdracht;
+import be.thomasmore.babili.repositories.OpdrachtRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
@@ -10,6 +14,7 @@ import java.security.Principal;
 
 @Controller
 public class HomeController {
+
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/")
@@ -20,7 +25,9 @@ public class HomeController {
     }
 
     @GetMapping("/overview-tasks")
-    public String overviewTasks() {
+    public String overviewTasks(Model model) {
+        Iterable<Opdracht> opdrachtFromDB = opdrachtRepository.findAll();
+        model.addAttribute("opdrachtFromDB",opdrachtFromDB);
         return "overview-tasks";
     }
 

@@ -35,28 +35,13 @@
     </nav>
 </div>
 <main>
-    <h1>Week 3: opdrachten</h1>
-    <h2>Afgewerkt: 10/30</h2>
-    <div class="task">
+    <h1>Opdrachten</h1>
+<!--    <h2>Afgewerkt: 10/30</h2>-->
+    <div class="task" th:each="opdracht:${opdrachtFromDB}"><a th:href="">
         <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number">01</span><span class="task-content">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
         </div>
-    </div>
-    <div class="task">
-        <i class="task-state material-icons-round md-small md-dark">done</i>
-        <div class="task-card"><span class="task-number">02</span><span class="task-content">Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
-        </div>
-    </div>
-    <div class="task">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number">03</span><span
-                class="task-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam placerat ligula nec fermentum condimentum. Curabitur sollicitudin efficitur mauris id tristique. Aliquam vitae risus at erat malesuada aliquam id id lectus. Curabitur neque risus, elementum a vulputate vitae, luctus eget dolor. Vivamus nec nisl aliquet, ornare ex vitae, scelerisque sem. Ut quis ligula nisl. Maecenas et tincidunt ex.</span>
-        </div>
-    </div>
-    <div class="task">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number">04</span><span
-                class="task-content">Maak een wandeling en ...</span></div>
+    </a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
