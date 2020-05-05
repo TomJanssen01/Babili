@@ -124,10 +124,6 @@ footer{
     color: white;
 }
 
-#taskName{
-    width: 60%;
-}
-
 @media screen and (min-width: 768px) {
     body{
         grid-template-columns: [sidebar] max-content [content] auto [end];

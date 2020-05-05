@@ -2,9 +2,25 @@
     display: flex;
 }
 
+a.task{
+    color: var(--color-logo-dark);
+}
+
+a.task:hover{
+    text-decoration: none;
+}
+
+#taskName{
+    width: 60%;
+}
+
 .task-state{
     align-self: center;
     margin-right: 5px;
+}
+
+.task-state:hover{
+    background-color: var(--color-logo-dark-transparant);
 }
 
 .task-card{
@@ -15,6 +31,11 @@
     display: flex;
     padding: 10px;
 }
+
+.task-card:hover{
+    border-color: var(--color-logo-dark-transparant);
+}
+
 .task-card :first-child{
     margin-right: 10px;
 }
