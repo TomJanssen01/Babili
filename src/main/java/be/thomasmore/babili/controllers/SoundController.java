@@ -18,11 +18,6 @@ public class SoundController {
     @Autowired
     private OpdrachtRepository opdrachtRepository;
 
-    @GetMapping("/homeBeta")
-    public String homeBeta(Model model) {
-        model.addAttribute("rec", "Klik op start om de taak op te nemen.");
-        return "homeBeta";
-    }
 
     @GetMapping("/task-details/start/{id}")
     public String startRec(@PathVariable(required = false) int id, Model model, Principal principal) {
@@ -46,7 +41,7 @@ public class SoundController {
         return "redirect:/task-details/" + id + "/opname";
     }
 
-    @GetMapping("/task-details/startExample/{id}")
+    @GetMapping("/startExample/{id}")
     public String startExample(@PathVariable(required = false) int id, Model model){
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         Opdracht opdrachtFromDB = null;
