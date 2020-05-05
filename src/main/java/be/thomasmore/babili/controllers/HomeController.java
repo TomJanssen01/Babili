@@ -10,7 +10,6 @@ import java.security.Principal;
 
 @Controller
 public class HomeController {
-
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/")
@@ -23,5 +22,15 @@ public class HomeController {
     @GetMapping("/overview-tasks")
     public String overviewTasks() {
         return "overview-tasks";
+    }
+
+    @GetMapping("/task-details")
+    public String task() {
+        return "task-details";
+    }
+
+    @GetMapping("/task-confirmation")
+    public String taskConfirmation() {
+        return "task-confirmation";
     }
 }

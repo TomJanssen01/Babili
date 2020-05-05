@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taak ingeleverd</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/rating.css"/>
+    <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
+</head>
+<body>
+<header></header>
+<div id="sidebar">
+    <a href="/"><img id="logo" alt="Babili" th:src="'images/babiligroen300.png'"></a>
+    <h1>Navigatie</h1>
+    <nav id="navbar">
+        <a class="navbarItem btn" href="/">
+            <i class="material-icons-round md-small md-dark">home</i>
+            <span class="navbarName">Startpagina</span>
+        </a>
+        <a class="navbarItem btn active">
+            <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+            <span class="navbarName">Opdrachten</span>
+        </a>
+        <a class="navbarItem btn">
+            <i class="material-icons-round md-small md-dark">person</i>
+            <span class="navbarName">Mijn account</span>
+        </a>
+        <a class="navbarItem btn">
+            <i class="material-icons-round md-small md-dark">exit_to_app</i>
+            <span class="navbarName">Afmelden</span>
+        </a>
+    </nav>
+</div>
+<main>
+    <h1>Week 3: opdracht 2</h1>
+    <h2>Een vraag stellen</h2>
+    <div class="task">
+        <div class="task-card"><span class="task-number">02</span><span class="task-content">
+            Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
+        </div>
+    </div>
+    <p>Bedankt. De opdracht is opgeslagen.</p>
+    <div id="difficulty-rating">
+        <p>Hoe moeilijk vond je deze opdracht?</p>
+        <!--div id="testStar">
+            <i class="filled-star material-icons-round md-medium md-dark">star</i>
+            <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+        </div-->
+        <div id="star-rating">
+            <label id="1">
+                <input type="radio" name="star" value="1">
+                <i class="filled-star material-icons-round md-medium md-dark">star</i>
+                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+            </label>
+            <label id="2">
+                <input type="radio" name="star" value="2">
+                <i class="filled-star material-icons-round md-medium md-dark">star</i>
+                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+            </label>
+            <label id="3">
+                <input type="radio" name="star" value="3">
+                <i class="filled-star material-icons-round md-medium md-dark">star</i>
+                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+            </label>
+            <label id="4">
+                <input type="radio" name="star" value="4">
+                <i class="filled-star material-icons-round md-medium md-dark">star</i>
+                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+            </label>
+            <label id="5">
+                <input type="radio" name="star" value="5">
+                <i class="filled-star material-icons-round md-medium md-dark">star</i>
+                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
+            </label>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

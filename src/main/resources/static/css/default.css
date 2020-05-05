@@ -74,10 +74,60 @@ footer{
     display: flex;
 }
 
+.tile{
+    border: var(--color-logo-dark-transparant) solid 10px;
+    border-radius: 15px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+    transition: border-color .15s ease-in-out;
+}
+
+.tile:hover{
+    border-color: var(--color-logo-dark);
+}
+
+.tile *{
+    display: block;
+    margin: 10px;
+}
+
+.tile input{
+    border: none;
+    background-color: transparent;
+    color: var(--color-logo-dark);
+    padding: 0;
+    margin: auto;
+}
+
+a.tile{
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.tile span{
+    color: var(--color-logo-dark);
+}
+
+.btn-primary{
+    background-color: transparent;
+    border-color: var(--color-logo-dark);
+    color: var(--color-logo-dark);
+    border-width: 3px;
+    margin: 10px;
+}
+
+.btn-primary:hover{
+    background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
+    color: white;
+}
+
 @media screen and (min-width: 768px) {
     body{
-        grid-template-columns: [sidebar] auto [content] auto [end];
-        grid-template-rows: [header] 80px [content] auto [footer] 80px [end];
+        grid-template-columns: [sidebar] max-content [content] auto [end];
+        grid-template-rows: [header] 80px [content] auto [footer] auto [end];
     }
 
     header{
@@ -88,6 +138,7 @@ footer{
     main{
         grid-row: content / footer;
         grid-column: content / end;
+        min-height: 600px;
     }
 
     footer{
@@ -104,8 +155,8 @@ footer{
 
 @media screen and (max-width: 767px) {
     body{
-        grid-template-columns: [start] auto [end];
-        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] 80px [end];
+        grid-template-columns: [start] 100% [end];
+        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] auto [end];
     }
 
     header{

@@ -25,31 +25,8 @@ footer{
     width: 100%;
 }
 
-.tile{
-    border: var(--color-logo-dark-transparant) solid 10px;
-    border-radius: 15px;
-    margin: 10px;
-    text-align: center;
-    display: inline-block;
-    padding: 5px;
-}
-
-.tile:hover{
-    border-color: var(--color-logo-dark);
-}
-
-.tile *{
-    display: block;
-    margin: 10px;
-}
-
 a{
     color: var(--color-logo-dark);
-}
-
-a.tile{
-    text-decoration: none;
-    text-transform: capitalize;
 }
 
 a:hover{
