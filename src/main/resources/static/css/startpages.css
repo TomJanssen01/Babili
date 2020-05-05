@@ -48,11 +48,11 @@ a:hover{
 }
 
 .btn-primary{
-    background-color: var(--color-logo-dark);
+    background-color: var(--color-logo-dark-transparant);
     border-color: var(--color-logo-dark);
 }
 
 .btn-primary:hover{
-    color: var(--color-logo-light);
     background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
 }

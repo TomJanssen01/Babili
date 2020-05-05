@@ -1,8 +1,8 @@
 :root{
     --color-logo-dark: rgba(77, 97, 98, 1);
     --color-logo-light: rgba(241, 202, 0, 1);
-    --color-logo-dark-transparant: rgba(77, 97, 98, 0.8);
-    --color-logo-light-transparant: rgba(241, 202, 0, 0.8);
+    --color-logo-dark-transparant: rgba(77, 97, 98, 0.9);
+    --color-logo-light-transparant: rgba(241, 202, 0, 0.9);
 }
 
 .material-icons-round{
@@ -101,7 +101,7 @@ footer{
     margin: auto;
 }
 
-a.tile{
+.tile a{
     text-decoration: none;
     text-transform: capitalize;
 }

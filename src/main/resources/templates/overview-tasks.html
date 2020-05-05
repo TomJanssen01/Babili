@@ -36,12 +36,16 @@
 </div>
 <main>
     <h1>Opdrachten</h1>
-<!--    <h2>Afgewerkt: 10/30</h2>-->
-    <div class="task" th:each="opdracht:${opdrachtFromDB}"><a th:href="'/task-details/'+${opdracht.getId()}">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
-        </div>
-    </a>
+    <!--    <h2>Afgewerkt: 10/30</h2>-->
+    <div class="task" th:each="opdracht:${opdrachtFromDB}">
+        <a th:href="'/task-details/'+${opdracht.getId()}">
+            <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
+            <div class="task-card">
+                <span class="task-number" th:text="${opdracht.getId()}">01</span>
+                <span
+                    class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+            </div>
+        </a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
