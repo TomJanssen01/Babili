@@ -23,8 +23,8 @@ values
 (nextval ('opdracht_seq'), 'bakker', 'ga naar een test', 'D:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
 
 insert into inlevering
-(ID, AUDIO_PATH, FEEDBACK, OPDRACHT_Id, user_Id)
+(ID, AUDIO_PATH, OPDRACHT_Id, user_Id)
 values
-(nextval ('inlevering_seq'), '/audio/bakker.wav', 'dit is feedback', 0, 1);
+(nextval ('inlevering_seq'), '/audio/bakker.wav', 0, 1);
 
 

@@ -18,6 +18,12 @@ public class Inlevering {
     public Inlevering() {
     }
 
+    public Inlevering(String audioPath, Opdracht opdracht, User user){
+        this.audioPath = audioPath;
+        this.opdracht = opdracht;
+        this.user = user;
+    }
+
     public User getUser() {
         return user;
     }

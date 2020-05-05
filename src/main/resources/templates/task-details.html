@@ -59,11 +59,11 @@
         <span>Stop opname</span>
     </a>
     </div>
-    <div id="file" hidden>
-        Ingeleverd bestand: <span id="bestandsnaam"></span>
+    <div th:if="${taak!=null}">
+        <span th:text="${taak}"></span>
     </div>
     <br>
-    <input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren">
+    <a th:href="'/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren"></a>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

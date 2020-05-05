@@ -35,7 +35,6 @@ public class SoundController {
         if (principal != null){
            user = principal.getName();
         }
-        System.out.println(user);
         String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+user+".wav";
         JavaSoundRecorder.startRec(pathName);
         return "redirect:/task-details/" + id;
@@ -44,7 +43,7 @@ public class SoundController {
     @GetMapping("/task-details/stop/{id}")
     public String stopRec(@PathVariable(required = false) int id,Model model) {
         JavaSoundRecorder.stopRec();
-        return "redirect:/task-details/" + id;
+        return "redirect:/task-details/" + id + "/opname";
     }
 
     @GetMapping("/task-details/startExample/{id}")
