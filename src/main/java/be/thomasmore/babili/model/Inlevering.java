@@ -10,7 +10,6 @@ public class Inlevering {
     @Id
     private Integer Id;
     private String audioPath;
-    private String feedback;
     @OneToOne
     private Opdracht opdracht;
     @OneToOne
@@ -41,14 +40,6 @@ public class Inlevering {
 
     public void setAudioPath(String audioPath) {
         this.audioPath = audioPath;
-    }
-
-    public String getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
     }
 
     public Opdracht getOpdracht() {
