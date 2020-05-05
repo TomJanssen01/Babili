@@ -1,6 +1,10 @@
 package be.thomasmore.babili.controllers;
 
+import be.thomasmore.babili.model.Inlevering;
+import be.thomasmore.babili.model.Opdracht;
 import be.thomasmore.babili.model.User;
+import be.thomasmore.babili.repositories.InleveringRepository;
+import be.thomasmore.babili.repositories.OpdrachtRepository;
 import be.thomasmore.babili.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -26,109 +27,69 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    private Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private OpdrachtRepository opdrachtRepository;
+    @Autowired
+    private InleveringRepository inleveringRepository;
 
-    @GetMapping("/register/student")
-    public String registerStudent(Principal principal, Model model){
-        if (principal != null){
-            return "redirect:/";
-        }
-        return "register/register-student";
-    }
 
-    @PostMapping("/register/student")
-    public String registerStudentPost(@RequestParam String userName,
-                                      @RequestParam String password,
-                                      @RequestParam String name,
-                                      @RequestParam String email,
-                                      Principal principal, Model model){
-        if(principal == null && !userName.isBlank()){
-            Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent()){
-                User newUser = new User();
-                newUser.setUsername(userName);
-                String encode = passwordEncoder.encode(password);
-                logger.info(String.format("password %s\n", encode));
-                newUser.setPassword(encode);
-                newUser.setUsername(userName);
-                newUser.setName(name);
-                newUser.setEmail(email);
-                newUser.setRole("STUDENT");
-                userRepository.save(newUser);
-
-                autologin(userName, password);
-            }
-        }
-        return "redirect:/overview-tasks";
-    }
-
-    @GetMapping("/register/teacher")
-    public String registerTeacher(Principal principal, Model model){
-        if (principal != null){
-            return "redirect:/overview-tasks";
-        }
-        return "register/register-teacher";
-    }
-
-    @PostMapping("/register/teacher")
-    public String registerTeacherPost(@RequestParam String userName,
-                                      @RequestParam String password,
-                                      @RequestParam String name,
-                                      @RequestParam String email,
-                                      Principal principal, Model model){
-        if(principal == null && !userName.isBlank()){
-            Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent()){
-                User newUser = new User();
-                newUser.setUsername(userName);
-                String encode = passwordEncoder.encode(password);
-                logger.info(String.format("password %s\n", encode));
-                newUser.setPassword(encode);
-                newUser.setUsername(userName);
-                newUser.setName(name);
-                newUser.setEmail(email);
-                newUser.setRole("TEACHER");
-                userRepository.save(newUser);
-
-                autologin(userName, password);
-            }
-        }
-        return "redirect:/overview-tasks";
-    }
-
-    private void autologin(String userName, String password) {
-        UsernamePasswordAuthenticationToken token
-                = new UsernamePasswordAuthenticationToken(userName, password);
-
-        try {
-            Authentication auth = authenticationManager.authenticate(token);
-            logger.info("authentication done - result is " + auth.isAuthenticated());
-            SecurityContext sc = SecurityContextHolder.getContext();
-            sc.setAuthentication(auth);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Login form
-    @RequestMapping("/")
-    public String login(Principal principal, Model model){
-        if (principal != null) return "redirect:/";
-        return "home";
-    }
 
     // Logout form
     @RequestMapping("/logout")
     public String logout(Model model) {
         return "/login/logout";
+    }
+
+    @GetMapping("/overview-tasks")
+    public String overviewTasks(Model model) {
+        Iterable<Opdracht> opdrachtFromDB = opdrachtRepository.findAll();
+        model.addAttribute("opdrachtFromDB",opdrachtFromDB);
+        return "overview-tasks";
+    }
+
+    @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}"})
+    public String task(@PathVariable(required = false) int id,
+                       @PathVariable(required = false) String opname, Model model) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        Opdracht opdrachtFromDB = null;
+        if (optionalOpdracht.isPresent()){
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        if (opname!=null){
+            model.addAttribute("taak","Jouw opname is bewaard.");
+        }
+        model.addAttribute("opdracht", opdrachtFromDB);
+        return "task-details";
+    }
+
+    @GetMapping("/inlevering/{id}")
+    public String inlevering(@PathVariable(required = false) int id, Model model, Principal principal){
+        String userName = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        Opdracht opdrachtFromDB = null;
+        if (optionalOpdracht.isPresent()){
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        User UserFromDB = null;
+        if (principal != null){
+            userName = principal.getName();
+            Optional<User> optionalUser = userRepository.findByUsername(userName);
+            if (optionalUser.isPresent()){
+                UserFromDB = optionalUser.get();
+            }
+        }
+        String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+userName+".wav";
+        Inlevering newInlevering = new Inlevering(pathName,opdrachtFromDB,UserFromDB);
+        inleveringRepository.save(newInlevering);
+        return "redirect:/user/overview-tasks";
+    }
+
+    @GetMapping("/task-confirmation")
+    public String taskConfirmation() {
+
+        return "task-confirmation";
     }
 }

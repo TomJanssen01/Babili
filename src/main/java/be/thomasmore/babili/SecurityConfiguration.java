@@ -19,10 +19,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("ADMIN", "TEACHER", "STUDENT")
                 .anyRequest().permitAll();
         http.formLogin()
-                .loginPage("/").defaultSuccessUrl("/overview-tasks");
+                .loginPage("/").defaultSuccessUrl("/user/overview-tasks");
         http.logout()
                 .logoutUrl("/user/logout")
                 .logoutSuccessUrl("/");

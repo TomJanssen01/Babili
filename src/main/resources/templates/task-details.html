@@ -20,7 +20,7 @@
             <i class="material-icons-round md-small md-dark">home</i>
             <span class="navbarName">Startpagina</span>
         </a>
-        <a class="navbarItem btn active" href="/task-details">
+        <a class="navbarItem btn active" href="/user/overview-tasks">
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Opdrachten</span>
         </a>
@@ -35,7 +35,7 @@
     </nav>
 </div>
 <main>
-    <div class="tile-icon float-right"><a th:href="'/startExample/'+${opdracht.getId()}">
+    <div class="tile-icon float-right"><a th:href="'/user/startExample/'+${opdracht.getId()}">
         <i class="tile-icon material-icons-round md-medium md-dark">help</i>
     </a>
     </div>
@@ -63,7 +63,7 @@
         <span th:text="${taak}"></span>
     </div>
     <br>
-    <a th:href="'/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren"></a>
+    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren"></a>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
