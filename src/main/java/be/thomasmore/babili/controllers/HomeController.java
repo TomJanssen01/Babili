@@ -21,12 +21,6 @@ import java.util.Optional;
 @Controller
 public class HomeController {
 
-    @Autowired
-    private OpdrachtRepository opdrachtRepository;
-    @Autowired
-    private InleveringRepository inleveringRepository;
-    @Autowired
-    private UserRepository userRepository;
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/")
@@ -36,53 +30,9 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/overview-tasks")
-    public String overviewTasks(Model model) {
-        Iterable<Opdracht> opdrachtFromDB = opdrachtRepository.findAll();
-        model.addAttribute("opdrachtFromDB",opdrachtFromDB);
-        return "overview-tasks";
+    @GetMapping("/register")
+    public String register() {
+        return "register";
     }
 
-    @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}"})
-    public String task(@PathVariable(required = false) int id,
-                       @PathVariable(required = false) String opname, Model model) {
-        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
-        Opdracht opdrachtFromDB = null;
-        if (optionalOpdracht.isPresent()){
-            opdrachtFromDB = optionalOpdracht.get();
-        }
-        if (opname!=null){
-            model.addAttribute("taak","Jouw opname is bewaard.");
-        }
-        model.addAttribute("opdracht", opdrachtFromDB);
-        return "task-details";
-    }
-
-    @GetMapping("/inlevering/{id}")
-    public String inlevering(@PathVariable(required = false) int id, Model model, Principal principal){
-        String userName = null;
-        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
-        Opdracht opdrachtFromDB = null;
-        if (optionalOpdracht.isPresent()){
-            opdrachtFromDB = optionalOpdracht.get();
-        }
-        User UserFromDB = null;
-        if (principal != null){
-            userName = principal.getName();
-            Optional<User> optionalUser = userRepository.findByUsername(userName);
-            if (optionalUser.isPresent()){
-                UserFromDB = optionalUser.get();
-            }
-        }
-        String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+userName+".wav";
-        Inlevering newInlevering = new Inlevering(pathName,opdrachtFromDB,UserFromDB);
-        inleveringRepository.save(newInlevering);
-        return "redirect:/overview-tasks";
-    }
-
-    @GetMapping("/task-confirmation")
-    public String taskConfirmation() {
-
-        return "task-confirmation";
-    }
 }

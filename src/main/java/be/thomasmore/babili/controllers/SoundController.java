@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/user")
 public class SoundController {
     @Autowired
     private OpdrachtRepository opdrachtRepository;
@@ -32,13 +34,13 @@ public class SoundController {
         }
         String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+user+".wav";
         JavaSoundRecorder.startRec(pathName);
-        return "redirect:/task-details/" + id;
+        return "redirect:/user/task-details/" + id;
     }
 
     @GetMapping("/task-details/stop/{id}")
     public String stopRec(@PathVariable(required = false) int id,Model model) {
         JavaSoundRecorder.stopRec();
-        return "redirect:/task-details/" + id + "/opname";
+        return "redirect:/user/task-details/" + id + "/opname";
     }
 
     @GetMapping("/startExample/{id}")
@@ -49,6 +51,6 @@ public class SoundController {
             opdrachtFromDB = optionalOpdracht.get();
         }
         JavaSoundPlayer.play(opdrachtFromDB.getVoorbeeld());
-        return "redirect:/task-details/"+id;
+        return "redirect:/user/task-details/"+id;
     }
 }
