@@ -35,8 +35,6 @@ public class UserController {
     @Autowired
     private InleveringRepository inleveringRepository;
 
-
-
     // Logout form
     @RequestMapping("/logout")
     public String logout(Model model) {

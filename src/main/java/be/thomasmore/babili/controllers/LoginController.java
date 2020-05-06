@@ -44,27 +44,6 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-//    @GetMapping("/login/student")
-//    public String loginStudent() {
-//        return "login/login-student";
-//    }
-
-//    @GetMapping("/login/teacher")
-//    public String loginTeacher() {
-//        return "login/login-teacher";
-//    }
-
-
-//    @GetMapping("/register/student")
-//    public String registerStudent() {
-//        return "register/register-student";
-//    }
-//
-//    @GetMapping("/register/teacher")
-//    public String registerTeacher() {
-//        return "register/register-teacher";
-//    }
-
     @GetMapping("/register/student")
     public String registerStudent(Principal principal, Model model){
         if (principal != null){
