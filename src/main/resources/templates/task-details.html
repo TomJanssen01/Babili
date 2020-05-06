@@ -35,10 +35,9 @@
     </nav>
 </div>
 <main>
-    <div class="tile-icon float-right"><a th:href="'/user/startExample/'+${opdracht.getId()}">
+    <a class="tile-icon float-right" th:href="'/user/startExample/'+${opdracht.getId()}">
         <i class="tile-icon material-icons-round md-medium md-dark">help</i>
     </a>
-    </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
     <div class="task">
