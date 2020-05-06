@@ -101,9 +101,13 @@ footer{
     margin: auto;
 }
 
-.tile a{
+a.tile{
     text-decoration: none;
     text-transform: capitalize;
+}
+
+a.tile:hover{
+    text-decoration: none;
 }
 
 .tile span{

@@ -13,7 +13,7 @@
 <body>
 <header></header>
 <div id="sidebar">
-    <a href="/"><img id="logo" alt="Babili" th:src="'../images/babiligroen300.png'"></a>
+    <a href="/"><img id="logo" alt="Babili" th:src="'../../images/babiligroen300.png'"></a>
     <h1>Navigatie</h1>
     <nav id="navbar">
         <a class="navbarItem btn" href="/">
@@ -42,28 +42,28 @@
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
     <div class="task">
-        <div class="task-card"><span class="task-number">02</span><span class="task-content" th:text="${opdracht.getOpgave()}"></span>
+        <div class="task-card"><span class="task-number">02</span><span class="task-content"
+                                                                        th:text="${opdracht.getOpgave()}"></span>
         </div>
     </div>
-    <div id="record" class="tile"><a th:href="'start/'+${opdracht.getId()}">
+    <a id="record" class="tile" th:href="'start/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic</i>
         </div>
         <span>Opnemen</span>
     </a>
-    </div>
-    <div id="stopRecording" class="tile"><a th:href="'stop/'+${opdracht.getId()}">
+    <a id="stopRecording" class="tile" th:href="'stop/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
         </div>
         <span>Stop opname</span>
     </a>
-    </div>
     <div th:if="${taak!=null}">
         <span th:text="${taak}"></span>
     </div>
     <br>
-    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline" type="submit" value="Inleveren"></a>
+    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
+                                                                type="submit" value="Inleveren"></a>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
