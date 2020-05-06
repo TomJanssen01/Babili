@@ -87,7 +87,6 @@ public class UserController {
 
     @GetMapping("/task-confirmation")
     public String taskConfirmation() {
-
         return "task-confirmation";
     }
 }
