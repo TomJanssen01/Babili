@@ -115,8 +115,7 @@ public class UserController {
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
             }
-
         }
-        return "redirect:/"; //later nog aan te passen naar de juiste URL
+        return "redirect:/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 }

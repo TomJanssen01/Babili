@@ -37,12 +37,42 @@
 <main>
     <h1>Nieuwe cursus aanmaken</h1>
 
-    <a class="task" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
-                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+<div class ="container">
+    <div class="row">
+        <div class="col">
+            <form th:action="@{'/new-course'}" method="post">
+                <div class="filters">
+                    <div class="filterrow">
+                        <div class="row">
+                            <div class="col">
+                                <label for="naam">Naam van de cursus:</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="naam" name="naam" placeholder="Vul hier de naam van de cursus in">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterrow">
+                        <div class="row">
+                            <div class="col">
+                                <label for="beschrijving">Beschrijving van de cursus:</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="beschrijving" name="beschrijving" placeholder="Geef hier een beschrijving van de cursus">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterrow">
+                        <input type="submit" value="Curus aanmaken">
+                    </div>
+                    <div class="filterrow">
+                        <input type="reset" value="Cancel">
+                    </div>
+                </div>
+            </form>
         </div>
-    </a>
+    </div>
+</div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
