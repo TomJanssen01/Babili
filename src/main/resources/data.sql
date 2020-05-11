@@ -12,8 +12,13 @@ INSERT INTO USER
 VALUES
 (nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.talha', 'STUDENT');
 
+INSERT INTO USER
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
+VALUES
+(nextval('USER_SEQ'), 'talha_docent', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.talha', 'TEACHER');
+
 insert into Cursus
-(ID, NAAM, BESCHRIJVING, docent_Id)
+(ID, NAAM, BESCHRIJVING, DOCENT_ID)
 values
 (nextval ('cursus_seq'), 'testcursus1', 'Om te testen', 2);
 
