@@ -1,5 +1,6 @@
 package be.thomasmore.babili.controllers;
 
+import be.thomasmore.babili.model.Cursus;
 import be.thomasmore.babili.model.Inlevering;
 import be.thomasmore.babili.model.Opdracht;
 import be.thomasmore.babili.model.User;
@@ -98,5 +99,24 @@ public class UserController {
     public String newCourse(Model model) {
         model.addAttribute("course", cursusRepository.findAll());
         return "new-course";
+    }
+
+    @PostMapping("new-course")
+    public String createCoursePost(@RequestParam String naam,
+                                   @RequestParam String beschrijving,
+                                   Model model) {
+        Iterable<Cursus> alleCursussen = cursusRepository.findAll();
+        model.addAttribute("course", alleCursussen);
+        Optional<Cursus> optionalCursus = cursusRepository.findCursusByNaam(naam);
+        if (!(optionalCursus.isPresent())) {
+            if (naam != null) {
+                Cursus cursus = new Cursus();
+                cursus.setNaam(naam);
+                cursus.setBeschrijving(beschrijving);
+                cursusRepository.save(cursus);
+            }
+
+        }
+        return "redirect:/"; //later nog aan te passen naar de juiste URL
     }
 }
