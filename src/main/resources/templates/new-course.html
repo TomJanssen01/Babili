@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <title>Maak een nieuwe cursus aan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/default.css"/>
+    <!--link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/-->
+    <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
+</head>
+
+<body>
+<header></header>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2"><img id="logo" alt="Babili" th:src="'../../images/babiligroen300.png'"></div>
+            <div class="col-10">
+                <h1 class="title">Maak een nieuwe cursus aan</h1>
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>
