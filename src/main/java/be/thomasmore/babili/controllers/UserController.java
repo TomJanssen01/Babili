@@ -101,7 +101,7 @@ public class UserController {
         return "new-course";
     }
 
-    @PostMapping("new-course")
+    @PostMapping("/new-course")
     public String createCoursePost(@RequestParam String naam,
                                    @RequestParam String beschrijving,
                                    Model model) {
@@ -116,6 +116,6 @@ public class UserController {
                 cursusRepository.save(cursus);
             }
         }
-        return "redirect:/overview-tasks"; //later nog aan te passen naar de juiste URL
+        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 }
