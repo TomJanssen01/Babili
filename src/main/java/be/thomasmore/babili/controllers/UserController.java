@@ -6,6 +6,7 @@ import be.thomasmore.babili.model.User;
 import be.thomasmore.babili.repositories.InleveringRepository;
 import be.thomasmore.babili.repositories.OpdrachtRepository;
 import be.thomasmore.babili.repositories.UserRepository;
+import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,11 +83,20 @@ public class UserController {
         String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+userName+".wav";
         Inlevering newInlevering = new Inlevering(pathName,opdrachtFromDB,UserFromDB);
         inleveringRepository.save(newInlevering);
-        return "redirect:/user/overview-tasks";
+        return "redirect:/user/inlevering/{id}/confirmation";
     }
 
-    @GetMapping("/task-confirmation")
-    public String taskConfirmation() {
+    @GetMapping("/inlevering/{submissionId}/confirmation")
+    public String taskConfirmation(@PathVariable(required = true) int submissionId, @RequestParam(required = false) Integer rating, Model model) {
+        if(rating != null){
+            Optional<Inlevering> optionalSubmission = inleveringRepository.findById(submissionId);
+            if(optionalSubmission.isPresent()){
+                Inlevering currentSubmission = optionalSubmission.get();
+                currentSubmission.getOpdracht().setBeoordeling(rating.toString());
+                inleveringRepository.save(currentSubmission);
+            }
+        }
+        model.addAttribute("submissionId", submissionId);
         return "task-confirmation";
     }
 }

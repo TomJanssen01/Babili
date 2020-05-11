@@ -8,13 +8,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/rating.css"/>
     <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
+    <script type="text/javascript" src="/js/slider.js" defer></script>
 </head>
 <body>
 <header></header>
 <div id="sidebar">
-    <a href="/"><img id="logo" alt="Babili" th:src="'images/babiligroen300.png'"></a>
+    <a href="/"><img id="logo" alt="Babili" th:src="'../../images/babiligroen300.png'"></a>
     <h1>Navigatie</h1>
     <nav id="navbar">
         <a class="navbarItem btn" href="/">
@@ -43,41 +43,17 @@
             Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
         </div>
     </div>
-    <p>Bedankt. De opdracht is opgeslagen.</p>
-    <div id="difficulty-rating">
+    <form id="difficulty-rating" th:action="@{/user/inlevering/${submissionId}/confirmation}" method="post">
         <p>Hoe moeilijk vond je deze opdracht?</p>
-        <!--div id="testStar">
-            <i class="filled-star material-icons-round md-medium md-dark">star</i>
-            <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-        </div-->
-        <div id="star-rating">
-            <label id="1">
-                <input type="radio" name="star" value="1">
-                <i class="filled-star material-icons-round md-medium md-dark">star</i>
-                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-            </label>
-            <label id="2">
-                <input type="radio" name="star" value="2">
-                <i class="filled-star material-icons-round md-medium md-dark">star</i>
-                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-            </label>
-            <label id="3">
-                <input type="radio" name="star" value="3">
-                <i class="filled-star material-icons-round md-medium md-dark">star</i>
-                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-            </label>
-            <label id="4">
-                <input type="radio" name="star" value="4">
-                <i class="filled-star material-icons-round md-medium md-dark">star</i>
-                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-            </label>
-            <label id="5">
-                <input type="radio" name="star" value="5">
-                <i class="filled-star material-icons-round md-medium md-dark">star</i>
-                <i class="empty-star material-icons-round md-medium md-dark">star_border</i>
-            </label>
+        <div id="rating">
+            <span id="ratingText"></span>
+            <div class="progress">
+                <div id="ratingBar" class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"></div>
+            </div>
+            <input id="ratingSlider" type="range" min="0" max="4" value="2" title="rating" name="rating">
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Verstuur</button>
+    </form>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
