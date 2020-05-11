@@ -1,8 +1,10 @@
 package be.thomasmore.babili.controllers;
 
+import be.thomasmore.babili.model.Cursus;
 import be.thomasmore.babili.model.Inlevering;
 import be.thomasmore.babili.model.Opdracht;
 import be.thomasmore.babili.model.User;
+import be.thomasmore.babili.repositories.CursusRepository;
 import be.thomasmore.babili.repositories.InleveringRepository;
 import be.thomasmore.babili.repositories.OpdrachtRepository;
 import be.thomasmore.babili.repositories.UserRepository;
@@ -34,6 +36,8 @@ public class UserController {
     private OpdrachtRepository opdrachtRepository;
     @Autowired
     private InleveringRepository inleveringRepository;
+    @Autowired
+    private CursusRepository cursusRepository;
 
     // Logout form
     @RequestMapping("/logout")
@@ -42,9 +46,11 @@ public class UserController {
     }
 
     @GetMapping("/overview-tasks")
-    public String overviewTasks(Model model) {
+    public String overviewTasks(Model model, Principal principal) {
         Iterable<Opdracht> opdrachtFromDB = opdrachtRepository.findAll();
+        Iterable<Cursus> cursusesFromDB = cursusRepository.findByDocent_Username(principal.getName());
         model.addAttribute("opdrachtFromDB",opdrachtFromDB);
+        model.addAttribute("cursusFromDB", cursusesFromDB);
         return "overview-tasks";
     }
 

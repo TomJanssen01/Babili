@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Overzicht taken</title>
@@ -35,9 +36,18 @@
     </nav>
 </div>
 <main>
-    <h1>Opdrachten</h1>
+    <h1 sec:authorize="hasAuthority('TEACHER')">Opdrachten</h1>
+    <!--    <h2>...</h2>-->
+    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'task-details/'+${opdracht.getId()}">
+        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
+        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
+                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        </div>
+    </a>
+
+    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
     <!--    <h2>Afgewerkt: 10/30</h2>-->
-    <a class="task" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
+    <a class="task" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
         <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
         <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
                 class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
