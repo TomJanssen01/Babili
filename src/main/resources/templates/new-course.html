@@ -42,17 +42,17 @@
         <div class="col">
             <form th:action="@{'/new-course'}" method="post">
                 <div class="filters">
-                    <div class="filterrow">
+                    <div class="filterrow mb-2">
                         <div class="row">
                             <div class="col-2">
                                 <label for="naam">Naam van de cursus:</label>
                             </div>
                             <div class="col">
-                                <input type="text" id="naam" name="naam" placeholder="Vul hier de naam van de cursus in">
+                                <input type="text" class="form-control" id="naam" name="naam" placeholder="Vul hier de naam van de cursus in">
                             </div>
                         </div>
                     </div>
-                    <div class="filterrow">
+                    <div class="filterrow mb-2">
                         <div class="row">
                             <div class="col-2">
                                 <label for="beschrijving">Beschrijving van de cursus:</label>
