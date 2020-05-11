@@ -37,14 +37,14 @@
 <main>
     <h1>Nieuwe cursus aanmaken</h1>
 
-<div class ="container">
+<div class ="container-fluid">
     <div class="row">
         <div class="col">
             <form th:action="@{'/new-course'}" method="post">
                 <div class="filters">
                     <div class="filterrow">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-2">
                                 <label for="naam">Naam van de cursus:</label>
                             </div>
                             <div class="col">
@@ -54,11 +54,11 @@
                     </div>
                     <div class="filterrow">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-2">
                                 <label for="beschrijving">Beschrijving van de cursus:</label>
                             </div>
                             <div class="col">
-                                <input type="text" id="beschrijving" name="beschrijving" placeholder="Geef hier een beschrijving van de cursus">
+                                <textarea class="form-control" id="beschrijving" name="beschrijving" rows="5" placeholder="Geef hier een beschrijving van de cursus"></textarea>
                             </div>
                         </div>
                     </div>
