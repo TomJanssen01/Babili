@@ -10,6 +10,14 @@
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
     <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
+    <style>
+        a.tile{
+            color: var(--color-logo-dark);
+        }
+        a.tile:hover{
+            color: var(--color-logo-dark);
+        }
+    </style>
 </head>
 <body>
 <header></header>
@@ -40,9 +48,9 @@
     </nav>
 </div>
 <main>
+    <a sec:authorize="hasAuthority('TEACHER')" class="tile float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
     <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
     <!--    <h2>...</h2>-->
-    <a sec:authorize="hasAuthority('TEACHER')" class="tile" th:href="'/user/new-course/'">Cursus aanmaken</a>
     <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}">
         <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
         <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
