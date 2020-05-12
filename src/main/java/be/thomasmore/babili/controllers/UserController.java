@@ -38,6 +38,7 @@ public class UserController {
     private InleveringRepository inleveringRepository;
     @Autowired
     private CursusRepository cursusRepository;
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     // Logout form
     @RequestMapping("/logout")
