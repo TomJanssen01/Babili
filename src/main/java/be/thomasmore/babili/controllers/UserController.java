@@ -107,6 +107,7 @@ public class UserController {
     @PostMapping("/new-course")
     public String createCoursePost(@RequestParam String naam,
                                    @RequestParam String beschrijving,
+                                   Principal principal,
                                    Model model) {
         Iterable<Cursus> alleCursussen = cursusRepository.findAll();
         model.addAttribute("course", alleCursussen);
@@ -115,6 +116,10 @@ public class UserController {
             if (naam != null) {
                 Cursus cursus = new Cursus();
                 cursus.setNaam(naam);
+                Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
+                if (optionalUser.isPresent()){
+                    cursus.setDocent(optionalUser.get());
+                }
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
             }
