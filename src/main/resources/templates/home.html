@@ -14,7 +14,7 @@
 <body>
 <header></header>
 <main>
-    <a href="/"><img id="logo" class="logo" th:src="'images/babiligroen300.png'" alt="Babili logo"></a>
+    <a href="/"><img id="logo" class="logo" th:src="'/images/babiligroen300.png'" alt="Babili logo"></a>
     <h1 class="title">WELKOM!</h1>
     <p>Wij wensen je alvast heel veel succes!</p>
     <!--hr-->
@@ -29,7 +29,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Aanmelden</button>
     </form>
-    <a class="tile" href="/user/overview-tasks" sec:authorize="isAuthenticated()">Overzicht opdrachten</a>
+    <a class="tile" href="/user/overview-tasks" sec:authorize="hasAuthority('STUDENT')">Overzicht opdrachten</a>
+    <a class="tile" href="/user/overview-tasks" sec:authorize="hasAuthority('TEACHER')">Overzicht cursussen</a>
     <a id="docent" class="tile" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
     <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
         <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>

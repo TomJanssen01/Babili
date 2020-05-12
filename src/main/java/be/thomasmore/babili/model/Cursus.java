@@ -11,7 +11,8 @@ public class Cursus {
     private Integer id;
     private String naam;
     private String beschrijving;
-    private Integer docentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User docent;
 
 
     public Cursus() {
@@ -41,11 +42,11 @@ public class Cursus {
         this.beschrijving = beschrijving;
     }
 
-    public Integer getDocentId() {
-        return docentId;
+    public User getDocent() {
+        return docent;
     }
 
-    public void setDocentId(Integer docentId) {
-        this.docentId = docentId;
+    public void setDocent(User userDocent) {
+        this.docent = userDocent;
     }
 }

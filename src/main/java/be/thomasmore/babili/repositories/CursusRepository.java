@@ -3,6 +3,10 @@ package be.thomasmore.babili.repositories;
 import be.thomasmore.babili.model.Cursus;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CursusRepository extends CrudRepository <Cursus, Integer> {
+import javax.swing.text.html.Option;
+import java.util.Optional;
 
+public interface CursusRepository extends CrudRepository <Cursus, Integer> {
+    Optional<Cursus>findCursusByNaam(String naam);
+    Iterable<Cursus> findByDocent_Username(String username);
 }
