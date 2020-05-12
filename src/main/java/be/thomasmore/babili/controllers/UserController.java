@@ -92,6 +92,7 @@ public class UserController {
             Optional<Inlevering> optionalSubmission = inleveringRepository.findById(submissionId);
             if(optionalSubmission.isPresent()){
                 Inlevering currentSubmission = optionalSubmission.get();
+                ++rating;
                 currentSubmission.getOpdracht().setBeoordeling(rating.toString());
                 inleveringRepository.save(currentSubmission);
             }

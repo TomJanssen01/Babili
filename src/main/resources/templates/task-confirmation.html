@@ -14,7 +14,7 @@
 <body>
 <header></header>
 <div id="sidebar">
-    <a href="/"><img id="logo" alt="Babili" th:src="'../../images/babiligroen300.png'"></a>
+    <a href="/"><img id="logo" alt="Babili" th:src="'/images/babiligroen300.png'"></a>
     <h1>Navigatie</h1>
     <nav id="navbar">
         <a class="navbarItem btn" href="/">
@@ -43,16 +43,18 @@
             Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
         </div>
     </div>
-    <form id="difficulty-rating" th:action="@{/user/inlevering/${submissionId}/confirmation}" method="post">
+    <form id="difficulty-rating" th:action="@{'confirmation'}" method="get">
         <p>Hoe moeilijk vond je deze opdracht?</p>
         <div id="rating">
             <span id="ratingText"></span>
             <div class="progress">
-                <div id="ratingBar" class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"></div>
+                <div id="ratingBar" class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0"
+                     aria-valuemax="4">
+                </div>
             </div>
             <input id="ratingSlider" type="range" min="0" max="4" value="2" title="rating" name="rating">
         </div>
-        <button type="submit" class="btn btn-primary">Verstuur</button>
+        <button type="submit" class="btn btn-primary">Beoordeel</button>
     </form>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
