@@ -46,13 +46,3 @@ a:hover{
         max-width: 500px;
     }
 }
-
-.btn-primary{
-    background-color: var(--color-logo-dark-transparant);
-    border-color: var(--color-logo-dark);
-}
-
-.btn-primary:hover{
-    background-color: var(--color-logo-dark);
-    border-color: var(--color-logo-dark);
-}
