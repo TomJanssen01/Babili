@@ -21,9 +21,13 @@
             <i class="material-icons-round md-small md-dark">home</i>
             <span class="navbarName">Startpagina</span>
         </a>
-        <a class="navbarItem btn active">
+        <a class="navbarItem btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Opdrachten</span>
+        </a>
+        <a class="navbarItem btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
+            <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+            <span class="navbarName">Cursussen</span>
         </a>
         <a class="navbarItem btn">
             <i class="material-icons-round md-small md-dark">person</i>
