@@ -32,7 +32,7 @@ public class SoundController {
         if (principal != null) {
             user = principal.getName();
         }
-        String pathName = "src/main/resources/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
+        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
         JavaSoundRecorder.startRec(pathName);
         return "redirect:/user/task-details/" + id;
     }
@@ -68,7 +68,7 @@ public class SoundController {
         if (principal != null) {
             user = principal.getName();
         }
-        String pathName = "src/main/resources/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
+        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
         JavaSoundPlayer.play(pathName);
         return "redirect:/user/task-details/" + id + "/opname";
     }
