@@ -17,6 +17,8 @@ public class Cursus {
     @ManyToOne(fetch = FetchType.LAZY)
     private User docent;
     @OneToMany(fetch = FetchType.LAZY)
+    private Collection<User> cursisten;
+    @OneToMany(fetch = FetchType.LAZY)
     private Collection<Opdracht> opdrachten;
 
 

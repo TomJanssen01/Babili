@@ -17,17 +17,17 @@ public class User {
     private String name;
     private String email;
     private String role;
-    @ManyToMany
-    private Collection<Cursus> cursus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cursus cursus;
 
     public User() {
     }
 
-    public Collection<Cursus> getCursus() {
+    public Cursus getCursus() {
         return cursus;
     }
 
-    public void setCursus(Collection<Cursus> cursus) {
+    public void setCursus(Cursus cursus) {
         this.cursus = cursus;
     }
 

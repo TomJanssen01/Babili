@@ -49,7 +49,16 @@ public class UserController {
 
     @GetMapping("/overview-tasks")
     public String overviewTasks(Model model, Principal principal) {
-        Iterable<Opdracht> opdrachtFromDB = opdrachtRepository.findAll();
+        Optional<User> userFromDB = userRepository.findByUsername(principal.getName());
+        Iterable<Opdracht> opdrachtFromDB = null;
+        if (userFromDB.isPresent()){
+            User ingelogdeUser = userFromDB.get();
+            if (ingelogdeUser.getCursus() == null){
+                opdrachtFromDB = opdrachtRepository.findAll();
+            }else{
+                opdrachtFromDB = opdrachtRepository.findByCursus_Id(ingelogdeUser.getCursus().getId());
+            }
+        }
         Iterable<Cursus> cursussenFromDB = cursusRepository.findByDocent_Username(principal.getName());
         model.addAttribute("opdrachtFromDB", opdrachtFromDB);
         model.addAttribute("cursusFromDB", cursussenFromDB);
