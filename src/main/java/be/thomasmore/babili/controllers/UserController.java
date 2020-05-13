@@ -136,4 +136,31 @@ public class UserController {
         }
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
+
+    @GetMapping("/new-task")
+    public String newTask(Model model) {
+        model.addAttribute("task", opdrachtRepository.findAll());
+        return "new-task";
+    }
+
+    @PostMapping("/new-task")
+    public String createTaskPost(@RequestParam String titel,
+                                   @RequestParam String opgave,
+                                   @RequestParam String voorbeeldzin,
+                                   Principal principal,
+                                   Model model) {
+        Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
+        model.addAttribute("task", alleOpdrachten);
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
+        if (!(optionalOpdracht.isPresent())) {
+            if (titel != null) {
+                Opdracht opdracht = new Opdracht();
+                opdracht.setTitel(titel);
+                opdracht.setOpgave(opgave);
+                opdracht.setVoorbeeld(voorbeeldzin);
+                opdrachtRepository.save(opdracht);
+                     }
+        }
+        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
+    }
 }
