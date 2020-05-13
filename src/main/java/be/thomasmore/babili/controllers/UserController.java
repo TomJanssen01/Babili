@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -177,14 +178,21 @@ public class UserController {
     }
 
     @GetMapping("/course/{courseId}/management/add-students")
-    public String addStudents(@PathVariable(required = true) int courseId, Model model){
+    public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model){
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
         if (!optionalCourse.isPresent()){
             return "/overview-tasks";
         }
 
+        if (selectedStudents != null){
+            model.addAttribute("alreadySelectedStudents", selectedStudents);
+        }
+
         model.addAttribute("course", optionalCourse.get());
-        //Iterable<User> iterableAvailableStudents = userRepository.findByRole()
+        Iterable<User> iterableAvailableStudents = userRepository.findByRole("STUDENT");
+        if (iterableAvailableStudents != null){
+            model.addAttribute("availableStudents", iterableAvailableStudents);
+        }
         return "course/add-students";
     }
 }

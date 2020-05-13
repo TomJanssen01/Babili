@@ -40,20 +40,22 @@
     </nav>
 </div>
 <main sec:authorize="hasAuthority('TEACHER')">
-    <h1 th:text="'Studenten toevoegen aan '+${course.getNaam()}">Voeg studenten toe</h1>
-    <form>
+    <h1 th:if="${availableStudents}" th:text="'Studenten toevoegen aan '+${course.getNaam()}">Voeg studenten toe</h1>
+    <form th:if="${availableStudents}">
         <div class="form-group">
-            <label for="exampleFormControlSelect2">Beschikbare cursisten</label>
-            <select multiple class="form-control" id="studentSelect">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <label for="studentSelect">Beschikbare cursisten</label>
+            <select multiple class="form-control" id="studentSelect" name="selectedStudents"
+                    th:each="student:${availableStudents}">
+                <option th:value="${student.getId()}" th:text="${student.getName()}">1</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <button type="submit" class="btn btn-primary">Voeg toe</button>
     </form>
+    <div th:if="${alreadySelectedStudents}">
+        <p>De volgende studenten id's werden toegevoegd:
+            <span th:each="id:${alreadySelectedStudents}" th:text="${id}+' '"></span>
+        </p>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
