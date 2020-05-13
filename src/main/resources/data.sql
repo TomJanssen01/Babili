@@ -10,7 +10,7 @@ VALUES
 INSERT INTO USER
 (ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.talha', 'STUDENT');
+(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT');
 
 INSERT INTO USER
 (ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)

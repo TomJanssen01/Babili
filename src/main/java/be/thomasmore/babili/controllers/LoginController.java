@@ -61,7 +61,7 @@ public class LoginController {
                                       Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent() && password.equals(password2)){
+            if(!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()){
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
@@ -96,7 +96,7 @@ public class LoginController {
                                       Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent() && password.equals(password2)){
+            if(!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()){
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
