@@ -40,30 +40,40 @@
     </nav>
 </div>
 <main>
-    <h1>Nieuwe cursus aanmaken</h1>
+    <h1>Nieuwe taken aanmaken</h1>
 
     <div class ="container-fluid">
         <div class="row">
             <div class="col">
-                <form th:action="@{''}" method="post">
+                <form th:action="@{'new-task'}" method="post">
                     <div class="filters">
                         <div class="filterrow mb-2">
                             <div class="row">
                                 <div class="col-2">
-                                    <label for="naam">Naam van de cursus:</label>
+                                    <label for="titel">Titel van de opdracht:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="naam" name="naam" placeholder="Vul hier de naam van de cursus in">
+                                    <input type="text" class="form-control" id="titel" name="titel" placeholder="Noteer hier de titel van de opdracht">
                                 </div>
                             </div>
                         </div>
                         <div class="filterrow mb-2">
                             <div class="row">
                                 <div class="col-2">
-                                    <label for="beschrijving">Beschrijving van de cursus:</label>
+                                    <label for="opdracht">Beschrijving van de opdracht:</label>
                                 </div>
                                 <div class="col">
-                                    <textarea class="form-control" id="beschrijving" name="beschrijving" rows="5" placeholder="Geef hier een beschrijving van de cursus"></textarea>
+                                    <textarea class="form-control" id="opdracht" name="opdracht" rows="5" placeholder="Geef hier een beschrijving van de opdracht"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterrow mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="voorbeeldzin">Voorbeeldzin opnemen:</label>
+                                </div>
+                                <div class="col">
+                                    <textarea class="form-control" id="voorbeeldzin" name="voorbeeldzin" rows="5" placeholder="Geef hier een beschrijving van de opdracht"></textarea>
                                 </div>
                             </div>
                         </div>
