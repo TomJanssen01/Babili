@@ -163,4 +163,15 @@ public class UserController {
         }
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
+
+    @GetMapping("/course/{id}/management")
+    public String manageCourse(@PathVariable(required = true) int id, Model model){
+        Optional<Cursus> optionalCourse = cursusRepository.findById(id);
+        if (!optionalCourse.isPresent()){
+            return "/home";
+        }
+
+        model.addAttribute("course", optionalCourse.get());
+        return "course/course-management";
+    }
 }
