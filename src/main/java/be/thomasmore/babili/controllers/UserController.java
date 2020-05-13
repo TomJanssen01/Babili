@@ -177,6 +177,8 @@ public class UserController {
         return "course/course-management";
     }
 
+    //TODO filter availableStudents: check if not already added to a course
+    //TODO actually add the students to the course in the database
     @GetMapping("/course/{courseId}/management/add-students")
     public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model){
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
