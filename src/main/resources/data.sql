@@ -20,11 +20,11 @@ values
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', '../audio/bakkerexample/opdracht1.wav', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', '../audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 0);
 
 insert into inlevering
 (ID, AUDIO_PATH, OPDRACHT_Id, user_Id)
 values
-(nextval ('inlevering_seq'), '/audio/bakker.wav', 0, 1);
+(nextval ('inlevering_seq'), '/be.thomasmore.babili.audioFiles/bakker.wav', 0, 1);
 
 

@@ -59,6 +59,9 @@
     </a>
     <div th:if="${taak!=null}">
         <span th:text="${taak}"></span>
+        <a class="tile-icon float-right" th:href="'/user/startExample/'+${opdracht.getId()}">
+            <i class="tile-icon material-icons-round md-medium md-dark">help</i>
+        </a>
     </div>
     <br>
     <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
