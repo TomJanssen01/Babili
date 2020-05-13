@@ -21,7 +21,7 @@ public class SoundController {
     private OpdrachtRepository opdrachtRepository;
 
 
-    @GetMapping("/task-details/start/{id}")
+    @GetMapping("/start/{id}")
     public String startRec(@PathVariable(required = false) int id, Model model, Principal principal) {
         String user = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
@@ -37,7 +37,7 @@ public class SoundController {
         return "redirect:/user/task-details/" + id;
     }
 
-    @GetMapping("/task-details/stop/{id}")
+    @GetMapping("/stop/{id}")
     public String stopRec(@PathVariable(required = false) int id, Model model) {
         JavaSoundRecorder.stopRec();
         return "redirect:/user/task-details/" + id + "/opname";
@@ -55,21 +55,21 @@ public class SoundController {
         return "redirect:/user/task-details/" + id;
     }
 
-    @GetMapping("/listenRec/{id}/opname")
-    public String listenRec(@PathVariable(required = false) int id,
-                            Model model,
-                            Principal principal){
-        String user = null;
-        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
-        Opdracht opdrachtFromDB = null;
-        if (optionalOpdracht.isPresent()) {
-            opdrachtFromDB = optionalOpdracht.get();
-        }
-        if (principal != null) {
-            user = principal.getName();
-        }
-        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
-        JavaSoundPlayer.play(pathName);
-        return "redirect:/user/task-details/" + id + "/opname";
-    }
+//    @GetMapping("/listenRec/{id}/opname")
+//    public String listenRec(@PathVariable(required = false) int id,
+//                            Model model,
+//                            Principal principal){
+//        String user = null;
+//        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+//        Opdracht opdrachtFromDB = null;
+//        if (optionalOpdracht.isPresent()) {
+//            opdrachtFromDB = optionalOpdracht.get();
+//        }
+//        if (principal != null) {
+//            user = principal.getName();
+//        }
+//        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
+//        JavaSoundPlayer.play(pathName);
+//        return "redirect:/user/task-details/" + id + "/opname";
+//    }
 }

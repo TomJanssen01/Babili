@@ -62,8 +62,8 @@ public class UserController {
         }
         if (opname!=null){
             model.addAttribute("taak","Jouw opname is bewaard.");
-            model.addAttribute("audioPath","src/main/resources/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav" );
-            System.out.println("src/main/resources/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav");
+            model.addAttribute("audioPath","/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav" );
+            System.out.println("/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav");
         }
         model.addAttribute("opdracht", opdrachtFromDB);
         return "task-details";
