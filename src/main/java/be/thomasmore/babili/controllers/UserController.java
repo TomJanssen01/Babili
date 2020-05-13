@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -164,14 +165,26 @@ public class UserController {
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 
-    @GetMapping("/course/{id}/management")
-    public String manageCourse(@PathVariable(required = true) int id, Model model){
-        Optional<Cursus> optionalCourse = cursusRepository.findById(id);
+    @GetMapping("/course/{courseId}/management")
+    public String manageCourse(@PathVariable(required = true) int courseId, Model model){
+        Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
         if (!optionalCourse.isPresent()){
-            return "/home";
+            return "/overview-tasks";
         }
 
         model.addAttribute("course", optionalCourse.get());
         return "course/course-management";
+    }
+
+    @GetMapping("/course/{courseId}/management/add-students")
+    public String addStudents(@PathVariable(required = true) int courseId, Model model){
+        Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
+        if (!optionalCourse.isPresent()){
+            return "/overview-tasks";
+        }
+
+        model.addAttribute("course", optionalCourse.get());
+        //Iterable<User> iterableAvailableStudents = userRepository.findByRole()
+        return "course/add-students";
     }
 }
