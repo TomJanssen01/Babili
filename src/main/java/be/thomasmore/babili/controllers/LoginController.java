@@ -55,12 +55,13 @@ public class LoginController {
     @PostMapping("/register/student")
     public String registerStudentPost(@RequestParam String userName,
                                       @RequestParam String password,
+                                      @RequestParam String password2,
                                       @RequestParam String name,
                                       @RequestParam String email,
                                       Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent()){
+            if(!userWithUserName.isPresent() && password.equals(password2)){
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
@@ -89,12 +90,13 @@ public class LoginController {
     @PostMapping("/register/teacher")
     public String registerTeacherPost(@RequestParam String userName,
                                       @RequestParam String password,
+                                      @RequestParam String password2,
                                       @RequestParam String name,
                                       @RequestParam String email,
                                       Principal principal, Model model){
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent()){
+            if(!userWithUserName.isPresent() && password.equals(password2)){
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
