@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Overzicht taken</title>
+    <title th:text="'Beheer '+${course.getNaam()}">Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
     <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
-    <style>
-        a.tile{
-            color: var(--color-logo-dark);
-        }
-        a.tile:hover{
-            color: var(--color-logo-dark);
-        }
-    </style>
 </head>
 <body>
 <header></header>
@@ -41,31 +33,24 @@
             <i class="material-icons-round md-small md-dark">person</i>
             <span class="navbarName">Mijn account</span>
         </a>
-        <a class="navbarItem btn" href="/user/logout">
+        <a class="navbarItem btn">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
         </a>
     </nav>
 </div>
-<main>
-    <a sec:authorize="hasAuthority('TEACHER')" class="tile float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
-    <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
-    <!--    <h2>...</h2>-->
-    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
-                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
-        </div>
-    </a>
-
-    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
-    <!--    <h2>Afgewerkt: 10/30</h2>-->
-    <a class="task" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
-                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
-        </div>
-    </a>
+<main sec:authorize="hasAuthority('TEACHER')">
+    <h1 th:text="'Beheer '+${course.getNaam()}">Beheer</h1>
+    <h2>Cursisten</h2>
+    <div class="btn-group-vertical" role="group" aria-label="Basic example">
+        <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/add-students'">Toevoegen</a>
+        <a class="btn btn-primary">Verwijderen</a>
+    </div>
+    <h2>Cursus</h2>
+    <div class="btn-group-vertical" role="group" aria-label="Basic example">
+        <a class="btn btn-primary">Naam wijzigen</a>
+        <a class="btn btn-primary">Beschrijving wijzigen</a>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
