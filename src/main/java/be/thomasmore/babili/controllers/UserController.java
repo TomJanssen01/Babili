@@ -57,8 +57,8 @@ public class UserController {
         if (userFromDB.isPresent()){
             User ingelogdeUser = userFromDB.get();
             if (ingelogdeUser.getCursus() == null){
-                opdrachtFromDB = opdrachtRepository.findAll();
-            }else{
+                opdrachtFromDB = null;
+            }else {
                 opdrachtFromDB = opdrachtRepository.findByCursus_Id(ingelogdeUser.getCursus().getId());
             }
         }
@@ -218,20 +218,16 @@ public class UserController {
         return "course/add-students";
     }
 
-    private boolean isAlreadyEnrolled(User student, Cursus course) {
-        for (Cursus enlistedCourse : student.getCursus()) {
-            if (enlistedCourse.equals(course)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean isAlreadyEnrolled(User student) {
+
+        return student.getCursus() != null;
     }
 
     private List<User> getListOfStudentsThatAreNotEnrolled(Iterable<User> allStudents, Cursus course) {
         if (allStudents != null) {
             List<User> studentsThatAreNotEnrolled = new ArrayList<>();
             allStudents.forEach((s) -> {
-                if (!isAlreadyEnrolled(s, course)) {
+                if (!isAlreadyEnrolled(s)) {
                     studentsThatAreNotEnrolled.add(s);
                 }
             });
@@ -241,7 +237,7 @@ public class UserController {
     }
 
     private void enrollStudent(User student, Cursus course){
-        student.getCursus().add(course);
+        student.setCursus((course));
         userRepository.save(student);
     }
 }

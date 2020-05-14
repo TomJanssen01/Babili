@@ -28,19 +28,19 @@ VALUES
 (nextval('USER_SEQ'), 'admin', '$2a$10$fNEP0vLPDboAhB7ZM1vUxOzsj2Wt5IsY1hH3FYLUaE4YyQYFAZVOC', 'Admin', 'admin@admin.admin', 'ADMIN');
 
 INSERT INTO USER
-(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT', 0);
+(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT');
 
 INSERT INTO USER
-(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talba2', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha2@talha.be', 'STUDENT', 1);
+(nextval('USER_SEQ'), 'talba2', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar2', 'talha2@talha.be', 'STUDENT');
 
 INSERT INTO USER
-(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talba3', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha3@talha.be', 'STUDENT', 2);
+(nextval('USER_SEQ'), 'talba3', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar3', 'talha3@talha.be', 'STUDENT');
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)

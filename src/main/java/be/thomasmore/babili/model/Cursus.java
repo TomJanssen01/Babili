@@ -57,6 +57,14 @@ public class Cursus {
         this.docent = userDocent;
     }
 
+    public Collection<User> getCursisten() {
+        return cursisten;
+    }
+
+    public void setCursisten(Collection<User> cursisten) {
+        this.cursisten = cursisten;
+    }
+
     public Collection<Opdracht> getOpdrachten() {
         return opdrachten;
     }
