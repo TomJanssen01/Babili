@@ -40,21 +40,27 @@
     </nav>
 </div>
 <main sec:authorize="hasAuthority('TEACHER')">
-    <h1 th:if="${availableStudents}" th:text="'Studenten toevoegen aan '+${course.getNaam()}">Voeg studenten toe</h1>
-    <form th:if="${availableStudents}">
-        <div class="form-group">
-            <label for="studentSelect">Beschikbare cursisten</label>
-            <select multiple class="form-control" id="studentSelect" name="selectedStudents"
-                    th:each="student:${availableStudents}">
-                <option th:value="${student.getId()}" th:text="${student.getName()}">1</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Voeg toe</button>
-    </form>
-    <div th:if="${alreadySelectedStudents}">
-        <p>De volgende studenten id's werden toegevoegd:
-            <span th:each="id:${alreadySelectedStudents}" th:text="${id}+' '"></span>
-        </p>
+    <h1 th:text="'Studenten toevoegen aan '+${course.getNaam()}">Voeg studenten toe</h1>
+    <div th:if="${availableStudents != null && !availableStudents.isEmpty()}">
+        <form id="formAddStudents">
+            <div class="form-group">
+                <label for="studentSelect">Beschikbare cursisten</label>
+                <select multiple class="form-control" id="studentSelect" name="selectedStudents"
+                        th:each="student:${availableStudents}">
+                    <option th:value="${student.getId()}" th:text="${student.getName()}">1</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Voeg toe</button>
+        </form>
+    </div>
+    <div th:unless="${availableStudents != null || !availableStudents.isEmpty()}">
+        <p>Er zijn geen studenten die ingeschreven kunnen worden.</p>
+    </div>
+    <div th:if="${addedStudents != null && !addedStudents.isEmpty()}">
+        <p>De volgende student(en) werden toegevoegd:</p>
+        <ul th:each="student:${addedStudents}">
+            <li th:text="${student.getName()}"></li>
+        </ul>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

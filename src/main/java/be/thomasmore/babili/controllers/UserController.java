@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,9 +98,9 @@ public class UserController {
 
     @GetMapping("/inlevering/{submissionId}/confirmation")
     public String taskConfirmation(@PathVariable(required = true) int submissionId, @RequestParam(required = false) Integer rating, Model model) {
-        if(rating != null){
+        if (rating != null) {
             Optional<Inlevering> optionalSubmission = inleveringRepository.findById(submissionId);
-            if(optionalSubmission.isPresent()){
+            if (optionalSubmission.isPresent()) {
                 Inlevering currentSubmission = optionalSubmission.get();
                 ++rating;
                 currentSubmission.getOpdracht().setBeoordeling(rating.toString());
@@ -129,7 +130,7 @@ public class UserController {
                 Cursus cursus = new Cursus();
                 cursus.setNaam(naam);
                 Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-                if (optionalUser.isPresent()){
+                if (optionalUser.isPresent()) {
                     cursus.setDocent(optionalUser.get());
                 }
                 cursus.setBeschrijving(beschrijving);
@@ -147,10 +148,10 @@ public class UserController {
 
     @PostMapping("/new-task")
     public String createTaskPost(@RequestParam String titel,
-                                   @RequestParam String opgave,
-                                   @RequestParam String voorbeeldzin,
-                                   Principal principal,
-                                   Model model) {
+                                 @RequestParam String opgave,
+                                 @RequestParam String voorbeeldzin,
+                                 Principal principal,
+                                 Model model) {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
@@ -161,15 +162,15 @@ public class UserController {
                 opdracht.setOpgave(opgave);
                 opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
-                     }
+            }
         }
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 
     @GetMapping("/course/{courseId}/management")
-    public String manageCourse(@PathVariable(required = true) int courseId, Model model){
+    public String manageCourse(@PathVariable(required = true) int courseId, Model model) {
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
-        if (!optionalCourse.isPresent()){
+        if (!optionalCourse.isPresent()) {
             return "/overview-tasks";
         }
 
@@ -177,24 +178,61 @@ public class UserController {
         return "course/course-management";
     }
 
-    //TODO filter availableStudents: check if not already added to a course
-    //TODO actually add the students to the course in the database
     @GetMapping("/course/{courseId}/management/add-students")
-    public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model){
+    public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
+        Cursus givenCourse = null;
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
-        if (!optionalCourse.isPresent()){
+        if (!optionalCourse.isPresent()) {
             return "/overview-tasks";
         }
+        givenCourse = optionalCourse.get();
+        model.addAttribute("course", givenCourse);
 
         if (selectedStudents != null){
-            model.addAttribute("alreadySelectedStudents", selectedStudents);
+            List<User> studentsToEnroll = new ArrayList<>();
+            for (int studentId : selectedStudents) {
+                Optional<User> optionalStudent = userRepository.findById(studentId);
+                optionalStudent.ifPresent(studentsToEnroll::add);
+            }
+            studentsToEnroll.forEach((s)->{
+                enrollStudent(s, optionalCourse.get());
+            });
+            model.addAttribute("addedStudents", studentsToEnroll);
         }
 
-        model.addAttribute("course", optionalCourse.get());
-        Iterable<User> iterableAvailableStudents = userRepository.findByRole("STUDENT");
-        if (iterableAvailableStudents != null){
-            model.addAttribute("availableStudents", iterableAvailableStudents);
+        Iterable<User> allUsers = userRepository.findByRole("STUDENT");
+        if (allUsers != null) {
+            List<User> studentsThatAreNotEnrolled = getListOfStudentsThatAreNotEnrolled(allUsers, givenCourse);
+            model.addAttribute("availableStudents", studentsThatAreNotEnrolled);
         }
+
         return "course/add-students";
+    }
+
+    private boolean isAlreadyEnrolled(User student, Cursus course) {
+        for (Cursus enlistedCourse : student.getCursus()) {
+            if (enlistedCourse.equals(course)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<User> getListOfStudentsThatAreNotEnrolled(Iterable<User> allStudents, Cursus course) {
+        if (allStudents != null) {
+            List<User> studentsThatAreNotEnrolled = new ArrayList<>();
+            allStudents.forEach((s) -> {
+                if (!isAlreadyEnrolled(s, course)) {
+                    studentsThatAreNotEnrolled.add(s);
+                }
+            });
+            return studentsThatAreNotEnrolled;
+        }
+        return null;
+    }
+
+    private void enrollStudent(User student, Cursus course){
+        student.getCursus().add(course);
+        userRepository.save(student);
     }
 }
