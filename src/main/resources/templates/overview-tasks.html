@@ -60,12 +60,13 @@
 
     <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
     <!--    <h2>Afgewerkt: 10/30</h2>-->
-    <a class="task" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
+    <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
         <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
         <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
                 class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
         </div>
     </a>
+    <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

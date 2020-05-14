@@ -1,6 +1,9 @@
 package be.thomasmore.babili.model;
 
+import io.micrometer.shaded.org.pcollections.PCollection;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Cursus {
@@ -13,6 +16,10 @@ public class Cursus {
     private String beschrijving;
     @ManyToOne(fetch = FetchType.LAZY)
     private User docent;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Collection<User> cursisten;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Collection<Opdracht> opdrachten;
 
 
     public Cursus() {
@@ -48,5 +55,21 @@ public class Cursus {
 
     public void setDocent(User userDocent) {
         this.docent = userDocent;
+    }
+
+    public Collection<User> getCursisten() {
+        return cursisten;
+    }
+
+    public void setCursisten(Collection<User> cursisten) {
+        this.cursisten = cursisten;
+    }
+
+    public Collection<Opdracht> getOpdrachten() {
+        return opdrachten;
+    }
+
+    public void setOpdrachten(Collection<Opdracht> opdrachten) {
+        this.opdrachten = opdrachten;
     }
 }
