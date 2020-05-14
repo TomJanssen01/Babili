@@ -10,22 +10,17 @@ VALUES
 INSERT INTO USER
 (ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
 VALUES
-(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT');
-
-INSERT INTO USER
-(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE)
-VALUES
-(nextval('USER_SEQ'), 'talha_docent', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.talha', 'TEACHER');
+(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.talha', 'STUDENT');
 
 insert into Cursus
-(ID, NAAM, BESCHRIJVING, DOCENT_ID)
+(ID, NAAM, BESCHRIJVING, docent_Id)
 values
 (nextval ('cursus_seq'), 'testcursus1', 'Om te testen', 2);
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'opdracht week 1: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'bakker', 'ga naar een test', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
 
 insert into inlevering
 (ID, AUDIO_PATH, OPDRACHT_Id, user_Id)

@@ -40,9 +40,13 @@
     </nav>
 </div>
 <main>
-    <a class="tile-icon float-right" th:href="'/user/startExample/'+${opdracht.getId()}">
-        <i class="tile-icon material-icons-round md-medium md-dark">help</i>
-    </a>
+    <div class="tile-icon float-right">
+        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i>
+        <audio controls>
+            <source th:src="${opdracht.getVoorbeeld()}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
     <div class="task">
@@ -50,13 +54,13 @@
                                                                         th:text="${opdracht.getOpgave()}"></span>
         </div>
     </div>
-    <a id="record" class="tile" th:href="'start/'+${opdracht.getId()}">
+    <a id="record" class="tile" th:href="'/user/start/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic</i>
         </div>
         <span>Opnemen</span>
     </a>
-    <a id="stopRecording" class="tile" th:href="'stop/'+${opdracht.getId()}">
+    <a id="stopRecording" class="tile" th:href="'/user/stop/'+${opdracht.getId()}">
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
         </div>
@@ -64,6 +68,12 @@
     </a>
     <div th:if="${taak!=null}">
         <span th:text="${taak}"></span>
+        <div>
+            <audio controls>
+                <source th:src="${audioPath}" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
     <br>
     <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
