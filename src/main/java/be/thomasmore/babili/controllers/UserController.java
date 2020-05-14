@@ -50,14 +50,20 @@ public class UserController {
 
     @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}"})
     public String task(@PathVariable(required = false) int id,
-                       @PathVariable(required = false) String opname, Model model) {
+                       @PathVariable(required = false) String opname, Model model, Principal principal) {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         Opdracht opdrachtFromDB = null;
+        String user = null;
+        if (principal != null) {
+            user = principal.getName();
+        }
         if (optionalOpdracht.isPresent()){
             opdrachtFromDB = optionalOpdracht.get();
         }
         if (opname!=null){
             model.addAttribute("taak","Jouw opname is bewaard.");
+            model.addAttribute("audioPath","/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav" );
+            System.out.println("/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav");
         }
         model.addAttribute("opdracht", opdrachtFromDB);
         return "task-details";
@@ -79,7 +85,7 @@ public class UserController {
                 UserFromDB = optionalUser.get();
             }
         }
-        String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+userName+".wav";
+        String pathName = "/audioFiles/" + opdrachtFromDB.getTitel()+"/"+userName+".wav";
         Inlevering newInlevering = new Inlevering(pathName,opdrachtFromDB,UserFromDB);
         inleveringRepository.save(newInlevering);
         return "redirect:/user/overview-tasks";
