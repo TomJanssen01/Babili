@@ -30,12 +30,32 @@ VALUES
 INSERT INTO USER
 (ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
 VALUES
-(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT', 1);
+(nextval('USER_SEQ'), 'talba', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha@talha.be', 'STUDENT', 0);
+
+INSERT INTO USER
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
+VALUES
+(nextval('USER_SEQ'), 'talba2', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha2@talha.be', 'STUDENT', 1);
+
+INSERT INTO USER
+(ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
+VALUES
+(nextval('USER_SEQ'), 'talba3', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar', 'talha3@talha.be', 'STUDENT', 2);
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'opdracht week 1: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 1);
+(nextval ('opdracht_seq'), 'opdracht week 1: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
+
+insert into opdracht
+(ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
+values
+(nextval ('opdracht_seq'), 'opdracht week 2: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 1);
+
+insert into opdracht
+(ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
+values
+(nextval ('opdracht_seq'), 'opdracht week 3: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 2);
 
 insert into inlevering
 (ID, AUDIO_PATH, OPDRACHT_Id, user_Id)
