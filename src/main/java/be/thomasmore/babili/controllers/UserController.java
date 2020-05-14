@@ -149,17 +149,18 @@ public class UserController {
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 
-    @GetMapping("/new-task")
-    public String newTask(Model model) {
+    @GetMapping("/course/{courseId}/management/new-task")
+    public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
         return "new-task";
     }
 
-    @PostMapping("/new-task")
+    @PostMapping("/course/{courseId}/management/new-task")
     public String createTaskPost(@RequestParam String titel,
                                  @RequestParam String opgave,
-                                 @RequestParam String voorbeeldzin,
+//                                 @RequestParam String voorbeeldzin,
                                  Principal principal,
+                                 @PathVariable(required = true) int courseId,
                                  Model model) {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
@@ -169,7 +170,10 @@ public class UserController {
                 Opdracht opdracht = new Opdracht();
                 opdracht.setTitel(titel);
                 opdracht.setOpgave(opgave);
-                opdracht.setVoorbeeld(voorbeeldzin);
+                if (cursusRepository.findById(courseId).isPresent()){
+                    opdracht.setCursus(cursusRepository.findById(courseId).get());
+                }
+//                opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
             }
         }
