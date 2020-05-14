@@ -104,11 +104,12 @@ public class UserController {
                 UserFromDB = optionalUser.get();
             }
         }
-        String pathName = "D:/Test/Audio/" + opdrachtFromDB.getTitel() + "/" + userName + ".wav";
+        String pathName = "/audioFiles/" + opdrachtFromDB.getTitel() + "/" + userName + ".wav";
         Inlevering newInlevering = new Inlevering(pathName, opdrachtFromDB, UserFromDB);
         inleveringRepository.save(newInlevering);
         return "redirect:/user/inlevering/{id}/confirmation";
     }
+
 
     @GetMapping("/inlevering/{submissionId}/confirmation")
     public String taskConfirmation(@PathVariable(required = true) int submissionId, @RequestParam(required = false) Integer rating, Model model) {
