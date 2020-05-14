@@ -45,21 +45,21 @@ VALUES
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'opdracht week 1: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 0);
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'opdracht week 2: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 1);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 1);
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'opdracht week 3: Ga naar de bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'C:/Test/Audio/Examples/opdracht1.wav', 'moeilijk', 2);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 2);
 
 insert into inlevering
 (ID, AUDIO_PATH, OPDRACHT_Id, user_Id)
 values
-(nextval ('inlevering_seq'), '/audio/bakker.wav', 0, 1);
+(nextval ('inlevering_seq'), '/audio/bakker/bakker.wav', 0, 1);
 
 

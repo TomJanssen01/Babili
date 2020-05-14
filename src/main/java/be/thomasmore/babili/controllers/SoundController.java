@@ -1,10 +1,12 @@
 package be.thomasmore.babili.controllers;
 
+
 import be.thomasmore.babili.audio.JavaSoundPlayer;
 import be.thomasmore.babili.audio.JavaSoundRecorder;
 import be.thomasmore.babili.model.Opdracht;
 import be.thomasmore.babili.repositories.OpdrachtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,36 +23,36 @@ public class SoundController {
     private OpdrachtRepository opdrachtRepository;
 
 
-    @GetMapping("/task-details/start/{id}")
+    @GetMapping("/start/{id}")
     public String startRec(@PathVariable(required = false) int id, Model model, Principal principal) {
         String user = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         Opdracht opdrachtFromDB = null;
-        if (optionalOpdracht.isPresent()){
+        if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        if (principal != null){
-           user = principal.getName();
+        if (principal != null) {
+            user = principal.getName();
         }
-        String pathName = "C:/Test/Audio/" + opdrachtFromDB.getTitel()+"/"+user+".wav";
+        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
         JavaSoundRecorder.startRec(pathName);
         return "redirect:/user/task-details/" + id;
     }
 
-    @GetMapping("/task-details/stop/{id}")
-    public String stopRec(@PathVariable(required = false) int id,Model model) {
+    @GetMapping("/stop/{id}")
+    public String stopRec(@PathVariable(required = false) int id, Model model) {
         JavaSoundRecorder.stopRec();
+//        evictAllCaches();
         return "redirect:/user/task-details/" + id + "/opname";
     }
 
-    @GetMapping("/startExample/{id}")
-    public String startExample(@PathVariable(required = false) int id, Model model){
-        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
-        Opdracht opdrachtFromDB = null;
-        if (optionalOpdracht.isPresent()){
-            opdrachtFromDB = optionalOpdracht.get();
-        }
-        JavaSoundPlayer.play(opdrachtFromDB.getVoorbeeld());
-        return "redirect:/user/task-details/"+id;
-    }
+//    @Autowired
+//    CacheManager cacheManager;
+//
+//    public void evictAllCaches() {
+//        cacheManager.getCacheNames().stream()
+//                .forEach(cacheName -> cacheManager.getCache(cacheName).clear());
+//    }
+
+
 }
