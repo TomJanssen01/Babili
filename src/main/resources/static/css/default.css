@@ -1,8 +1,8 @@
 :root{
     --color-logo-dark: rgba(77, 97, 98, 1);
     --color-logo-light: rgba(241, 202, 0, 1);
-    --color-logo-dark-transparant: rgba(77, 97, 98, 0.9);
-    --color-logo-light-transparant: rgba(241, 202, 0, 0.9);
+    --color-logo-dark-transparant: rgba(77, 97, 98, 0.92);
+    --color-logo-light-transparant: rgba(241, 202, 0, 0.92);
 }
 
 .material-icons-round{
@@ -69,11 +69,26 @@ footer{
 .btn-primary{
     background-color: var(--color-logo-dark-transparant);
     border-color: var(--color-logo-dark);
+    color: white !important;
 }
 
 .btn-primary:hover{
     background-color: var(--color-logo-dark);
     border-color: var(--color-logo-dark);
+}
+
+.btn-primary-outline{
+    background-color: transparent;
+    border-color: var(--color-logo-dark);
+    color: var(--color-logo-dark);
+    border-width: 3px;
+    margin: 10px;
+}
+
+.btn-primary-outline:hover{
+    background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
+    color: white;
 }
 
 .title{
@@ -124,20 +139,6 @@ a.tile:hover{
     color: var(--color-logo-dark);
 }
 
-.btn-primary-outline{
-    background-color: transparent;
-    border-color: var(--color-logo-dark);
-    color: var(--color-logo-dark);
-    border-width: 3px;
-    margin: 10px;
-}
-
-.btn-primary-outline:hover{
-    background-color: var(--color-logo-dark);
-    border-color: var(--color-logo-dark);
-    color: white;
-}
-
 #ratingSlider{
     width: 100%;
 }
@@ -164,6 +165,10 @@ a.tile:hover{
 
 #ratingText{
     font-weight: bold;
+}
+
+select{
+    width: auto;
 }
 
 @media screen and (min-width: 768px) {

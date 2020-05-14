@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Overzicht taken</title>
+    <title th:text="'Beheer '+${course.getNaam()}">Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
     <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
-    <style>
-        a.tile{
-            color: var(--color-logo-dark);
-        }
-        a.tile:hover{
-            color: var(--color-logo-dark);
-        }
-    </style>
 </head>
 <body>
 <header></header>
@@ -41,31 +33,35 @@
             <i class="material-icons-round md-small md-dark">person</i>
             <span class="navbarName">Mijn account</span>
         </a>
-        <a class="navbarItem btn" href="/user/logout">
+        <a class="navbarItem btn">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
         </a>
     </nav>
 </div>
-<main>
-    <a sec:authorize="hasAuthority('TEACHER')" class="tile float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
-    <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
-    <!--    <h2>...</h2>-->
-    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
-                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
-        </div>
-    </a>
-
-    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
-    <!--    <h2>Afgewerkt: 10/30</h2>-->
-    <a class="task" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
-                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
-        </div>
-    </a>
+<main sec:authorize="hasAuthority('TEACHER')">
+    <h1 th:text="'Studenten toevoegen aan '+${course.getNaam()}">Voeg studenten toe</h1>
+    <div th:if="${availableStudents != null && !availableStudents.isEmpty()}">
+        <form id="formAddStudents">
+            <div class="form-group">
+                <label for="studentSelect">Beschikbare cursisten</label>
+                <select multiple class="form-control" id="studentSelect" name="selectedStudents"
+                        th:each="student:${availableStudents}">
+                    <option th:value="${student.getId()}" th:text="${student.getName()}">1</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Voeg toe</button>
+        </form>
+    </div>
+    <div th:unless="${availableStudents != null || !availableStudents.isEmpty()}">
+        <p>Er zijn geen studenten die ingeschreven kunnen worden.</p>
+    </div>
+    <div th:if="${addedStudents != null && !addedStudents.isEmpty()}">
+        <p>De volgende student(en) werden toegevoegd:</p>
+        <ul th:each="student:${addedStudents}">
+            <li th:text="${student.getName()}"></li>
+        </ul>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
