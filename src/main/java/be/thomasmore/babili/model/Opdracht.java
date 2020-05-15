@@ -12,7 +12,6 @@ public class Opdracht {
     private String titel;
     private String opgave;
     private String voorbeeld;
-    private String beoordeling;
     @OneToOne
     private Cursus cursus;
 
@@ -51,13 +50,13 @@ public class Opdracht {
         this.voorbeeld = voorbeeld;
     }
 
-    public String getBeoordeling() {
-        return beoordeling;
-    }
-
-    public void setBeoordeling(String beoordeling) {
-        this.beoordeling = beoordeling;
-    }
+//    public String getBeoordeling() {
+//        return beoordeling;
+//    }
+//
+//    public void setBeoordeling(String beoordeling) {
+//        this.beoordeling = beoordeling;
+//    }
 
     public Cursus getCursus() {
         return cursus;

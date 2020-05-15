@@ -112,15 +112,31 @@ public class UserController {
 
 
     @GetMapping("/inlevering/{submissionId}/confirmation")
-    public String taskConfirmation(@PathVariable(required = true) int submissionId, @RequestParam(required = false) Integer rating, Model model) {
+    public String taskConfirmation(@PathVariable(required = true) Integer submissionId, @RequestParam(required = false) Integer rating, Model model, Principal principal) {
         if (rating != null) {
-            Optional<Inlevering> optionalSubmission = inleveringRepository.findById(submissionId);
+            String userName = null;
+            if (principal != null) {
+                userName = principal.getName();
+            }
+            Optional<User> optionalUser = userRepository.findByUsername(userName);
+            User user = null;
+            if (optionalUser.isPresent()){
+                user = optionalUser.get();
+            }
+            Opdracht opdrachtFromDB = null;
+            Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(submissionId);
+            if (optionalOpdracht.isPresent()) {
+                opdrachtFromDB = optionalOpdracht.get();
+            }
+            Optional<Inlevering> optionalSubmission = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdrachtFromDB);
             if (optionalSubmission.isPresent()) {
                 Inlevering currentSubmission = optionalSubmission.get();
                 ++rating;
-                currentSubmission.getOpdracht().setBeoordeling(rating.toString());
+                System.out.println(rating);
+                currentSubmission.setBeoordeling(rating.toString());
                 inleveringRepository.save(currentSubmission);
             }
+            return "redirect:/user/overview-tasks";
         }
         model.addAttribute("submissionId", submissionId);
         return "task-confirmation";

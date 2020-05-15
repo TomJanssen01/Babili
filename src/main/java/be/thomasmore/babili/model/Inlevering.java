@@ -14,6 +14,7 @@ public class Inlevering {
     private Opdracht opdracht;
     @OneToOne
     private User user;
+    private String beoordeling;
 
     public Inlevering() {
     }
@@ -22,6 +23,14 @@ public class Inlevering {
         this.audioPath = audioPath;
         this.opdracht = opdracht;
         this.user = user;
+    }
+
+    public String getBeoordeling() {
+        return beoordeling;
+    }
+
+    public void setBeoordeling(String beoordeling) {
+        this.beoordeling = beoordeling;
     }
 
     public User getUser() {

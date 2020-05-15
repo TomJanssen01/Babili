@@ -43,23 +43,23 @@ VALUES
 (nextval('USER_SEQ'), 'talba3', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Talha Bayansar3', 'talha3@talha.be', 'STUDENT');
 
 insert into opdracht
-(ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
+(ID, TITEL, OPGAVE, VOORBEELD,  CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 0);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 0);
 
 insert into opdracht
-(ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
+(ID, TITEL, OPGAVE, VOORBEELD,  CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 1);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav',  1);
 
 insert into opdracht
-(ID, TITEL, OPGAVE, VOORBEELD, BEOORDELING, CURSUS_Id)
+(ID, TITEL, OPGAVE, VOORBEELD,  CURSUS_Id)
 values
-(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 'moeilijk', 2);
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav',  2);
 
 insert into inlevering
-(ID, AUDIO_PATH, OPDRACHT_Id, user_Id)
+(ID, AUDIO_PATH, OPDRACHT_Id, user_Id, BEOORDELING)
 values
-(nextval ('inlevering_seq'), '/audio/bakker/bakker.wav', 0, 1);
+(nextval ('inlevering_seq'), '/audio/bakker/bakker.wav', 0, 1, 'moeilijk');
 
 
