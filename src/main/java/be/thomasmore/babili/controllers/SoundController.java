@@ -43,7 +43,7 @@ public class SoundController {
     public String stopRec(@PathVariable(required = false) int id, Model model) {
         JavaSoundRecorder.stopRec();
 //        evictAllCaches();
-        return "redirect:/user/task-details/" + id + "/opname";
+        return "redirect:/user/task-details/" + id + "/opname/" + id;
     }
 
 //    @Autowired

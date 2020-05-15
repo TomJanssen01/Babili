@@ -68,7 +68,7 @@ public class UserController {
         return "overview-tasks";
     }
 
-    @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}"})
+    @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}","/task-details/{id}/{opname}/{id}"})
     public String task(@PathVariable(required = false) int id,
                        @PathVariable(required = false) String opname, Model model, Principal principal) {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
