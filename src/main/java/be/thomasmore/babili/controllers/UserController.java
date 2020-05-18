@@ -222,7 +222,7 @@ public class UserController {
             cursusFromDb = optionalCursus.get();
         model.addAttribute("cursussen", cursusFromDb);
         model.addAttribute("cursus", cursusRepository.findAll());
-        return "course/edit-course";
+        return "/course/edit-course";
     }
 
     @PostMapping({"/course/{courseId}/management/edit-course"})
