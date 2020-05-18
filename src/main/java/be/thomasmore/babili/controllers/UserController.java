@@ -171,10 +171,7 @@ public class UserController {
         return "redirect:/user/overview-tasks";
     }
 
-    @GetMapping("/course/{courdeId}/edit-course")
-    public String editCourse(@PathVariable(required = true) int courseId, Model model){
-        return "redirect:/user/overview-tasks";
-    }
+
 
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
@@ -217,13 +214,37 @@ public class UserController {
         model.addAttribute("course", optionalCourse.get());
         return "course/course-management";
     }
+    @GetMapping("/course/{courseId}/management/edit-course/")
+    public String editCourse(@PathVariable int courseId, Model model){
+        Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
+       Cursus cursusFromDb = null;
+        if (optionalCursus.isPresent())
+            cursusFromDb = optionalCursus.get();
+        model.addAttribute("cursussen", cursusFromDb);
+        model.addAttribute("cursus", cursusRepository.findAll());
+        return "course/edit-course";
+    }
+
+    @PostMapping({"/course/{courseId}/management/edit-course"})
+    public String editCourse(@PathVariable (required = false) int courseId,
+                             @RequestParam String naam,
+                             @RequestParam String beschrijving,
+                             Model model){
+        Optional <Cursus> cursusFromDb =  cursusRepository.findById(courseId);
+        if (cursusFromDb.isPresent()){
+            Cursus cursus = cursusFromDb.get();
+            cursus.setNaam(naam);
+            cursus.setBeschrijving(beschrijving);
+        }
+        return "redirect:/user/overview-tasks";
+    }
 
     @GetMapping("/course/{courseId}/management/add-students")
     public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
         Cursus givenCourse = null;
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
         if (!optionalCourse.isPresent()) {
-            return "/overview-tasks";
+            return "course/overview-tasks";
         }
         givenCourse = optionalCourse.get();
         model.addAttribute("course", givenCourse);
