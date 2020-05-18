@@ -235,6 +235,7 @@ public class UserController {
             Cursus cursus = cursusFromDb.get();
             cursus.setNaam(naam);
             cursus.setBeschrijving(beschrijving);
+            cursusRepository.save(cursus);
         }
         return "redirect:/user/overview-tasks";
     }
