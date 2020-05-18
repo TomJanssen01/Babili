@@ -14,6 +14,8 @@ public class Opdracht {
     private String voorbeeld;
     @OneToOne
     private Cursus cursus;
+    @OneToOne(mappedBy = "opdracht")
+    private Inlevering inlevering;
 
     public Opdracht() {
     }
@@ -64,5 +66,9 @@ public class Opdracht {
 
     public void setCursus(Cursus cursus) {
         this.cursus = cursus;
+    }
+
+    public Inlevering getInlevering() {
+        return inlevering;
     }
 }

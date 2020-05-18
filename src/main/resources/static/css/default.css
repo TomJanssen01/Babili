@@ -10,13 +10,22 @@
     color: white;
     border-radius: 45px;
     padding: 1px;
+    border-width: 1px;
+    border-left-style: solid;
 }
 
-.material-icons-round.md-dark { background-color: var(--color-logo-dark); }
-.material-icons-round.md-light { background-color: var(--color-logo-light); }
-.material-icons-round.md-small {
-    font-size: 36px;
+.material-icons-round.md-dark {
+    background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
 }
+.material-icons-round.md-light {
+    background-color: var(--color-logo-light);
+    border-color: var(--color-logo-light);
+}
+.material-icons-round.md-dark:hover { border-color: var(--color-logo-dark-transparant) }
+.material-icons-round.md-light:hover { border-color: var(--color-logo-light-transparant) }
+
+.material-icons-round.md-small { font-size: 36px; }
 .material-icons-round.md-medium { font-size: 60px; }
 .material-icons-round.md-large { font-size: 96px; }
 
@@ -170,6 +179,11 @@ a.tile:hover{
 
 select{
     width: auto;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }
 
 @media screen and (min-width: 768px) {

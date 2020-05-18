@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -54,11 +55,11 @@ public class UserController {
     public String overviewTasks(Model model, Principal principal) {
         Optional<User> userFromDB = userRepository.findByUsername(principal.getName());
         Iterable<Opdracht> opdrachtFromDB = null;
-        if (userFromDB.isPresent()){
+        if (userFromDB.isPresent()) {
             User ingelogdeUser = userFromDB.get();
-            if (ingelogdeUser.getCursus() == null){
+            if (ingelogdeUser.getCursus() == null) {
                 opdrachtFromDB = null;
-            }else {
+            } else {
                 opdrachtFromDB = opdrachtRepository.findByCursus_Id(ingelogdeUser.getCursus().getId());
             }
         }
@@ -68,7 +69,7 @@ public class UserController {
         return "overview-tasks";
     }
 
-    @GetMapping({"/task-details/{id}","/task-details/{id}/{opname}","/task-details/{id}/{opname}/{id}"})
+    @GetMapping({"/task-details/{id}", "/task-details/{id}/{opname}", "/task-details/{id}/{opname}/{id}"})
     public String task(@PathVariable(required = false) int id,
                        @PathVariable(required = false) String opname, Model model, Principal principal) {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
@@ -77,12 +78,12 @@ public class UserController {
         if (principal != null) {
             user = principal.getName();
         }
-        if (optionalOpdracht.isPresent()){
+        if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        if (opname!=null){
-            model.addAttribute("taak","Jouw opname is bewaard.");
-            model.addAttribute("audioPath","/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav" );
+        if (opname != null) {
+            model.addAttribute("taak", "Jouw opname is bewaard.");
+            model.addAttribute("audioPath", "/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav");
         }
         model.addAttribute("opdracht", opdrachtFromDB);
         return "task-details";
@@ -120,7 +121,7 @@ public class UserController {
             }
             Optional<User> optionalUser = userRepository.findByUsername(userName);
             User user = null;
-            if (optionalUser.isPresent()){
+            if (optionalUser.isPresent()) {
                 user = optionalUser.get();
             }
             Opdracht opdrachtFromDB = null;
@@ -192,7 +193,7 @@ public class UserController {
                 Opdracht opdracht = new Opdracht();
                 opdracht.setTitel(titel);
                 opdracht.setOpgave(opgave);
-                if (cursusRepository.findById(courseId).isPresent()){
+                if (cursusRepository.findById(courseId).isPresent()) {
                     opdracht.setCursus(cursusRepository.findById(courseId).get());
                 }
 //                opdracht.setVoorbeeld(voorbeeldzin);
@@ -210,6 +211,7 @@ public class UserController {
         }
 
         model.addAttribute("course", optionalCourse.get());
+        model.addAttribute("tasks", opdrachtRepository.findAll());
         return "course/course-management";
     }
 
@@ -223,13 +225,13 @@ public class UserController {
         givenCourse = optionalCourse.get();
         model.addAttribute("course", givenCourse);
 
-        if (selectedStudents != null){
+        if (selectedStudents != null) {
             List<User> studentsToEnroll = new ArrayList<>();
             for (int studentId : selectedStudents) {
                 Optional<User> optionalStudent = userRepository.findById(studentId);
                 optionalStudent.ifPresent(studentsToEnroll::add);
             }
-            studentsToEnroll.forEach((s)->{
+            studentsToEnroll.forEach((s) -> {
                 enrollStudent(s, optionalCourse.get());
             });
             model.addAttribute("addedStudents", studentsToEnroll);
@@ -242,6 +244,22 @@ public class UserController {
         }
 
         return "course/add-students";
+    }
+
+    @GetMapping("/course/{courseId}/task/{taskId}/delete")
+    public String deleteTask(@PathVariable(required = true) int courseId, @PathVariable(required = true) int taskId) {
+        Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
+        if (optionalCursus.isPresent()) {
+            Optional<Opdracht> optionalTask = opdrachtRepository.findById(taskId);
+
+            if(optionalTask.isPresent()) {
+                Opdracht task = optionalTask.get();
+                Cursus course = optionalCursus.get();
+                course.getOpdrachten().remove(task);
+                opdrachtRepository.delete(task);
+            }
+        }
+        return "redirect:/user/course/"+courseId+"/management";
     }
 
     private boolean isAlreadyEnrolled(User student) {
@@ -262,7 +280,7 @@ public class UserController {
         return null;
     }
 
-    private void enrollStudent(User student, Cursus course){
+    private void enrollStudent(User student, Cursus course) {
         student.setCursus((course));
         userRepository.save(student);
     }
