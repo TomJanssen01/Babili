@@ -244,9 +244,52 @@ public class UserController {
         return "course/add-students";
     }
 
-    private boolean isAlreadyEnrolled(User student) {
+    @GetMapping("/course/{courseId}/management/delete-students")
+    public String deleteStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
+        Cursus givenCourse = null;
+        Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
+        if (!optionalCourse.isPresent()) {
+            return "/overview-tasks";
+        }
+        givenCourse = optionalCourse.get();
+        model.addAttribute("course", givenCourse);
 
+        if (selectedStudents != null){
+            List<User> studentsToDelete = new ArrayList<>();
+            for (int studentId : selectedStudents) {
+                Optional<User> optionalStudent = userRepository.findById(studentId);
+                optionalStudent.ifPresent(studentsToDelete::add);
+            }
+            studentsToDelete.forEach((s)->{
+                deleteStudent(s);
+            });
+            model.addAttribute("addedStudents", studentsToDelete);
+        }
+
+        Iterable<User> allUsers = userRepository.findByRole("STUDENT");
+        if (allUsers != null) {
+            List<User> studentsThatAreEnrolled = getListOfStudentsThatAreEnrolled(allUsers, givenCourse);
+            model.addAttribute("availableStudents", studentsThatAreEnrolled);
+        }
+
+        return "course/delete-students";
+    }
+
+    private boolean isAlreadyEnrolled(User student) {
         return student.getCursus() != null;
+    }
+
+    private List<User> getListOfStudentsThatAreEnrolled(Iterable<User> allStudents, Cursus course) {
+        if (allStudents != null) {
+            List<User> studentsThatAreEnrolled = new ArrayList<>();
+            allStudents.forEach((s) -> {
+                if (isAlreadyEnrolled(s) && s.getCursus().equals(course)) {
+                    studentsThatAreEnrolled.add(s);
+                }
+            });
+            return studentsThatAreEnrolled;
+        }
+        return null;
     }
 
     private List<User> getListOfStudentsThatAreNotEnrolled(Iterable<User> allStudents, Cursus course) {
@@ -264,6 +307,11 @@ public class UserController {
 
     private void enrollStudent(User student, Cursus course){
         student.setCursus((course));
+        userRepository.save(student);
+    }
+
+    private void deleteStudent(User student){
+        student.setCursus(null);
         userRepository.save(student);
     }
 }
