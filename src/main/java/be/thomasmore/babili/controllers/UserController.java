@@ -214,7 +214,7 @@ public class UserController {
         model.addAttribute("course", optionalCourse.get());
         return "course/course-management";
     }
-    @GetMapping("/course/{courseId}/management/edit-course/")
+    @GetMapping("/course/{courseId}/management/edit-course")
     public String editCourse(@PathVariable int courseId, Model model){
         Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
        Cursus cursusFromDb = null;
