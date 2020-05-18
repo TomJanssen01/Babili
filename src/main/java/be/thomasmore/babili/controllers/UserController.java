@@ -168,7 +168,12 @@ public class UserController {
                 cursusRepository.save(cursus);
             }
         }
-        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
+        return "redirect:/user/overview-tasks";
+    }
+
+    @GetMapping("/course/{courdeId}/edit-course")
+    public String editCourse(@PathVariable(required = true) int courseId, Model model){
+        return "redirect:/user/overview-tasks";
     }
 
     @GetMapping("/course/{courseId}/management/new-task")
