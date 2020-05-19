@@ -172,6 +172,33 @@ public class UserController {
         return "redirect:/user/overview-tasks";
     }
 
+    @GetMapping("/edit-task/{id}")
+    public String editCourse(Model model, @RequestParam(required = false) int id) {
+        Opdracht opdrachtFromDB = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        if (optionalOpdracht.isPresent()) {
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        model.addAttribute("opdracht", opdrachtFromDB);
+        return "edit-task";
+    }
+
+    @PostMapping("/edit-task/{id}")
+    public String postEditCourse(Model model,
+                                 @RequestParam(required = false) int id,
+                                 @RequestParam(required = false) String titel,
+                                 @RequestParam(required = false) String opgave) {
+        Opdracht opdrachtFromDB = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        if (optionalOpdracht.isPresent()) {
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        opdrachtFromDB.setTitel(titel);
+        opdrachtFromDB.setOpgave(opgave);
+        model.addAttribute("opdracht", opdrachtFromDB);
+        return "edit-task";
+    }
+
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
