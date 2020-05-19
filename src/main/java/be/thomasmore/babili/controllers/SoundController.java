@@ -34,7 +34,7 @@ public class SoundController {
         if (principal != null) {
             user = principal.getName();
         }
-        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getTitel() + "/" + user + ".wav";
+        String pathName = "src/main/resources/static/audioFiles/" + opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ", "").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ", "").toLowerCase()+ "/" + user + ".wav";
         JavaSoundRecorder.startRec(pathName);
         return "redirect:/user/task-details/" + id;
     }
