@@ -45,7 +45,7 @@
     <div class ="container-fluid">
         <div class="row">
             <div class="col">
-                <form th:action="@{'edit-task'+}" method="post">
+                <form th:action="@{'edit-task/'+ ${opdracht.getId()}}" method="post">
                     <div class="filters">
                         <div class="filterrow mb-2">
                             <div class="row">
