@@ -54,7 +54,7 @@
     <div class="btn-group-vertical" role="group" aria-label="Basic example">
         <a class="btn btn-primary" th:href="'/user/course/'+${courseId}+'/management/new-task'">Opdracht toevoegen</a>
     </div>
-    <h2 class="mt-3">Gemaakte taken</h2>
+    <h2 class="mt-3">Gemaakte opdrachten</h2>
     <div class="flex-row" th:each="task:${tasks}">
         <a class="task" th:href="'/user/task-details/'+${task.getId()}">
             <div class="task-card mr-2">
