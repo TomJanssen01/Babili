@@ -171,6 +171,17 @@ public class UserController {
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
     }
 
+    @GetMapping("/edit-task/{id}")
+    public String editCourse(Model model, @RequestParam(required = false) int id) {
+        Opdracht opdrachtFromDB = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
+        if (optionalOpdracht.isPresent()) {
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        model.addAttribute("opdracht", opdrachtFromDB);
+        return "edit-task";
+    }
+
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
