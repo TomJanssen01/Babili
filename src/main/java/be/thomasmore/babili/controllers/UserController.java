@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.security.Principal;
 import java.util.*;
@@ -299,6 +300,7 @@ public class UserController {
         return "course/add-students";
     }
 
+    @Transactional
     @GetMapping("/course/{courseId}/task/{taskId}/delete")
     public String deleteTask(@PathVariable(required = true) int courseId, @PathVariable(required = true) int taskId) {
         Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
@@ -308,6 +310,7 @@ public class UserController {
                 Opdracht task = optionalTask.get();
                 Cursus course = optionalCursus.get();
                 course.getOpdrachten().remove(task);
+                inleveringRepository.deleteByOpdracht(task);
                 opdrachtRepository.delete(task);
                 File index = new File("src/main/resources/static/audioFiles/"+course.getId()+course.getNaam().replaceAll(" ","").toLowerCase()+"/"+task.getTitel().replaceAll(" ","").toLowerCase());
                 String[]entries = index.list();

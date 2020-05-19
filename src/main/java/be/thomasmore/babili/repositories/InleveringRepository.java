@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface InleveringRepository extends CrudRepository<Inlevering, Integer> {
     Optional<Inlevering> findByUser_IdAndOpdracht(int userId, Opdracht Opdracht);
+    Collection<Inlevering> deleteByOpdracht(Opdracht opdracht);
 }
