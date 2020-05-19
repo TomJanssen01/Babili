@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
-    <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
 </head>
 <body>
 <header></header>
@@ -55,6 +54,19 @@
     <div class="btn-group-vertical" role="group" aria-label="Basic example">
         <a class="btn btn-primary" th:href="'/user/course/'+${courseId}+'/management/new-task'">Opdracht toevoegen</a>
         <a class="btn btn-primary">Opdracht verwijderen</a>
+    </div>
+    <h2>Gemaakte taken</h2>
+    <div class="flex-row" th:each="task:${tasks}">
+        <a class="task" th:href="'/user/task-details/'+${task.getId()}">
+            <div class="task-card mr-2">
+                <span class="task-number" th:text="${task.getId()}">01</span>
+                <span class="task-content" th:text="${task.getTitel()}"></span>
+            </div>
+        </a>
+        <a class="task-state material-icons-round md-small md-dark"
+           th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
+        <a th:if="${task.getInlevering()==null}" class="task-state material-icons-round md-small md-dark"
+           th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

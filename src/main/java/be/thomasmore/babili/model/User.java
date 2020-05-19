@@ -19,6 +19,8 @@ public class User {
     private String role;
     @ManyToOne(fetch = FetchType.LAZY)
     private Cursus cursus;
+    @OneToOne(mappedBy = "user")
+    private Inlevering inlevering;
 
     public User() {
     }

@@ -19,10 +19,6 @@ a.task:hover{
     margin-right: 5px;
 }
 
-.task-state:hover{
-    background-color: var(--color-logo-dark-transparant);
-}
-
 .task-card{
     border: var(--color-logo-dark) solid 5px;
     background-color: white;

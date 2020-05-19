@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface InleveringRepository extends CrudRepository<Inlevering, Integer> {
-Optional<Inlevering> findByUser_IdAndOpdracht(int userId, Opdracht Opdracht);
+    Optional<Inlevering> findByUser_IdAndOpdracht(int userId, Opdracht Opdracht);
 }
