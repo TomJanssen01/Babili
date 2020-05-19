@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -306,12 +304,18 @@ public class UserController {
         Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
         if (optionalCursus.isPresent()) {
             Optional<Opdracht> optionalTask = opdrachtRepository.findById(taskId);
-
             if (optionalTask.isPresent()) {
                 Opdracht task = optionalTask.get();
                 Cursus course = optionalCursus.get();
                 course.getOpdrachten().remove(task);
                 opdrachtRepository.delete(task);
+                File index = new File("src/main/resources/static/audioFiles/"+course.getId()+course.getNaam().replaceAll(" ","").toLowerCase()+"/"+task.getTitel().replaceAll(" ","").toLowerCase());
+                String[]entries = index.list();
+                for(String s: entries){
+                    File currentFile = new File(index.getPath(),s);
+                    currentFile.delete();
+                }
+                index.delete();
             }
         }
         return "redirect:/user/course/" + courseId + "/management";

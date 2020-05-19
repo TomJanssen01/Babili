@@ -4,6 +4,7 @@ import be.thomasmore.babili.model.Inlevering;
 import be.thomasmore.babili.model.Opdracht;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface InleveringRepository extends CrudRepository<Inlevering, Integer> {
