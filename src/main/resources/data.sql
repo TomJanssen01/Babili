@@ -32,9 +32,5 @@ values
 (nextval ('opdracht_seq'), 'Corona', 'Spreek met iemand uit je omgeving over het coronavirus.', '/audioFiles/bakkerexample/opdracht1.wav', 2)
 ;
 
-insert into inlevering
-(ID, AUDIO_PATH, OPDRACHT_Id, user_Id, BEOORDELING)
-values
-(nextval ('inlevering_seq'), '/audio/bakker/bakker.wav', 0, 2, 'moeilijk');
 
 
