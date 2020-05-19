@@ -229,7 +229,7 @@ public class UserController {
         }
 
         model.addAttribute("course", optionalCourse.get());
-        model.addAttribute("tasks", opdrachtRepository.findAll());
+        model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
         return "course/course-management";
     }
     @GetMapping("/course/{courseId}/management/edit-course")
