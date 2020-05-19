@@ -104,22 +104,24 @@ public class UserController {
 
     @GetMapping("/inlevering/{submissionId}/confirmation")
     public String taskConfirmation(@PathVariable(required = true) Integer submissionId, @RequestParam(required = false) Integer rating, Model model, Principal principal) {
+
+        String userName = null;
+        if (principal != null) {
+            userName = principal.getName();
+        }
+        Optional<User> optionalUser = userRepository.findByUsername(userName);
+        User user = null;
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
+        Opdracht opdrachtFromDB = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(submissionId);
+        if (optionalOpdracht.isPresent()) {
+            opdrachtFromDB = optionalOpdracht.get();
+        }
+        model.addAttribute("task", opdrachtFromDB);
+        Optional<Inlevering> optionalSubmission = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdrachtFromDB);
         if (rating != null) {
-            String userName = null;
-            if (principal != null) {
-                userName = principal.getName();
-            }
-            Optional<User> optionalUser = userRepository.findByUsername(userName);
-            User user = null;
-            if (optionalUser.isPresent()) {
-                user = optionalUser.get();
-            }
-            Opdracht opdrachtFromDB = null;
-            Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(submissionId);
-            if (optionalOpdracht.isPresent()) {
-                opdrachtFromDB = optionalOpdracht.get();
-            }
-            Optional<Inlevering> optionalSubmission = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdrachtFromDB);
             if (optionalSubmission.isPresent()) {
                 Inlevering currentSubmission = optionalSubmission.get();
                 ++rating;
@@ -130,6 +132,7 @@ public class UserController {
             return "redirect:/user/overview-tasks";
         }
         model.addAttribute("submissionId", submissionId);
+
         return "task-confirmation";
     }
 
@@ -232,10 +235,11 @@ public class UserController {
         model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
         return "course/course-management";
     }
+
     @GetMapping("/course/{courseId}/management/edit-course")
-    public String editCourse(@PathVariable int courseId, Model model){
+    public String editCourse(@PathVariable int courseId, Model model) {
         Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
-       Cursus cursusFromDb = null;
+        Cursus cursusFromDb = null;
         if (optionalCursus.isPresent())
             cursusFromDb = optionalCursus.get();
         model.addAttribute("cursussen", cursusFromDb);
@@ -244,12 +248,12 @@ public class UserController {
     }
 
     @PostMapping({"/course/{courseId}/management/edit-course"})
-    public String editCourse(@PathVariable (required = false) int courseId,
+    public String editCourse(@PathVariable(required = false) int courseId,
                              @RequestParam String naam,
                              @RequestParam String beschrijving,
-                             Model model){
-        Optional <Cursus> cursusFromDb =  cursusRepository.findById(courseId);
-        if (cursusFromDb.isPresent()){
+                             Model model) {
+        Optional<Cursus> cursusFromDb = cursusRepository.findById(courseId);
+        if (cursusFromDb.isPresent()) {
             Cursus cursus = cursusFromDb.get();
             cursus.setNaam(naam);
             cursus.setBeschrijving(beschrijving);
@@ -295,14 +299,14 @@ public class UserController {
         if (optionalCursus.isPresent()) {
             Optional<Opdracht> optionalTask = opdrachtRepository.findById(taskId);
 
-            if(optionalTask.isPresent()) {
+            if (optionalTask.isPresent()) {
                 Opdracht task = optionalTask.get();
                 Cursus course = optionalCursus.get();
                 course.getOpdrachten().remove(task);
                 opdrachtRepository.delete(task);
             }
         }
-        return "redirect:/user/course/"+courseId+"/management";
+        return "redirect:/user/course/" + courseId + "/management";
     }
 
     @GetMapping("/course/{courseId}/management/delete-students")
@@ -315,13 +319,13 @@ public class UserController {
         givenCourse = optionalCourse.get();
         model.addAttribute("course", givenCourse);
 
-        if (selectedStudents != null){
+        if (selectedStudents != null) {
             List<User> studentsToDelete = new ArrayList<>();
             for (int studentId : selectedStudents) {
                 Optional<User> optionalStudent = userRepository.findById(studentId);
                 optionalStudent.ifPresent(studentsToDelete::add);
             }
-            studentsToDelete.forEach((s)->{
+            studentsToDelete.forEach((s) -> {
                 deleteStudent(s);
             });
             model.addAttribute("addedStudents", studentsToDelete);
@@ -371,7 +375,7 @@ public class UserController {
         userRepository.save(student);
     }
 
-    private void deleteStudent(User student){
+    private void deleteStudent(User student) {
         student.setCursus(null);
         userRepository.save(student);
     }

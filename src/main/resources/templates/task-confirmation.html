@@ -40,11 +40,10 @@
     </nav>
 </div>
 <main>
-    <h1>Week 3: opdracht 2</h1>
-    <h2>Een vraag stellen</h2>
+    <h1 th:text="${task.getTitel()}"></h1>
     <div class="task">
-        <div class="task-card"><span class="task-number">02</span><span class="task-content">
-            Vraag aan iemand om ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</span>
+        <div class="task-card"><span class="task-content" th:text="${task.getOpgave()}">
+          </span>
         </div>
     </div>
     <form id="difficulty-rating" th:action="@{'confirmation'}" method="get">

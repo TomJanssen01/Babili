@@ -57,9 +57,4 @@ insert into opdracht
 values
 (nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav',  2);
 
-insert into inlevering
-(ID, AUDIO_PATH, OPDRACHT_Id, user_Id, BEOORDELING)
-values
-(nextval ('inlevering_seq'), '/audio/bakker/bakker.wav', 0, 1, 'moeilijk');
-
 
