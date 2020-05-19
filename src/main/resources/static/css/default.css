@@ -38,6 +38,14 @@
     border-color: white;
 }
 
+.md-dark:active {
+    border-color: white;
+}
+
+.md-light:hover {
+    border-color: white;
+}
+
 .md-small {
     font-size: 36px;
 }
