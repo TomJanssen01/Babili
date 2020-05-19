@@ -8,23 +8,13 @@ import be.thomasmore.babili.repositories.CursusRepository;
 import be.thomasmore.babili.repositories.InleveringRepository;
 import be.thomasmore.babili.repositories.OpdrachtRepository;
 import be.thomasmore.babili.repositories.UserRepository;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
-import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -172,20 +162,20 @@ public class UserController {
         return "redirect:/user/overview-tasks";
     }
 
-    @GetMapping("/edit-task/{id}")
-    public String editCourse(Model model, @RequestParam(required = false) int id) {
+    @GetMapping("/course/{courseId}/task/{id}/edit")
+    public String editCourse(Model model, @PathVariable(required = true) Integer id) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
         model.addAttribute("opdracht", opdrachtFromDB);
-        return "edit-task";
+        return "/course/edit-task";
     }
 
-    @PostMapping("/edit-task/{id}")
+    @PostMapping("/course/{courseId}/task/{id}/edit")
     public String postEditCourse(Model model,
-                                 @RequestParam(required = false) int id,
+                                 @PathVariable(required = true) Integer id,
                                  @RequestParam(required = false) String titel,
                                  @RequestParam(required = false) String opgave) {
         Opdracht opdrachtFromDB = null;
@@ -195,8 +185,9 @@ public class UserController {
         }
         opdrachtFromDB.setTitel(titel);
         opdrachtFromDB.setOpgave(opgave);
+        opdrachtRepository.save(opdrachtFromDB);
         model.addAttribute("opdracht", opdrachtFromDB);
-        return "edit-task";
+        return "redirect:/user/overview-tasks";
     }
 
     @GetMapping("/course/{courseId}/management/new-task")

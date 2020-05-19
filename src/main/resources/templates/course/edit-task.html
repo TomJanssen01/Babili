@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Nieuwe cursus aanmaken</title>
+    <title>Taak wijzigen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -40,12 +40,12 @@
     </nav>
 </div>
 <main>
-    <h1>Nieuwe taken aanmaken</h1>
+    <h1>Taak wijzigen</h1>
 
     <div class ="container-fluid">
         <div class="row">
             <div class="col">
-                <form th:action="@{'edit-task/'+ ${opdracht.getId()}}" method="post">
+                <form th:action="@{''}" method="post">
                     <div class="filters">
                         <div class="filterrow mb-2">
                             <div class="row">
@@ -78,11 +78,11 @@
 <!--                            </div>-->
 <!--                        </div>-->
                         <div class="filterrow mb-2">
-                            <input type="submit" value="Opdracht aanmaken">
+                            <input type="submit" value="Opdracht wijzigen">
                         </div>
                         <div class="filterrow">
                             <a href="/user/overview-tasks">
-                                <input type="button" value="Cancel">
+                                <input type="button" value="Annuleren">
                             </a>
                         </div>
                     </div>
