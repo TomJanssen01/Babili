@@ -21,7 +21,9 @@ INSERT INTO USER
 (ID, USERNAME, PASSWORD, NAME, EMAIL, ROLE, CURSUS_ID)
 VALUES
 (nextval('USER_SEQ'), 'marc_student', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Marc Decaluwe', 'marc.decaluwe@student.thomasmore.be', 'STUDENT', 0),
-(nextval('USER_SEQ'), 'vera_student', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Vera Peeters', 'vera.peeters@student.thomasmore.be', 'STUDENT',2)
+(nextval('USER_SEQ'), 'vera_student', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Vera Peeters', 'vera.peeters@student.thomasmore.be', 'STUDENT',2),
+(nextval('USER_SEQ'), 'Tom De Boeck', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Tom', 'Tom@Tom.be', 'STUDENT', null),
+(nextval('USER_SEQ'), 'Sara', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Sara van der Heyden', 'saravdh@hotmail.be', 'STUDENT', null)
 ;
 
 insert into opdracht

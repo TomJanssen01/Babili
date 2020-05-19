@@ -54,7 +54,7 @@
                                         <label for="naam">Naam van de cursus:</label>
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" id="naam" name="naam" th:value="${cursussen.getNaam()}">
+                                        <input type="text" class="form-control" disabled="disabled" id="naam" name="naam" th:value="${cursussen.getNaam()}">
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,9 @@
                                 </div>
                             </div>
                             <div class="filterrow mb-2">
+                                <a th:href="'/user/course/'+${cursussen.id}+'/management'">
                                 <input type="button" class="btn btn-primary float-right" value="Annuleren">
+                                </a>
                             </div>
                             <div class="filterrow">
                                 <a href="/user/overview-tasks">

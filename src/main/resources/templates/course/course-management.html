@@ -56,16 +56,16 @@
     </div>
     <h2 class="mt-3">Gemaakte opdrachten</h2>
     <div class="flex-row" th:each="task:${tasks}">
+        <a class="task-state material-icons-round md-small md-dark"
+           th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
+        <a class="task-state material-icons-round md-small md-dark"
+           th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
         <a class="task" th:href="'/user/task-details/'+${task.getId()}">
             <div class="task-card mr-2">
                 <span class="task-number" th:text="${task.getId()}">01</span>
                 <span class="task-content" th:text="${task.getTitel()}"></span>
             </div>
         </a>
-        <a class="task-state material-icons-round md-small md-dark"
-           th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
-        <a class="task-state material-icons-round md-small md-dark"
-           th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

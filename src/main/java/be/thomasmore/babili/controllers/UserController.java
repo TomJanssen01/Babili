@@ -199,6 +199,7 @@ public class UserController {
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
+        model.addAttribute("cursussen",cursusRepository.findById(courseId));
         return "new-task";
     }
 
