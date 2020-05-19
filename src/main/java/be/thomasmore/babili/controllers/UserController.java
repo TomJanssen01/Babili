@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +161,9 @@ public class UserController {
                 }
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
+                String path = naam.replace(" ","").toLowerCase();
+                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+path);
+                file.mkdir();
             }
         }
         return "redirect:/user/overview-tasks";
@@ -208,6 +212,8 @@ public class UserController {
                                  Model model) {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
+        Cursus cursus = cursusRepository.findById(courseId).get();
+        String cursusPath = cursus.getNaam().replace(" ","").toLowerCase();
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
         if (!(optionalOpdracht.isPresent())) {
             if (titel != null) {
@@ -215,10 +221,12 @@ public class UserController {
                 opdracht.setTitel(titel);
                 opdracht.setOpgave(opgave);
                 if (cursusRepository.findById(courseId).isPresent()) {
-                    opdracht.setCursus(cursusRepository.findById(courseId).get());
+                    opdracht.setCursus(cursus);
                 }
 //                opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
+                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+cursusPath+"/"+titel.replace(" ","").toLowerCase());
+                file.mkdir();
             }
         }
         return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
