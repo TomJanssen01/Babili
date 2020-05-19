@@ -135,4 +135,11 @@ public class LoginController {
         return "home";
     }
 
+    @RequestMapping("/errorLogin")
+    public String errorLogin(Principal principal, Model model){
+        if (principal != null) return "redirect:/user/overview-tasks";
+        model.addAttribute("error", "De gebruikersnaam en paswoord komen niet overeen.");
+        return "home";
+    }
+
 }

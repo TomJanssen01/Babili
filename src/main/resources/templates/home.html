@@ -26,6 +26,9 @@
             <label for="inputPassword1">Paswoord</label>
             <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="Gelieve uw wachtwoord in te geven.">
         </div>
+        <div th:if="${error != null}">
+            <p class="text-center font-weight-bold text-danger" th:text="${error}"></p>
+        </div>
         <button type="submit" class="btn btn-primary">Aanmelden</button>
     </form>
     <a class="tile" href="/user/overview-tasks" sec:authorize="hasAuthority('STUDENT')">Overzicht opdrachten</a>
