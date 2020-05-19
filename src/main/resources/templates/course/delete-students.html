@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+    <!--link rel="stylesheet" type="text/css" media="all" href="/css/testing.css"/-->
 </head>
 <body>
 <header></header>
@@ -39,34 +40,29 @@
     </nav>
 </div>
 <main sec:authorize="hasAuthority('TEACHER')">
-    <h1 th:text="'Beheer '+${course.getNaam()}">Beheer</h1>
-    <h2>Cursisten</h2>
-    <div class="btn-group-vertical" role="group" aria-label="Basic example">
-        <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/add-students'">Toevoegen</a>
-        <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/delete-students'">Verwijderen</a>
-    </div>
-    <h2>Cursus</h2>
-    <div class="btn-group-vertical" role="group" aria-label="Basic example">
-        <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/edit-course'">Cursusdetails wijzigen</a>
-
-    </div>
-    <h2>Opdracht</h2>
-    <div class="btn-group-vertical" role="group" aria-label="Basic example">
-        <a class="btn btn-primary" th:href="'/user/course/'+${courseId}+'/management/new-task'">Opdracht toevoegen</a>
-        <a class="btn btn-primary">Opdracht verwijderen</a>
-    </div>
-    <h2>Gemaakte taken</h2>
-    <div class="flex-row" th:each="task:${tasks}">
-        <a class="task" th:href="'/user/task-details/'+${task.getId()}">
-            <div class="task-card mr-2">
-                <span class="task-number" th:text="${task.getId()}">01</span>
-                <span class="task-content" th:text="${task.getTitel()}"></span>
+    <h1 th:text="'Studenten uitschrijven van '+${course.getNaam()}">schrijf studenten uit</h1>
+    <div th:if="${availableStudents != null && !availableStudents.isEmpty()}">
+        <form id="formAddStudents">
+            <div class="form-group">
+                <label for="studentSelect">aangemelde cursisten</label>
+                <select multiple class="form-control" id="studentSelect" name="selectedStudents">
+                    <option th:each="student:${availableStudents}" th:value="${student.getId()}" th:text="${student.getName()}">1</option>
+                </select>
             </div>
-        </a>
-        <a class="task-state material-icons-round md-small md-dark"
-           th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
-        <a th:if="${task.getInlevering()==null}" class="task-state material-icons-round md-small md-dark"
-           th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
+            <button type="submit" class="btn btn-primary">Verwijder</button>
+        </form>
+    </div>
+    <div th:unless="${availableStudents != null || !availableStudents.isEmpty()}">
+        <p>Er zijn geen studenten die uitgeschreven kunnen worden.</p>
+    </div>
+    <div th:if="${addedStudents != null && !addedStudents.isEmpty()}">
+        <p>De volgende student(en) werden uitgeschreven:</p>
+        <ul th:each="student:${addedStudents}">
+            <li th:text="${student.getName()}"></li>
+        </ul>
+    </div>
+    <div class="mt-3">
+        <a class="btn btn-primary" href="/user/overview-tasks">Cursus overzicht</a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

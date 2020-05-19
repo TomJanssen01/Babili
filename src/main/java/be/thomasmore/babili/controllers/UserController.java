@@ -169,7 +169,7 @@ public class UserController {
                 cursusRepository.save(cursus);
             }
         }
-        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
+        return "redirect:/user/overview-tasks";
     }
 
     @GetMapping("/course/{courseId}/management/new-task")
@@ -214,13 +214,38 @@ public class UserController {
         model.addAttribute("tasks", opdrachtRepository.findAll());
         return "course/course-management";
     }
+    @GetMapping("/course/{courseId}/management/edit-course")
+    public String editCourse(@PathVariable int courseId, Model model){
+        Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
+       Cursus cursusFromDb = null;
+        if (optionalCursus.isPresent())
+            cursusFromDb = optionalCursus.get();
+        model.addAttribute("cursussen", cursusFromDb);
+        model.addAttribute("cursus", cursusRepository.findAll());
+        return "/course/edit-course";
+    }
+
+    @PostMapping({"/course/{courseId}/management/edit-course"})
+    public String editCourse(@PathVariable (required = false) int courseId,
+                             @RequestParam String naam,
+                             @RequestParam String beschrijving,
+                             Model model){
+        Optional <Cursus> cursusFromDb =  cursusRepository.findById(courseId);
+        if (cursusFromDb.isPresent()){
+            Cursus cursus = cursusFromDb.get();
+            cursus.setNaam(naam);
+            cursus.setBeschrijving(beschrijving);
+            cursusRepository.save(cursus);
+        }
+        return "redirect:/user/overview-tasks";
+    }
 
     @GetMapping("/course/{courseId}/management/add-students")
     public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
         Cursus givenCourse = null;
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
         if (!optionalCourse.isPresent()) {
-            return "/overview-tasks";
+            return "course/overview-tasks";
         }
         givenCourse = optionalCourse.get();
         model.addAttribute("course", givenCourse);
@@ -262,9 +287,52 @@ public class UserController {
         return "redirect:/user/course/"+courseId+"/management";
     }
 
-    private boolean isAlreadyEnrolled(User student) {
+    @GetMapping("/course/{courseId}/management/delete-students")
+    public String deleteStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
+        Cursus givenCourse = null;
+        Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
+        if (!optionalCourse.isPresent()) {
+            return "/overview-tasks";
+        }
+        givenCourse = optionalCourse.get();
+        model.addAttribute("course", givenCourse);
 
+        if (selectedStudents != null){
+            List<User> studentsToDelete = new ArrayList<>();
+            for (int studentId : selectedStudents) {
+                Optional<User> optionalStudent = userRepository.findById(studentId);
+                optionalStudent.ifPresent(studentsToDelete::add);
+            }
+            studentsToDelete.forEach((s)->{
+                deleteStudent(s);
+            });
+            model.addAttribute("addedStudents", studentsToDelete);
+        }
+
+        Iterable<User> allUsers = userRepository.findByRole("STUDENT");
+        if (allUsers != null) {
+            List<User> studentsThatAreEnrolled = getListOfStudentsThatAreEnrolled(allUsers, givenCourse);
+            model.addAttribute("availableStudents", studentsThatAreEnrolled);
+        }
+
+        return "course/delete-students";
+    }
+
+    private boolean isAlreadyEnrolled(User student) {
         return student.getCursus() != null;
+    }
+
+    private List<User> getListOfStudentsThatAreEnrolled(Iterable<User> allStudents, Cursus course) {
+        if (allStudents != null) {
+            List<User> studentsThatAreEnrolled = new ArrayList<>();
+            allStudents.forEach((s) -> {
+                if (isAlreadyEnrolled(s) && s.getCursus().equals(course)) {
+                    studentsThatAreEnrolled.add(s);
+                }
+            });
+            return studentsThatAreEnrolled;
+        }
+        return null;
     }
 
     private List<User> getListOfStudentsThatAreNotEnrolled(Iterable<User> allStudents, Cursus course) {
@@ -282,6 +350,11 @@ public class UserController {
 
     private void enrollStudent(User student, Cursus course) {
         student.setCursus((course));
+        userRepository.save(student);
+    }
+
+    private void deleteStudent(User student){
+        student.setCursus(null);
         userRepository.save(student);
     }
 }
