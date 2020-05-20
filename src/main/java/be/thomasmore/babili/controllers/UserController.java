@@ -182,14 +182,12 @@ public class UserController {
     @PostMapping("/course/{courseId}/task/{id}/edit")
     public String postEditCourse(Model model,
                                  @PathVariable(required = true) Integer id,
-                                 @RequestParam(required = false) String titel,
                                  @RequestParam(required = false) String opgave) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        opdrachtFromDB.setTitel(titel);
         opdrachtFromDB.setOpgave(opgave);
         opdrachtRepository.save(opdrachtFromDB);
         model.addAttribute("opdracht", opdrachtFromDB);
@@ -257,7 +255,6 @@ public class UserController {
 
     @PostMapping({"/course/{courseId}/management/edit-course"})
     public String editCourse(@PathVariable(required = false) int courseId,
-                             @RequestParam (required = false) String naam,
                              @RequestParam String beschrijving,
                              Model model) {
         Optional<Cursus> cursusFromDb = cursusRepository.findById(courseId);
