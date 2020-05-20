@@ -257,13 +257,13 @@ public class UserController {
 
     @PostMapping({"/course/{courseId}/management/edit-course"})
     public String editCourse(@PathVariable(required = false) int courseId,
-                             @RequestParam String naam,
+                             @RequestParam (required = false) String naam,
                              @RequestParam String beschrijving,
                              Model model) {
         Optional<Cursus> cursusFromDb = cursusRepository.findById(courseId);
         if (cursusFromDb.isPresent()) {
             Cursus cursus = cursusFromDb.get();
-            cursus.setNaam(naam);
+            //cursus.setNaam(naam);
             cursus.setBeschrijving(beschrijving);
             cursusRepository.save(cursus);
         }
