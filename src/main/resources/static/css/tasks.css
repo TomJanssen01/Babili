@@ -46,3 +46,11 @@ a.task:hover{
     text-align: justify;
     align-self: center;
 }
+
+.md-large{
+    font-size: 120px;
+}
+
+.btn-primary-outline{
+    margin-left: 0;
+}

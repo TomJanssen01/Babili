@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+    <script src="/js/p5.min.js"></script>
+    <script src="/js/p5.sound.min.js"></script>
 </head>
 <body>
 <header></header>
@@ -48,36 +50,41 @@
     </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
-    <div class="task">
+    <div id="task" class="task">
         <div class="task-card"><span class="task-number">02</span><span class="task-content"
                                                                         th:text="${opdracht.getOpgave()}"></span>
         </div>
     </div>
-    <a id="record" class="tile" th:href="'/user/start/'+${opdracht.getId()}">
-        <div class="tile-icon">
-            <i class="tile-icon material-icons-round md-medium md-dark">mic</i>
-        </div>
-        <span>Opnemen</span>
-    </a>
-    <a id="stopRecording" class="tile" th:href="'/user/stop/'+${opdracht.getId()}">
-        <div class="tile-icon">
-            <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
-        </div>
-        <span>Stop opname</span>
-    </a>
-    <div th:if="${taak!=null}">
-        <span th:text="${taak}"></span>
-        <div>
-            <audio controls id="recordingPlayer">
-                <source th:src="${audioPath}" type="audio/wav">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
+<!--    <a id="record" class="tile" th:href="'/user/start/'+${opdracht.getId()}">-->
+<!--        <div class="tile-icon">-->
+<!--            <i class="tile-icon material-icons-round md-medium md-dark">mic</i>-->
+<!--        </div>-->
+<!--        <span>Opnemen</span>-->
+<!--    </a>-->
+<!--    <a id="stopRecording" class="tile" th:href="'/user/stop/'+${opdracht.getId()}">-->
+<!--        <div class="tile-icon">-->
+<!--            <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>-->
+<!--        </div>-->
+<!--        <span>Stop opname</span>-->
+<!--    </a>-->
+    <button id="rec" class="material-icons-round md-large md-dark">mic</button>
+    <button id="stop" class="tile-icon material-icons-round md-medium md-dark">mic_off</button>
+<!--    <div th:if="${taak!=null}">-->
+<!--        <span th:text="${taak}"></span>-->
+<!--        <div>-->
+<!--            <audio controls id="recordingPlayer">-->
+<!--                <source th:src="${audioPath}" type="audio/wav">-->
+<!--                Your browser does not support the audio element.-->
+<!--            </audio>-->
+<!--        </div>-->
+<!--    </div>-->
     <br>
+    <div id="inlevering">
     <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
                                                                 type="submit" value="Inleveren"></a>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
+<script src="/js/audio.js" type="text/javascript"></script>
 </body>
 </html>
