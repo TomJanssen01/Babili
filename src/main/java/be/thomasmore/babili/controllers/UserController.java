@@ -14,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.sound.sampled.*;
 import javax.transaction.Transactional;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.*;
 
@@ -76,8 +79,22 @@ public class UserController {
             model.addAttribute("audioPath", "/audioFiles/" + cursusPath(id) + "/" + user + ".wav");
         }
         model.addAttribute("opdracht", opdrachtFromDB);
+        model.addAttribute("user", user);
         return "task-details";
     }
+
+//    @RequestMapping("/task-details/{id}")
+//    public void saveFile(@PathVariable(required = false) int id,
+//                         Model model,
+//                         Principal principal,
+//                         @RequestParam("file") MultipartFile file) throws Exception {
+//        File convFile = new File("/audioFiles/" + cursusPath(id) + "/" + file.getOriginalFilename());
+//        convFile.createNewFile();
+//        FileOutputStream fos = new FileOutputStream(convFile);
+//        fos.write(file.getBytes());
+//        fos.close();
+//    }
+
 
     @GetMapping("/inlevering/{id}")
     public String inlevering(@PathVariable(required = false) int id, Model model, Principal principal) {
@@ -160,8 +177,8 @@ public class UserController {
                 }
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
-                String path = naam.replaceAll(" ","").toLowerCase();
-                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+path);
+                String path = naam.replaceAll(" ", "").toLowerCase();
+                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + path);
                 file.mkdir();
             }
         }
@@ -197,7 +214,7 @@ public class UserController {
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
-        model.addAttribute("cursussen",cursusRepository.findById(courseId));
+        model.addAttribute("cursussen", cursusRepository.findById(courseId));
         return "new-task";
     }
 
@@ -211,7 +228,7 @@ public class UserController {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
         Cursus cursus = cursusRepository.findById(courseId).get();
-        String cursusPath = cursus.getNaam().replaceAll(" ","").toLowerCase();
+        String cursusPath = cursus.getNaam().replaceAll(" ", "").toLowerCase();
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
         if (!(optionalOpdracht.isPresent())) {
             if (titel != null) {
@@ -223,7 +240,7 @@ public class UserController {
                 }
 //                opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
-                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+cursusPath+"/"+titel.replaceAll(" ","").toLowerCase());
+                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + cursusPath + "/" + titel.replaceAll(" ", "").toLowerCase());
                 file.mkdir();
             }
         }
@@ -310,10 +327,10 @@ public class UserController {
                 course.getOpdrachten().remove(task);
                 inleveringRepository.deleteByOpdracht(task);
                 opdrachtRepository.delete(task);
-                File index = new File("src/main/resources/static/audioFiles/"+course.getId()+course.getNaam().replaceAll(" ","").toLowerCase()+"/"+task.getTitel().replaceAll(" ","").toLowerCase());
-                String[]entries = index.list();
-                for(String s: entries){
-                    File currentFile = new File(index.getPath(),s);
+                File index = new File("src/main/resources/static/audioFiles/" + course.getId() + course.getNaam().replaceAll(" ", "").toLowerCase() + "/" + task.getTitel().replaceAll(" ", "").toLowerCase());
+                String[] entries = index.list();
+                for (String s : entries) {
+                    File currentFile = new File(index.getPath(), s);
                     currentFile.delete();
                 }
                 index.delete();
@@ -393,12 +410,12 @@ public class UserController {
         userRepository.save(student);
     }
 
-    private String cursusPath(int opdrachtId){
+    private String cursusPath(int opdrachtId) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ","").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ","").toLowerCase();
+        return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ", "").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ", "").toLowerCase();
     }
 }

@@ -36,7 +36,7 @@ function setup() {
 function draw() {
     background('rgba(241, 202, 0, 1)');
     var spectrum = fft.analyze();
-    console.log(spectrum);
+    //console.log(spectrum);
     noStroke();
     for (var i = 0; i < spectrum.length; i++) {
         var amp = spectrum[i];
@@ -44,7 +44,7 @@ function draw() {
         fill(i, 255, 255);
         rect(i * w, y, w-2, height - y);
     }
-}
+};
 
 recordButton.addEventListener('click', () => {
     recordButton.style.display = 'none';
@@ -64,5 +64,13 @@ stopButton.addEventListener('click', () => {
     stopButton.style.display = 'none';
     playButton.style.display = 'block';
     playButton.style.marginLeft = 210 + 'px';
+});
 
-})
+playButton.addEventListener('click', () => {
+    fft.setInput(soundFile);
+   soundFile.play();
+});
+
+function inlevering() {
+    return soundFile;
+}
