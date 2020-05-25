@@ -88,7 +88,7 @@
             </div>
         </a>
     </div>
-    <div id="confirmBox">
+    <div class="confirmbox" id="confirmBox">
         <div class="message"></div>
         <button class="yes">Yes</button>
         <button class="no">No</button>
@@ -97,5 +97,19 @@
 
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
+<script>
+    function doConfirm(msg, yesFn, noFn)
+    {
+        var confirmBox = $("#confirmBox");
+        confirmBox.find(".message").text(msg);
+        confirmBox.find(".yes,.no").unbind().click(function()
+        {
+            confirmBox.hide();
+        });
+        confirmBox.find(".yes").click(yesFn);
+        confirmBox.find(".no").click(noFn);
+        confirmBox.show();
+    }
+</script>
 </body>
 </html>
