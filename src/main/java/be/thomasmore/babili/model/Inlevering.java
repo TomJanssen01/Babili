@@ -15,6 +15,7 @@ public class Inlevering {
     @OneToOne
     private User user;
     private String beoordeling;
+    private String feedback;
 
     public Inlevering() {
     }
@@ -63,5 +64,13 @@ public class Inlevering {
 
     public void setOpdracht(Opdracht opdracht) {
         this.opdracht = opdracht;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 }
