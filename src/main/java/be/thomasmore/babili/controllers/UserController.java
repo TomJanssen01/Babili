@@ -233,12 +233,13 @@ public class UserController {
     @GetMapping("/course/{courseId}/management")
     public String manageCourse(@PathVariable(required = true) int courseId, Model model) {
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
-        if (!optionalCourse.isPresent()) {
+        if (optionalCourse.isEmpty()) {
             return "/overview-tasks";
         }
 
         model.addAttribute("course", optionalCourse.get());
         model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
+        model.addAttribute("students", userRepository.findByRoleAndCursus_Id("STUDENT", courseId));
         return "course/course-management";
     }
 
@@ -351,6 +352,19 @@ public class UserController {
         }
 
         return "course/delete-students";
+    }
+
+    @GetMapping("/course/{courseId}/management/overview-submissions/{userId}")
+    public String overviewSubmissions(@PathVariable(required = true) int userId, Model model, Principal principal) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()){
+            User givenUser = optionalUser.get();
+            Iterable<Inlevering> submissions = inleveringRepository.findByUser_Id(givenUser.getId());
+            model.addAttribute("submissions", submissions);
+        } else {
+            return "home";
+        }
+        return "overview-submissions";
     }
 
     private boolean isAlreadyEnrolled(User student) {
