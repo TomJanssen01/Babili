@@ -7,16 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="all" href="/static/css/default.css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/static/css/tasks.css"/>
-    <style>
-        a.tile{
-            color: var(--color-logo-dark);
-        }
-        a.tile:hover{
-            color: var(--color-logo-dark);
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
 </head>
 <body>
 <header></header>
@@ -47,8 +39,18 @@
     </nav>
 </div>
 <main>
-    <div sec:authorize="hasAuthority('TEACHER')">
-
+    <div>
+        <div th:if="${submissions != null && submissions.iterator().hasNext()}" class="card" th:each="submission:${submissions}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
+                <p class="card-text" th:text="${submission.getBeoordeling()}.isEmpty()?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
+            </div>
+        </div>
+        <div th:unless="${submissions != null && submissions.iterator().hasNext()}">
+            <p>
+                Deze gebruiker heeft nog geen inzendingen
+            </p>
+        </div>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
