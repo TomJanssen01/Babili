@@ -239,6 +239,8 @@ public class UserController {
 
         model.addAttribute("course", optionalCourse.get());
         model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
+        model.addAttribute("student", userRepository.findByCursus_Id(courseId));
+
         return "course/course-management";
     }
 

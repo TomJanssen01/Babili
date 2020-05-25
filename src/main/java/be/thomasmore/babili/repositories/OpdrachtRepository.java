@@ -10,4 +10,5 @@ public interface OpdrachtRepository extends CrudRepository<Opdracht, Integer> {
     Optional<Opdracht> findById(Integer id);
     Optional<Opdracht>findOpdrachtByTitel(String titel);
     Iterable<Opdracht> findByCursus_Id(Integer id);
+
 }
