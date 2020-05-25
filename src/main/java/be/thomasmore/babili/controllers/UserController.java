@@ -295,7 +295,6 @@ public class UserController {
             List<User> studentsThatAreNotEnrolled = getListOfStudentsThatAreNotEnrolled(allUsers, givenCourse);
             model.addAttribute("availableStudents", studentsThatAreNotEnrolled);
         }
-
         return "course/add-students";
     }
 
@@ -359,7 +358,7 @@ public class UserController {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()){
             User givenUser = optionalUser.get();
-            Iterable<Inlevering> submissions = inleveringRepository.findByUser_Id(givenUser.getId());
+            Collection<Inlevering> submissions = inleveringRepository.findAllByUser_Id(givenUser.getId());
             model.addAttribute("submissions", submissions);
         } else {
             return "home";
