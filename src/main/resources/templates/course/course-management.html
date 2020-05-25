@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${student.getName()}">Card title</h5>
                         <div class="card-text">
-                            <a class="btn btn-primary" th:href="'overview/submissions/'+${student.getId()}">Submissions</a>
+                            <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/'+${student.getId()}+'/overview-submissions'">Submissions</a>
                         </div>
                     </div>
                 </div>

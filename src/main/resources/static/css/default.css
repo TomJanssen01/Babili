@@ -58,6 +58,22 @@
     font-size: 96px;
 }
 
+.card{
+    width: fit-content;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-color: var(--color-logo-dark);
+    border-width: 5px;
+}
+
+a.card{
+    color: var(--color-logo-dark);
+}
+
+a.card:hover{
+    text-decoration: none;
+}
+
 html, body {
     background-color: var(--color-logo-light);
     text-align: left;

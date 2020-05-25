@@ -327,7 +327,7 @@ public class UserController {
     public String deleteStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
         Cursus givenCourse = null;
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
-        if (!optionalCourse.isPresent()) {
+        if (optionalCourse.isEmpty()) {
             return "/overview-tasks";
         }
         givenCourse = optionalCourse.get();
@@ -354,7 +354,7 @@ public class UserController {
         return "course/delete-students";
     }
 
-    @GetMapping("/course/{courseId}/management/overview-submissions/{userId}")
+    @GetMapping("/course/{courseId}/management/{userId}/overview-submissions")
     public String overviewSubmissions(@PathVariable(required = true) int userId, Model model, Principal principal) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()){
@@ -364,7 +364,7 @@ public class UserController {
         } else {
             return "home";
         }
-        return "overview-submissions";
+        return "course/overview-submissions";
     }
 
     private boolean isAlreadyEnrolled(User student) {
