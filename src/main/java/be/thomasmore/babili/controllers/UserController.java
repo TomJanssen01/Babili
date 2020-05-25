@@ -403,4 +403,21 @@ public class UserController {
         }
         return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ","").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ","").toLowerCase();
     }
+
+    @GetMapping("/task-feedback")
+    public String taskFeedback(@RequestParam String feedback, Model model, Principal principal, String titel) {
+        Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
+        Opdracht opdracht = null;
+        User user = null;
+        if (optionalUser.isPresent()) user = optionalUser.get();
+        if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
+        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdracht);
+        if (optionalInlevering.isPresent()){
+            Inlevering inlevering = optionalInlevering.get();
+            inlevering.setFeedback(feedback);
+            inleveringRepository.save(inlevering);
+        }
+        return "task-feedback";
+    }
 }
