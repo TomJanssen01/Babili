@@ -20,10 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.security.Principal;
@@ -79,10 +76,22 @@ public class LoginController {
         return "redirect:/user/overview-tasks";
     }
 
-    @GetMapping("/register/teacher")
-    public String registerTeacher(Principal principal, Model model){
+    @GetMapping({"/register/teacher","/register/teacher/{filter}"})
+    public String registerTeacher(Principal principal, Model model, @PathVariable (required = false) String filter){
         if (principal != null){
             return "redirect:/user/overview-tasks";
+        }
+        if (filter != null) {
+            if (filter.equals("userName")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+            }
+            if (filter.equals("emailInUse")) {
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            }
+            if (filter.equals("userAndEmailInUse")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            }
         }
         return "register/register-teacher";
     }
@@ -94,6 +103,7 @@ public class LoginController {
                                       @RequestParam String name,
                                       @RequestParam String email,
                                       Principal principal, Model model){
+        String returnValue = null;
         if(principal == null && !userName.isBlank()){
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
             if(!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()){
@@ -107,11 +117,19 @@ public class LoginController {
                 newUser.setEmail(email);
                 newUser.setRole("TEACHER");
                 userRepository.save(newUser);
-
                 autologin(userName, password);
+                returnValue = "redirect:/user/overview-tasks";
+            }
+            else if (userWithUserName.isPresent() && userRepository.findByEmail(email).isPresent()){
+                returnValue = "redirect:/register/teacher/userAndEmailInUse";
+            }
+            else if (userWithUserName.isPresent()){
+                returnValue = "redirect:/register/teacher/userName";
+            }else if (userRepository.findByEmail(email).isPresent()){
+                returnValue = "redirect:/register/teacher/emailInUse";
             }
         }
-        return "redirect:/user/overview-tasks";
+        return returnValue;
     }
 
     private void autologin(String userName, String password) {
