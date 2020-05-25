@@ -72,11 +72,8 @@
         <a class="task-state material-icons-round md-small md-dark"
            th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
 
-
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Launch demo modal
-        </button>
+        <a class="task-state material-icons-round md-small md-dark" data-toggle="modal" data-target="#exampleModalCenter"
+           >delete</a>
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -91,16 +88,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
-                        <button type="button" class="btn btn-primary">Verwijderen</button>
+                        <a class="btn btn-primary"
+                                th:href="|/user/course/${courseId}/task/${task.getId()}/delete|" role="button">Verwijderen</a>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="task-state material-icons-round md-small md-dark"
-           th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
-
-
-
 
 
         <a class="task" th:href="'/user/task-details/'+${task.getId()}">
@@ -109,11 +102,6 @@
                 <span class="task-content" th:text="${task.getTitel()}"></span>
             </div>
         </a>
-    </div>
-    <div class="confirmbox" id="confirmBox">
-        <div class="message"></div>
-        <button class="yes">Yes</button>
-        <button class="no">No</button>
     </div>
 
 
