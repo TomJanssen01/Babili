@@ -139,7 +139,7 @@ footer {
     border-color: var(--color-logo-dark);
 }
 
-.btn-primary:hover {
+.btn-primary:active {
     background-color: var(--color-logo-dark-darkened);
     border-color: var(--color-logo-dark);
 }
@@ -153,6 +153,12 @@ footer {
 }
 
 .btn-primary-outline:hover {
+    background-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark);
+    color: white;
+}
+
+.btn-primary-outline:active {
     background-color: var(--color-logo-dark);
     border-color: var(--color-logo-dark);
     color: white;
