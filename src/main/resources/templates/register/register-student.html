@@ -19,30 +19,34 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputUserName">Gebruikersnaam</label>
-                <input type="text" name="userName" class="form-control" id="inputUserName" placeholder="Gelieve uw gebruikersnaam in te geven.">
+                <input required type="text" name="userName" class="form-control" id="inputUserName" placeholder="Gelieve uw gebruikersnaam in te geven.">
+                <span th:if="${userAlreadyInUse != null}" th:text="${userAlreadyInUse}" class="font-weight-bold text-danger"></span>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputName">Naam</label>
-                <input type="text" name="name" class="form-control" id="inputName" placeholder="Gelieve uw naam in te geven.">
+                <input required type="text" name="name" class="form-control" id="inputName" placeholder="Gelieve uw naam in te geven.">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail">E-mail</label>
-            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Gelieve uw email adres in te geven.">
+            <input required type="email" name="email" class="form-control" id="inputEmail" placeholder="Gelieve uw email adres in te geven.">
+            <span th:if="${emailInUse != null}" th:text="${emailInUse}" class="font-weight-bold text-danger"></span>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputPassword1">Paswoord</label>
-                <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="Gelieve uw wachtwoord in te geven.">
+                <input required type="password" name="password" th:class="${classDanger}" id="inputPassword1" placeholder="Gelieve uw wachtwoord in te geven.">
+                <span th:if="${passwordNotOK != null}" th:text="${passwordNotOK}" class="font-weight-bold text-danger"></span>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword2">Typ password opnieuw</label>
-                <input type="password" name="password2" class="form-control" id="inputPassword2" placeholder="Gelieve uw wachtwoord te herhalen.">
+                <input required type="password" name="password2" th:class="${classDanger}" id="inputPassword2"  placeholder="Gelieve uw wachtwoord te herhalen.">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Registreren</button>
     </form>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
+
 </body>
 </html>

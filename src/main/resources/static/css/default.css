@@ -5,6 +5,12 @@
     --color-logo-light-transparant: rgba(241, 202, 0, 0.92);
 }
 
+.delete{
+    color: white !important;
+    cursor: pointer;
+
+}
+
 .material-icons-round {
     color: white;
     border-radius: 45px;
@@ -278,3 +284,4 @@ select {
         width: 100%;
     }
 }
+

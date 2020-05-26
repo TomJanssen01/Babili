@@ -19,8 +19,8 @@ public class User {
     private String role;
     @ManyToOne(fetch = FetchType.LAZY)
     private Cursus cursus;
-    @OneToOne(mappedBy = "user")
-    private Inlevering inlevering;
+    @OneToMany(mappedBy = "user")
+    private Collection<Inlevering> inlevering;
 
     public User() {
     }
@@ -79,5 +79,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Collection<Inlevering> getInlevering() {
+        return inlevering;
+    }
+
+    public void setInlevering(Collection<Inlevering> inlevering) {
+        this.inlevering = inlevering;
     }
 }
