@@ -81,8 +81,11 @@
 <!--    </div>-->
     <br>
     <div id="inlevering">
-    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
-                                                                type="submit" value="Inleveren"></a>
+        <form th:action="@{|/user/inlevering/${opdracht.getId()}}" method="post" enctype="multipart/form-data">
+            <input type="file" id="soundFile" name="soundFile" value="">
+        </form>
+<!--    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"-->
+<!--                                                                type="submit" value="Inleveren"></a>-->
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

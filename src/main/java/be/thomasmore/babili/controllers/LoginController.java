@@ -5,27 +5,17 @@ import be.thomasmore.babili.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.sql.DataSource;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -127,19 +117,6 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
-    // Login form
-    @RequestMapping("/")
-    public String login(Principal principal, Model model){
-        if (principal != null) return "redirect:/user/overview-tasks";
-        return "home";
-    }
-
-    @RequestMapping("/errorLogin")
-    public String errorLogin(Principal principal, Model model){
-        if (principal != null) return "redirect:/user/overview-tasks";
-        model.addAttribute("error", "De gebruikersnaam en paswoord komen niet overeen.");
-        return "home";
-    }
-
 }
+
+
