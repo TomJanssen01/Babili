@@ -404,43 +404,26 @@ public class UserController {
         return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ","").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ","").toLowerCase();
     }
 
-//    @GetMapping("/task-feedback")
-//    public String taskFeedback(@RequestParam String feedback, Model model, Principal principal, String titel) {
-//        Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-//        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
-//        Opdracht opdracht = null;
-//        User user = null;
-//        if (optionalUser.isPresent()) user = optionalUser.get();
-//        if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
-//        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdracht);
-//        if (optionalInlevering.isPresent()){
-//            Inlevering inlevering = optionalInlevering.get();
-//            inlevering.setFeedback(feedback);
-//            inleveringRepository.save(inlevering);
-//        }
-//        return "task-feedback";
-//    }
-
-    @GetMapping("/course/{courseId}/management/task-feedback/{opdracht}")
-    public String taskFeedback(@PathVariable int courseId,  Model model) {
-        Optional<Cursus> optionalCursus = cursusRepository.findById(courseId);
-        Cursus cursusFromDb = null;
-        if (optionalCursus.isPresent())
-            cursusFromDb = optionalCursus.get();
-        model.addAttribute("cursussen", cursusFromDb);
-        model.addAttribute("cursus", cursusRepository.findAll());
+    @GetMapping("/{opdrachtId}/{userId}/task-feedback")
+    public String taskFeedback(Model model, @PathVariable int opdrachtId, Principal principal) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
+        Opdracht opdracht = null;
+        if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
+        String user = principal.getName();
+        model.addAttribute("opdracht", opdracht);
+        model.addAttribute("audioPath", "/audioFiles/" + cursusPath(opdrachtId) + "/" + user + ".wav");
         return "task-feedback";
     }
 
-    @PostMapping({"/course/{courseId}/management/task-feedback"})
-    public String postTaskFeedback(@RequestParam String feedback, String titel, @PathVariable Integer courseId, Model model, Principal principal) {
-        Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
+    @PostMapping({"/{opdrachtId}/{userId}/task-feedback"})
+    public String postTaskFeedback(@RequestParam String feedback,
+                                   @PathVariable int opdrachtId, @PathVariable int userId) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
         Opdracht opdracht = null;
-        User user = null;
-        if (optionalUser.isPresent()) user = optionalUser.get();
-        if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
-        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(user.getId(), opdracht);
+        if (optionalOpdracht.isPresent()){
+            opdracht = optionalOpdracht.get();
+        }
+        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(userId, opdracht);
         if (optionalInlevering.isPresent()){
             Inlevering inlevering = optionalInlevering.get();
             inlevering.setFeedback(feedback);

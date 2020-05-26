@@ -48,11 +48,14 @@
 </div>
 <main>
     <h1>Geef uw feedback</h1>
-
+    <audio controls>
+        <source th:src="${audioPath}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
     <div class ="container-fluid">
         <div class="row">
             <div class="col">
-                <form th:action="@{'/user/task-feedback'}" method="post">
+                <form th:action="@{'/user/{opdrachtId}/{userId}/task-feedback'}" method="post">
                     <div class="filters">
                         <div class="filterrow mb-2">
                             <div class="row">
@@ -70,7 +73,7 @@
                             </a>
                         </div>
                         <div class="filterrow mb-2">
-                            <input type="submit" class="btn btn-primary" value="bevestigen">
+                            <input type="submit" class="btn btn-primary" value="Bevestigen">
                         </div>
                     </div>
                 </form>
