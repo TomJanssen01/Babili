@@ -5,6 +5,7 @@ import jdk.jfr.Name;
 import javax.persistence.*;
 
 @Entity
+@SuppressWarnings({"JpaDataSourceORMInspection"})
 @Table(
         uniqueConstraints=
         @UniqueConstraint(columnNames={"opdracht_id", "user_id"})
