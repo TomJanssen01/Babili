@@ -55,8 +55,8 @@
         <div class="col">
             <ul class="list-group" th:each="students:${student}">
                 <li class="list-group-item disabled">
-                    <h5 th:text="${students.getName()}"></h5>
-                    <a class="btn btn-primary" th:href="'/user/course/'+${course.getId()}+'/management/'+${students.getId()}+'/overview-submissions'">Submissions</a>
+                    <a class="btn btn-primary float-right" th:href="'/user/course/'+${course.getId()}+'/management/'+${students.getId()}+'/overview-submissions'">Submissions</a>
+                    <span th:text="${students.getName()}"></span>
                 </li>
             </ul>
         </div>
