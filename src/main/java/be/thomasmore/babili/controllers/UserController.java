@@ -227,7 +227,7 @@ public class UserController {
                 file.mkdir();
             }
         }
-        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
+        return "redirect:/user/course/"+courseId+"/management";
     }
 
     @GetMapping("/course/{courseId}/management")
@@ -266,7 +266,7 @@ public class UserController {
             cursus.setBeschrijving(beschrijving);
             cursusRepository.save(cursus);
         }
-        return "redirect:/user/overview-tasks";
+        return "redirect:/user/course/" + courseId + "/management";
     }
 
     @GetMapping("/course/{courseId}/management/add-students")
