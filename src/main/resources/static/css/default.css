@@ -4,7 +4,7 @@
     --color-logo-dark-transparant: rgba(77, 97, 98, 0.92);
     --color-logo-light-transparant: rgba(241, 202, 0, 0.92);
     --color-logo-dark-darkened: rgba(56, 71, 71, 1);
-    --color-logo-light-darkened: rgba(241, 202, 0, 1);
+    --color-logo-light-darkened: rgba(230, 191, 0, 1);
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -137,16 +137,17 @@ footer {
     background-color: var(--color-logo-dark);
     border-color: var(--color-logo-dark);
     color: white !important;
+    border-width: 3px;
 }
 
 .btn-primary:hover {
     background-color: var(--color-logo-dark-darkened);
-    border-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark-darkened);
 }
 
 .btn-primary:active {
     background-color: var(--color-logo-dark-darkened);
-    border-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark-darkened);
 }
 
 .btn-primary-outline {
