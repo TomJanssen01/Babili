@@ -5,6 +5,12 @@
     --color-logo-light-transparant: rgba(241, 202, 0, 0.92);
 }
 
+.delete{
+    color: white !important;
+    cursor: pointer;
+
+}
+
 .material-icons-round {
     color: white;
     border-radius: 45px;
@@ -278,33 +284,4 @@ select {
         width: 100%;
     }
 }
-.confirmbox{
-    display: none;
-    background-color: #eee;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    position: fixed;
-    width: 300px;
-    left: 50%;
-    margin-left: -150px;
-    padding: 6px 8px 8px;
-    box-sizing: border-box;
-    text-align: center;
-}
-.confirmbox button{
-    background-color: #ccc;
-    display: inline-block;
-    border-radius: 3px;
-    border: 1px solid #aaa;
-    padding: 2px;
-    text-align: center;
-    width: 80px;
-    cursor: pointer;
-}
-.confirmbox button:hover{
-    background-color: #dddddd;
-}
-.confirmbox .message{
-    text-align: left;
-    margin-bottom: 8px;
-}
+
