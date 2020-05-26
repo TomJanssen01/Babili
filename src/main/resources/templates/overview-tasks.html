@@ -53,7 +53,7 @@
     <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
         <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
         <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
-                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............</span>
         </div>
     </a>
 
