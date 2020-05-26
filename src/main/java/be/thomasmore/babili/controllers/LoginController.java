@@ -20,10 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.security.Principal;
@@ -44,10 +41,37 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("/register/student")
-    public String registerStudent(Principal principal, Model model){
-        if (principal != null){
+    @GetMapping({"/register/student", "/register/student/{filter}"})
+    public String registerStudent(Principal principal, Model model, @PathVariable(required = false) String filter) {
+        if (principal != null) {
             return "redirect:/user/overview-tasks";
+        }
+        model.addAttribute("classDanger", "form-control");
+        if (filter != null) {
+            if (filter.equals("userName")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+            } else if (filter.equals("emailInUse")) {
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("PasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+            } else if (filter.equals("userAndEmailInUse")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("emailInUsePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("userNamePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+            } else if (filter.equals("userAndEmailInUsePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            }
         }
         return "register/register-student";
     }
@@ -58,10 +82,11 @@ public class LoginController {
                                       @RequestParam String password2,
                                       @RequestParam String name,
                                       @RequestParam String email,
-                                      Principal principal, Model model){
-        if(principal == null && !userName.isBlank()){
+                                      Principal principal, Model model) {
+        String returnValue = null;
+        if (principal == null && !userName.isBlank()) {
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()){
+            if (!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()) {
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
@@ -72,17 +97,58 @@ public class LoginController {
                 newUser.setEmail(email);
                 newUser.setRole("STUDENT");
                 userRepository.save(newUser);
-
                 autologin(userName, password);
+                returnValue = "redirect:/user/overview-tasks";
+            } else if (userWithUserName.isPresent() && userRepository.findByEmail(email).isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/student/userAndEmailInUsePasswordNotMatching";
+            } else if (userWithUserName.isPresent() && userRepository.findByEmail(email).isPresent()) {
+                returnValue = "redirect:/register/student/userAndEmailInUse";
+            } else if (userWithUserName.isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/student/userNamePasswordNotMatching";
+            } else if (userRepository.findByEmail(email).isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/student/emailInUsePasswordNotMatching";
+            } else if (!password.equals(password2)) {
+                returnValue = "redirect:/register/student/PasswordNotMatching";
+            } else if (userWithUserName.isPresent()) {
+                returnValue = "redirect:/register/student/userName";
+            } else if (userRepository.findByEmail(email).isPresent()) {
+                returnValue = "redirect:/register/student/emailInUse";
             }
         }
-        return "redirect:/user/overview-tasks";
+        return returnValue;
     }
 
-    @GetMapping("/register/teacher")
-    public String registerTeacher(Principal principal, Model model){
-        if (principal != null){
+    @GetMapping({"/register/teacher", "/register/teacher/{filter}"})
+    public String registerTeacher(Principal principal, Model model, @PathVariable(required = false) String filter) {
+        if (principal != null) {
             return "redirect:/user/overview-tasks";
+        }
+        model.addAttribute("classDanger", "form-control");
+        if (filter != null) {
+            if (filter.equals("userName")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+            } else if (filter.equals("emailInUse")) {
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("PasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+            } else if (filter.equals("userAndEmailInUse")) {
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("emailInUsePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            } else if (filter.equals("userNamePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+            } else if (filter.equals("userAndEmailInUsePasswordNotMatching")) {
+                model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
+                model.addAttribute("classDanger", "form-control border-danger");
+                model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
+                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+            }
         }
         return "register/register-teacher";
     }
@@ -93,10 +159,11 @@ public class LoginController {
                                       @RequestParam String password2,
                                       @RequestParam String name,
                                       @RequestParam String email,
-                                      Principal principal, Model model){
-        if(principal == null && !userName.isBlank()){
+                                      Principal principal, Model model) {
+        String returnValue = null;
+        if (principal == null && !userName.isBlank()) {
             Optional<User> userWithUserName = userRepository.findByUsername(userName);
-            if(!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()){
+            if (!userWithUserName.isPresent() && password.equals(password2) && !userRepository.findByEmail(email).isPresent()) {
                 User newUser = new User();
                 newUser.setUsername(userName);
                 String encode = passwordEncoder.encode(password);
@@ -107,11 +174,25 @@ public class LoginController {
                 newUser.setEmail(email);
                 newUser.setRole("TEACHER");
                 userRepository.save(newUser);
-
                 autologin(userName, password);
+                returnValue = "redirect:/user/overview-tasks";
+            } else if (userWithUserName.isPresent() && userRepository.findByEmail(email).isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/teacher/userAndEmailInUsePasswordNotMatching";
+            } else if (userWithUserName.isPresent() && userRepository.findByEmail(email).isPresent()) {
+                returnValue = "redirect:/register/teacher/userAndEmailInUse";
+            } else if (userWithUserName.isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/teacher/userNamePasswordNotMatching";
+            } else if (userRepository.findByEmail(email).isPresent() && !password.equals(password2)) {
+                returnValue = "redirect:/register/teacher/emailInUsePasswordNotMatching";
+            } else if (!password.equals(password2)) {
+                returnValue = "redirect:/register/teacher/PasswordNotMatching";
+            } else if (userWithUserName.isPresent()) {
+                returnValue = "redirect:/register/teacher/userName";
+            } else if (userRepository.findByEmail(email).isPresent()) {
+                returnValue = "redirect:/register/teacher/emailInUse";
             }
         }
-        return "redirect:/user/overview-tasks";
+        return returnValue;
     }
 
     private void autologin(String userName, String password) {
@@ -130,13 +211,13 @@ public class LoginController {
 
     // Login form
     @RequestMapping("/")
-    public String login(Principal principal, Model model){
+    public String login(Principal principal, Model model) {
         if (principal != null) return "redirect:/user/overview-tasks";
         return "home";
     }
 
     @RequestMapping("/errorLogin")
-    public String errorLogin(Principal principal, Model model){
+    public String errorLogin(Principal principal, Model model) {
         if (principal != null) return "redirect:/user/overview-tasks";
         model.addAttribute("error", "De gebruikersnaam en paswoord komen niet overeen.");
         return "home";

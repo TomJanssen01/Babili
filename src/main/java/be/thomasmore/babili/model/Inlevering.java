@@ -12,7 +12,7 @@ public class Inlevering {
     private String audioPath;
     @OneToOne
     private Opdracht opdracht;
-    @OneToOne
+    @ManyToOne
     private User user;
     private String beoordeling;
     private String feedback;
