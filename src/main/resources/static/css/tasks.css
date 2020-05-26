@@ -21,6 +21,7 @@ a.task:hover{
 
 .task-card{
     border: var(--color-logo-dark) solid 5px;
+    border-radius: 5px;
     background-color: white;
     min-height: 60px;
     margin-bottom: 5px;
