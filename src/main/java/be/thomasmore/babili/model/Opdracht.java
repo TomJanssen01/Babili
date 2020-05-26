@@ -1,6 +1,7 @@
 package be.thomasmore.babili.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Opdracht {
@@ -8,24 +9,24 @@ public class Opdracht {
     @SequenceGenerator(name = "opdracht_generator", sequenceName = "opdracht_seq",
             initialValue = 0, allocationSize = 1)
     @Id
-    private Integer Id;
+    private Integer id;
     private String titel;
     private String opgave;
     private String voorbeeld;
-    @OneToOne
+    @ManyToOne
     private Cursus cursus;
-    @OneToOne(mappedBy = "opdracht")
-    private Inlevering inlevering;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "opdracht")
+    private Collection<Inlevering> inleveringen;
 
     public Opdracht() {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitel() {
@@ -68,7 +69,7 @@ public class Opdracht {
         this.cursus = cursus;
     }
 
-    public Inlevering getInlevering() {
-        return inlevering;
+    public Collection<Inlevering> getInleveringen() {
+        return inleveringen;
     }
 }
