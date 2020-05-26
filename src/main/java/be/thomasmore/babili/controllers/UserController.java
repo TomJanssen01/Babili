@@ -169,13 +169,14 @@ public class UserController {
     }
 
     @GetMapping("/course/{courseId}/task/{id}/edit")
-    public String editCourse(Model model, @PathVariable(required = true) Integer id) {
+    public String editCourse(Model model, @PathVariable(required = true) int courseId, @PathVariable(required = true) Integer id) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
         model.addAttribute("opdracht", opdrachtFromDB);
+        model.addAttribute("cursussen",cursusRepository.findById(courseId));
         return "/course/edit-task";
     }
 

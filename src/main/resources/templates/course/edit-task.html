@@ -78,11 +78,13 @@
 <!--                            </div>-->
 <!--                        </div>-->
                         <div class="filterrow mb-2">
-                            <a href="/user/overview-tasks">
-                                <input type="button" class="btn btn-primary float-right" value="Annuleren"></a>
+                            <div class="filterrow mb-2">
+                                <a th:href="'/user/course/'+${cursussen.get().id}+'/management'">
+                                    <input type="button" class="btn btn-primary float-right" value="Annuleren"></a>
+                            </div>
+
                         </div>
                         <div class="filterrow">
-                            <a href="'/user/course/'+${cursussen.id}+'/management'">
                                 <input type="submit" class="btn btn-primary" value="Opdracht wijzigen">
                             </a>
                         </div>
