@@ -1,16 +1,22 @@
 package be.thomasmore.babili.model;
 
+import jdk.jfr.Name;
+
 import javax.persistence.*;
 
 @Entity
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"opdracht_id", "user_id"})
+)
 public class Inlevering {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inlevering_generator")
     @SequenceGenerator(name = "inlevering_generator", sequenceName = "inlevering_seq",
             initialValue = 0, allocationSize = 1)
     @Id
-    private Integer Id;
+    private Integer id;
     private String audioPath;
-    @OneToOne
+    @ManyToOne
     private Opdracht opdracht;
     @ManyToOne
     private User user;
@@ -42,11 +48,11 @@ public class Inlevering {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getAudioPath() {

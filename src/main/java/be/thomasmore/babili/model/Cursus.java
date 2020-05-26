@@ -16,9 +16,9 @@ public class Cursus {
     private String beschrijving;
     @ManyToOne(fetch = FetchType.LAZY)
     private User docent;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cursus")
     private Collection<User> cursisten;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cursus")
     private Collection<Opdracht> opdrachten;
 
 

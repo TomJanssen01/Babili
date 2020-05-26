@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Integer> {
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
-    Iterable<User> findByRole(String role);
-    Iterable<User> findByCursus_Id(Integer id);
-    Iterable<User> findByRoleAndCursus_Id(String role, int courseId);
+    Iterable<User> findAllByRole(String role);
+    Iterable<User> findAllByCursus_Id(Integer id);
 }
