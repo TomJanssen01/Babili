@@ -423,10 +423,10 @@ public class UserController {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
         Opdracht opdracht = null;
         if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
-        String user = principal.getName();
         Optional<User> optionalUser = userRepository.findById(userId);
         User userFromDB = null;
         if (optionalUser.isPresent()) userFromDB = optionalUser.get();
+        String user = userFromDB.getUsername();
         model.addAttribute("user", userFromDB);
         model.addAttribute("opdracht", opdracht);
         model.addAttribute("audioPath", "/audioFiles/" + cursusPath(opdrachtId) + "/" + user + ".wav");

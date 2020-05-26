@@ -41,10 +41,12 @@
 <main>
     <div>
         <div th:if="${submissions != null && !submissions.isEmpty()}" class="card" th:each="submission:${submissions}">
+            <a th:href="'/user/' + ${submission.opdracht.id} + '/' + ${userId} + '/' + 'task-feedback'">
             <div class="card-body">
                 <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
                 <p class="card-text" th:text="${submission.getBeoordeling().isEmpty()}?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
             </div>
+            </a>
         </div>
         <div th:unless="${submissions != null && !submissions.isEmpty()}">
             <p>Deze gebruiker heeft nog geen inzendingen</p>

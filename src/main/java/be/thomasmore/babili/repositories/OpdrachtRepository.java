@@ -1,6 +1,7 @@
 package be.thomasmore.babili.repositories;
 
 import be.thomasmore.babili.model.Cursus;
+import be.thomasmore.babili.model.Inlevering;
 import be.thomasmore.babili.model.Opdracht;
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,5 +11,4 @@ public interface OpdrachtRepository extends CrudRepository<Opdracht, Integer> {
     Optional<Opdracht> findById(Integer id);
     Optional<Opdracht>findOpdrachtByTitel(String titel);
     Iterable<Opdracht> findByCursus_Id(Integer id);
-
 }
