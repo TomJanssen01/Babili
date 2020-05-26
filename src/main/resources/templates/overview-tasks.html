@@ -65,7 +65,7 @@
                 class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............</span>
         </div>
         <div th:if="${opdracht.getInleveringFromUsername(username) != null}" class="ml-3 d-flex align-items-center">
-            <p th:if="${opdracht.getInleveringFromUsername(username).getFeedback()} != null" th:text="'Feedback: ' + ${opdracht.getInleveringFromUsername(username).feedback}"></p>
+            <p th:if="${opdracht.getInleveringFromUsername(username).getFeedback() != null}" th:text="'Feedback: ' + ${opdracht.getInleveringFromUsername(username).feedback}"></p>
         </div>
     </a>
     <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
