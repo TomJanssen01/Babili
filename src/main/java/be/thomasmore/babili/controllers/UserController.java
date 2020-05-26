@@ -160,8 +160,8 @@ public class UserController {
                 }
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
-                String path = naam.replaceAll(" ","").toLowerCase();
-                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+path);
+                String path = naam.replaceAll(" ", "").toLowerCase();
+                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + path);
                 file.mkdir();
             }
         }
@@ -197,7 +197,7 @@ public class UserController {
     @GetMapping("/course/{courseId}/management/new-task")
     public String newTask(@PathVariable(required = true) int courseId, Model model) {
         model.addAttribute("task", opdrachtRepository.findAll());
-        model.addAttribute("cursussen",cursusRepository.findById(courseId));
+        model.addAttribute("cursussen", cursusRepository.findById(courseId));
         return "new-task";
     }
 
@@ -211,9 +211,9 @@ public class UserController {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
         Cursus cursus = cursusRepository.findById(courseId).get();
-        String cursusPath = cursus.getNaam().replaceAll(" ","").toLowerCase();
+        String cursusPath = cursus.getNaam().replaceAll(" ", "").toLowerCase();
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
-        if (!(optionalOpdracht.isPresent())) {
+        if (optionalOpdracht.isEmpty()) {
             if (titel != null) {
                 Opdracht opdracht = new Opdracht();
                 opdracht.setTitel(titel);
@@ -223,7 +223,7 @@ public class UserController {
                 }
 //                opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
-                File file = new File("src/main/resources/static/audioFiles/"+cursus.getId()+cursusPath+"/"+titel.replaceAll(" ","").toLowerCase());
+                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + cursusPath + "/" + titel.replaceAll(" ", "").toLowerCase());
                 file.mkdir();
             }
         }
@@ -240,8 +240,6 @@ public class UserController {
         model.addAttribute("course", optionalCourse.get());
         model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
         model.addAttribute("student", userRepository.findByCursus_Id(courseId));
-
-        model.addAttribute("students", userRepository.findByRoleAndCursus_Id("STUDENT", courseId));
         return "course/course-management";
     }
 
@@ -274,7 +272,7 @@ public class UserController {
     public String addStudents(@PathVariable(required = true) int courseId, @RequestParam(required = false) int[] selectedStudents, Model model) {
         Cursus givenCourse = null;
         Optional<Cursus> optionalCourse = cursusRepository.findById(courseId);
-        if (!optionalCourse.isPresent()) {
+        if (optionalCourse.isEmpty()) {
             return "course/overview-tasks";
         }
         givenCourse = optionalCourse.get();
@@ -313,15 +311,16 @@ public class UserController {
                 inleveringRepository.deleteByOpdracht(task);
                 opdrachtRepository.delete(task);
 
-                File index = new File("src/main/resources/static/audioFiles/"+course.getId()+course.getNaam().replaceAll(" ","").toLowerCase()+"/"+task.getTitel().replaceAll(" ","").toLowerCase());
-                if (index.exists()){
-                String[]entries = index.list();
-                for(String s: entries){
-              File currentFile = new File(index.getPath(),s);
-                    currentFile.delete();
+                File index = new File("src/main/resources/static/audioFiles/" + course.getId() + course.getNaam().replaceAll(" ", "").toLowerCase() + "/" + task.getTitel().replaceAll(" ", "").toLowerCase());
+                if (index.exists()) {
+                    String[] entries = index.list();
+                    for (String s : entries) {
+                        File currentFile = new File(index.getPath(), s);
+                        currentFile.delete();
+                    }
+                    index.delete();
                 }
-                index.delete();}
-             }
+            }
         }
         return "redirect:/user/course/" + courseId + "/management";
     }
@@ -360,7 +359,7 @@ public class UserController {
     @GetMapping("/course/{courseId}/management/{userId}/overview-submissions")
     public String overviewSubmissions(@PathVariable(required = true) int userId, Model model, Principal principal) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User givenUser = optionalUser.get();
             Collection<Inlevering> submissions = inleveringRepository.findAllByUser_Id(givenUser.getId());
             model.addAttribute("submissions", submissions);
@@ -410,12 +409,12 @@ public class UserController {
         userRepository.save(student);
     }
 
-    private String cursusPath(int opdrachtId){
+    private String cursusPath(int opdrachtId) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ","").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ","").toLowerCase();
+        return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ", "").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ", "").toLowerCase();
     }
 }
