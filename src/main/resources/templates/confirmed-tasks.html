@@ -46,7 +46,27 @@
         </a>
     </nav>
 </div>
+<main>
+    <a sec:authorize="hasAuthority('TEACHER')" class="tile float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
+    <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
+    <!--    <h2>...</h2>-->
+    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
+        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
+        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
+                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        </div>
+    </a>
 
+    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
+    <!--    <h2>Afgewerkt: 10/30</h2>-->
+    <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
+        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
+        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
+                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        </div>
+    </a>
+    <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
+</main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
 </html>

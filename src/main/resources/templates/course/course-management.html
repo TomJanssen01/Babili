@@ -70,7 +70,7 @@
            th:href="|/user/course/${courseId}/task/${task.getId()}/edit|">edit</a>
         <a class="task-state material-icons-round md-small md-dark"
            th:href="|/user/course/${courseId}/task/${task.getId()}/delete|">delete</a>
-        <a class="task" th:href="'/user/task-details/'+${task.getId()}">
+        <a class="task" th:href="'/user/confirmed-tasks/'+${task.getId()}">
             <div class="task-card mr-2">
                 <span class="task-number" th:text="${task.getId()}">01</span>
                 <span class="task-content" th:text="${task.getTitel()}"></span>
