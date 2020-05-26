@@ -17,10 +17,10 @@ public class User {
     private String name;
     private String email;
     private String role;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Cursus cursus;
-    @OneToMany(mappedBy = "user")
-    private Collection<Inlevering> inlevering;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Collection<Inlevering> inleveringen;
 
     public User() {
     }
@@ -81,11 +81,11 @@ public class User {
         this.role = role;
     }
 
-    public Collection<Inlevering> getInlevering() {
-        return inlevering;
+    public Collection<Inlevering> getInleveringen() {
+        return inleveringen;
     }
 
-    public void setInlevering(Collection<Inlevering> inlevering) {
-        this.inlevering = inlevering;
+    public void setInleveringen(Collection<Inlevering> inlevering) {
+        this.inleveringen = inlevering;
     }
 }

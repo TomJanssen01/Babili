@@ -50,10 +50,10 @@ public class UserController {
             if (ingelogdeUser.getCursus() == null) {
                 opdrachtFromDB = null;
             } else {
-                opdrachtFromDB = opdrachtRepository.findByCursus_Id(ingelogdeUser.getCursus().getId());
+                opdrachtFromDB = opdrachtRepository.findAllByCursus_Id(ingelogdeUser.getCursus().getId());
             }
         }
-        Iterable<Cursus> cursussenFromDB = cursusRepository.findByDocent_Username(principal.getName());
+        Iterable<Cursus> cursussenFromDB = cursusRepository.findAllByDocent_Username(principal.getName());
         model.addAttribute("opdrachtFromDB", opdrachtFromDB);
         model.addAttribute("cursusFromDB", cursussenFromDB);
         return "overview-tasks";
@@ -238,8 +238,8 @@ public class UserController {
         }
 
         model.addAttribute("course", optionalCourse.get());
-        model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
-        model.addAttribute("student", userRepository.findByCursus_Id(courseId));
+        model.addAttribute("tasks", opdrachtRepository.findAllByCursus_Id(courseId));
+        model.addAttribute("student", userRepository.findAllByCursus_Id(courseId));
         return "course/course-management";
     }
 
@@ -290,7 +290,7 @@ public class UserController {
             model.addAttribute("addedStudents", studentsToEnroll);
         }
 
-        Iterable<User> allUsers = userRepository.findByRole("STUDENT");
+        Iterable<User> allUsers = userRepository.findAllByRole("STUDENT");
         if (allUsers != null) {
             List<User> studentsThatAreNotEnrolled = getListOfStudentsThatAreNotEnrolled(allUsers, givenCourse);
             model.addAttribute("availableStudents", studentsThatAreNotEnrolled);
@@ -347,7 +347,7 @@ public class UserController {
             model.addAttribute("addedStudents", studentsToDelete);
         }
 
-        Iterable<User> allUsers = userRepository.findByRole("STUDENT");
+        Iterable<User> allUsers = userRepository.findAllByRole("STUDENT");
         if (allUsers != null) {
             List<User> studentsThatAreEnrolled = getListOfStudentsThatAreEnrolled(allUsers, givenCourse);
             model.addAttribute("availableStudents", studentsThatAreEnrolled);
