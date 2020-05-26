@@ -54,6 +54,7 @@ public class UserController {
             }
         }
         Iterable<Cursus> cursussenFromDB = cursusRepository.findAllByDocent_Username(principal.getName());
+        model.addAttribute("username", principal.getName());
         model.addAttribute("opdrachtFromDB", opdrachtFromDB);
         model.addAttribute("cursusFromDB", cursussenFromDB);
         return "overview-tasks";
