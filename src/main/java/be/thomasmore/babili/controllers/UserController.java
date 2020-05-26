@@ -183,6 +183,7 @@ public class UserController {
     @PostMapping("/course/{courseId}/task/{id}/edit")
     public String postEditCourse(Model model,
                                  @PathVariable(required = true) Integer id,
+                                 @PathVariable(required = true) int courseId,
                                  @RequestParam(required = false) String opgave) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
@@ -192,7 +193,7 @@ public class UserController {
         opdrachtFromDB.setOpgave(opgave);
         opdrachtRepository.save(opdrachtFromDB);
         model.addAttribute("opdracht", opdrachtFromDB);
-        return "redirect:/user/overview-tasks";
+        return "redirect:/user/course/"+courseId+"/management";
     }
 
     @GetMapping("/course/{courseId}/management/new-task")
