@@ -31,9 +31,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Aanmelden</button>
     </form>
-    <a class="tile" href="/user/overview-tasks" sec:authorize="hasAuthority('STUDENT')">Overzicht opdrachten</a>
-    <a class="tile" href="/user/overview-tasks" sec:authorize="hasAuthority('TEACHER')">Overzicht cursussen</a>
-    <a id="docent" class="tile" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
+    <a class="btn btn-primary" href="/user/overview-tasks" sec:authorize="hasAuthority('STUDENT')">Overzicht opdrachten</a>
+    <a class="btn btn-primary" href="/user/overview-tasks" sec:authorize="hasAuthority('TEACHER')">Overzicht cursussen</a>
+    <a id="docent" class="btn btn-primary-outline" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
     <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
         <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>
     </p>

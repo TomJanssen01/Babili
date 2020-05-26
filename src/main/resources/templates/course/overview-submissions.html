@@ -9,14 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
-    <style>
-        a.tile{
-            color: var(--color-logo-dark);
-        }
-        a.tile:hover{
-            color: var(--color-logo-dark);
-        }
-    </style>
 </head>
 <body>
 <header></header>
@@ -47,25 +39,17 @@
     </nav>
 </div>
 <main>
-    <a sec:authorize="hasAuthority('TEACHER')" class="btn btn-primary float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
-    <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
-    <!--    <h2>...</h2>-->
-    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
-                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+    <div>
+        <div th:if="${submissions != null && !submissions.isEmpty()}" class="card" th:each="submission:${submissions}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
+                <p class="card-text" th:text="${submission.getBeoordeling().isEmpty()}?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
+            </div>
         </div>
-    </a>
-
-    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
-    <!--    <h2>Afgewerkt: 10/30</h2>-->
-    <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
-                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............ ............ ...... ..... ..... ........... ...................... .......... ............ ............ ...... ..... ..... ........... ...................... ..........</span>
+        <div th:unless="${submissions != null && !submissions.isEmpty()}">
+            <p>Deze gebruiker heeft nog geen inzendingen</p>
         </div>
-    </a>
-    <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

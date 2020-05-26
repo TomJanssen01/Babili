@@ -11,4 +11,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     Optional<User> findByEmail(String email);
     Iterable<User> findByRole(String role);
     Iterable<User> findByCursus_Id(Integer id);
+    Iterable<User> findByRoleAndCursus_Id(String role, int courseId);
 }
