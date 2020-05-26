@@ -405,11 +405,15 @@ public class UserController {
     }
 
     @GetMapping("/{opdrachtId}/{userId}/task-feedback")
-    public String taskFeedback(Model model, @PathVariable int opdrachtId, Principal principal) {
+    public String taskFeedback(Model model, @PathVariable int opdrachtId, @PathVariable int userId, Principal principal) {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
         Opdracht opdracht = null;
         if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
         String user = principal.getName();
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User userFromDB = null;
+        if (optionalUser.isPresent()) userFromDB = optionalUser.get();
+        model.addAttribute("user", userFromDB);
         model.addAttribute("opdracht", opdracht);
         model.addAttribute("audioPath", "/audioFiles/" + cursusPath(opdrachtId) + "/" + user + ".wav");
         return "task-feedback";
@@ -429,6 +433,6 @@ public class UserController {
             inlevering.setFeedback(feedback);
             inleveringRepository.save(inlevering);
         }
-        return "task-feedback";
+        return "redirect:/user/overview-tasks";
     }
 }

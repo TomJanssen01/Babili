@@ -55,7 +55,7 @@
     <div class ="container-fluid">
         <div class="row">
             <div class="col">
-                <form th:action="@{'/user/{opdrachtId}/{userId}/task-feedback'}" method="post">
+                <form th:action="@{'/user/' + ${opdracht.id} + '/' + ${user.id} + '/task-feedback'}" method="post">
                     <div class="filters">
                         <div class="filterrow mb-2">
                             <div class="row">
