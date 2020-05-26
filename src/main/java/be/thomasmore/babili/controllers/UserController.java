@@ -239,6 +239,8 @@ public class UserController {
 
         model.addAttribute("course", optionalCourse.get());
         model.addAttribute("tasks", opdrachtRepository.findByCursus_Id(courseId));
+        model.addAttribute("student", userRepository.findByCursus_Id(courseId));
+
         model.addAttribute("students", userRepository.findByRoleAndCursus_Id("STUDENT", courseId));
         return "course/course-management";
     }
@@ -310,14 +312,16 @@ public class UserController {
                 course.getOpdrachten().remove(task);
                 inleveringRepository.deleteByOpdracht(task);
                 opdrachtRepository.delete(task);
+
                 File index = new File("src/main/resources/static/audioFiles/"+course.getId()+course.getNaam().replaceAll(" ","").toLowerCase()+"/"+task.getTitel().replaceAll(" ","").toLowerCase());
+                if (index.exists()){
                 String[]entries = index.list();
                 for(String s: entries){
-                    File currentFile = new File(index.getPath(),s);
+              File currentFile = new File(index.getPath(),s);
                     currentFile.delete();
                 }
-                index.delete();
-            }
+                index.delete();}
+             }
         }
         return "redirect:/user/course/" + courseId + "/management";
     }
