@@ -7,6 +7,10 @@
     --color-logo-light-darkened: rgba(230, 191, 0, 1);
 }
 
+*{
+    font-size: 50px;
+}
+
 h1, h2, h3, h4, h5, h6{
     color: var(--color-logo-dark);
 }
@@ -17,6 +21,35 @@ h1{
 
 h2{
     margin-bottom: 15px;
+}
+
+html, body {
+    background-color: var(--color-logo-light);
+    text-align: left;
+}
+
+body {
+    display: grid;
+    grid-template-columns: [start] 100% [end];
+    grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] auto [end];
+}
+
+header {
+    grid-row: header / navbar;
+    grid-column: start / end;
+    background-color: var(--color-logo-dark);
+}
+
+main {
+    grid-row: content / footer;
+    grid-column: start / end;
+    padding: 30px 20px 10px 20px;
+}
+
+footer {
+    grid-row: footer / end;
+    grid-column: start / end;
+    margin: 10px 40px 10px 40px;
 }
 
 .delete{
@@ -98,33 +131,14 @@ a.card:hover{
     text-decoration: none;
 }
 
-html, body {
-    background-color: var(--color-logo-light);
-    text-align: left;
-}
-
-body {
-    display: grid;
-}
-
-header {
-    background-color: var(--color-logo-dark);
-}
-
-main {
-    padding: 30px 20px 10px 20px;
-}
-
-footer {
-    margin: 10px 40px 10px 40px;
-}
-
 .logo {
     max-width: 500px;
     min-width: 120px;
 }
 
 #sidebar {
+    grid-row: navbar / content;
+    grid-column: start / end;
     padding-left: 15px;
 }
 
@@ -239,6 +253,7 @@ a.tile:hover {
 }
 
 #rating {
+    width: 100%;
     text-align: center;
     max-width: 500px;
 }
@@ -271,7 +286,7 @@ select {
     flex-direction: row;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 991px), (orientation: landscape){
     body {
         grid-template-columns: [sidebar] max-content [content] auto [end];
         grid-template-rows: [header] 80px [content] auto [footer] auto [end];
@@ -301,37 +316,6 @@ select {
 
     #rating {
         width: 40%;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    body {
-        grid-template-columns: [start] 100% [end];
-        grid-template-rows: [header] 80px [navbar] auto [content] auto [footer] auto [end];
-    }
-
-    header {
-        grid-row: header / navbar;
-        grid-column: start / end;
-    }
-
-    main {
-        grid-row: content / footer;
-        grid-column: start / end;
-    }
-
-    footer {
-        grid-row: footer / end;
-        grid-column: start / end;
-    }
-
-    #sidebar {
-        grid-row: navbar / content;
-        grid-column: start / end;
-    }
-
-    #rating {
-        width: 100%;
     }
 }
 
