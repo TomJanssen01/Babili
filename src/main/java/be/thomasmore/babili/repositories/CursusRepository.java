@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface CursusRepository extends CrudRepository <Cursus, Integer> {
     Optional<Cursus>findCursusByNaam(String naam);
-    Iterable<Cursus> findByDocent_Username(String username);
+    Iterable<Cursus> findAllByDocent_Username(String username);
 }
