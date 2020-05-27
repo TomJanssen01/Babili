@@ -81,11 +81,10 @@
 <!--    </div>-->
     <br>
     <div id="inlevering">
-        <form th:action="@{|/user/inlevering/${opdracht.getId()}}" method="post" enctype="multipart/form-data">
-            <input type="file" id="soundFile" name="soundFile" value="">
-        </form>
-<!--    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"-->
-<!--                                                                type="submit" value="Inleveren"></a>-->
+        <input id="hand-in2" onclick="saveSoundFile()" class="btn btn-primary-outline"
+               type="submit" value="Inleveren">
+    <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" th:onclick="saveSoundFile()" class="btn btn-primary-outline"
+                                                                type="submit" value="Inleveren"></a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

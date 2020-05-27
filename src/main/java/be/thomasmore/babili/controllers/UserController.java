@@ -11,6 +11,7 @@ import be.thomasmore.babili.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.sound.sampled.*;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -36,6 +38,8 @@ public class UserController {
     private InleveringRepository inleveringRepository;
     @Autowired
     private CursusRepository cursusRepository;
+    @Value("${upload.sound.dir}")
+    private String uploadSoundDirString;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     // Logout form
@@ -94,6 +98,24 @@ public class UserController {
 //        fos.write(file.getBytes());
 //        fos.close();
 //    }
+
+//    @CrossOrigin(origins = "http://localhost:8081")
+//    @PostMapping("/user/soundUpload")
+//    public String soundUploadPost(@PathVariable MultipartFile soundFile,
+//                                  @PathVariable int id,
+//                                  Model model,
+//                                  Principal principal){
+//        String soundName = soundFile.getOriginalFilename();
+//        File soundFileDir = new File(uploadSoundDirString);
+//        if (!soundFileDir.exists()) soundFileDir.mkdirs();
+//        File audioFile = new File(uploadSoundDirString, soundName);
+//        try{
+//            soundFile.transferTo(audioFile);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        return "soundUpload";
+//    };
 
 
     @GetMapping("/inlevering/{id}")
