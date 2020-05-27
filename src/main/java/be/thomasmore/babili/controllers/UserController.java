@@ -169,19 +169,21 @@ public class UserController {
     }
 
     @GetMapping("/course/{courseId}/task/{id}/edit")
-    public String editCourse(Model model, @PathVariable(required = true) Integer id) {
+    public String editCourse(Model model, @PathVariable(required = true) int courseId, @PathVariable(required = true) Integer id) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
         model.addAttribute("opdracht", opdrachtFromDB);
+        model.addAttribute("cursussen",cursusRepository.findById(courseId));
         return "/course/edit-task";
     }
 
     @PostMapping("/course/{courseId}/task/{id}/edit")
     public String postEditCourse(Model model,
                                  @PathVariable(required = true) Integer id,
+                                 @PathVariable(required = true) int courseId,
                                  @RequestParam(required = false) String opgave) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
@@ -191,7 +193,7 @@ public class UserController {
         opdrachtFromDB.setOpgave(opgave);
         opdrachtRepository.save(opdrachtFromDB);
         model.addAttribute("opdracht", opdrachtFromDB);
-        return "redirect:/user/overview-tasks";
+        return "redirect:/user/course/"+courseId+"/management";
     }
 
     @GetMapping("/course/{courseId}/management/new-task")
@@ -227,7 +229,7 @@ public class UserController {
                 file.mkdir();
             }
         }
-        return "redirect:/user/overview-tasks"; //later nog aan te passen naar de juiste URL
+        return "redirect:/user/course/"+courseId+"/management";
     }
 
     @GetMapping("/course/{courseId}/management")
@@ -265,7 +267,7 @@ public class UserController {
             cursus.setBeschrijving(beschrijving);
             cursusRepository.save(cursus);
         }
-        return "redirect:/user/overview-tasks";
+        return "redirect:/user/course/" + courseId + "/management";
     }
 
     @GetMapping("/course/{courseId}/management/add-students")

@@ -29,10 +29,6 @@
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn">
-            <i class="material-icons-round md-small md-dark">person</i>
-            <span class="navbarName">Mijn account</span>
-        </a>
         <a class="navbarItem btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
@@ -78,11 +74,13 @@
 <!--                            </div>-->
 <!--                        </div>-->
                         <div class="filterrow mb-2">
-                            <a href="/user/overview-tasks">
-                                <input type="button" class="btn btn-primary float-right" value="Annuleren"></a>
+                            <div class="filterrow mb-2">
+                                <a th:href="'/user/course/'+${cursussen.get().id}+'/management'">
+                                    <input type="button" class="btn btn-primary float-right" value="Annuleren"></a>
+                            </div>
+
                         </div>
                         <div class="filterrow">
-                            <a href="/user/overview-tasks">
                                 <input type="submit" class="btn btn-primary" value="Opdracht wijzigen">
                             </a>
                         </div>
