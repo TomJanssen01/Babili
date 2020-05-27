@@ -56,13 +56,13 @@
 
     <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
     <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i th:if="${opdracht.getInleveringen().isEmpty()}" class="task-state material-icons-round md-small md-dark">brightness_1</i>
+        <i th:if="${opdracht.getInleveringen().isEmpty()}" class="task-state task-right material-icons-round md-small md-dark">brightness_1</i>
         <i th:unless="${opdracht.getInleveringen().isEmpty()}" class="task-state material-icons-round md-small md-dark">check</i>
         <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
                 class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............</span>
         </div>
         <div th:if="${opdracht.getInleveringFromUsername(username) != null}" class="ml-3 d-flex align-items-center">
-            <p th:if="${opdracht.getInleveringFromUsername(username).getFeedback() != null}" th:text="'Feedback: ' + ${opdracht.getInleveringFromUsername(username).feedback}"></p>
+            <p class="line" th:if="${opdracht.getInleveringFromUsername(username).getFeedback() != null}" th:text="'Feedback: ' + ${opdracht.getInleveringFromUsername(username).feedback}"></p>
         </div>
     </a>
     <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>

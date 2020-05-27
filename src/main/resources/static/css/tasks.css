@@ -19,6 +19,10 @@ a.task:hover{
     margin-right: 5px;
 }
 
+.task-right{
+    margin-right: 30px;
+}
+
 .task-card{
     border: var(--color-logo-dark) solid 5px;
     border-radius: 5px;
@@ -46,4 +50,8 @@ a.task:hover{
 .task-card .task-content{
     text-align: justify;
     align-self: center;
+}
+
+.line{
+    margin-top: 10px;
 }
