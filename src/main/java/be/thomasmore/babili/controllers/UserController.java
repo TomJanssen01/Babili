@@ -101,7 +101,6 @@ public class UserController {
         return "redirect:/user/inlevering/{id}/confirmation";
     }
 
-
     @GetMapping("/inlevering/{submissionId}/confirmation")
     public String taskConfirmation(@PathVariable(required = true) Integer submissionId, @RequestParam(required = false) Integer rating, Model model, Principal principal) {
 
