@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Overzicht taken</title>
+    <title>Feedback taak</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -47,29 +47,39 @@
     </nav>
 </div>
 <main>
-    <a sec:authorize="hasAuthority('TEACHER')" class="btn btn-primary float-right" th:href="'/user/new-course/'">Cursus aanmaken</a>
-    <h1 sec:authorize="hasAuthority('TEACHER')">Cursussen</h1>
-    <!--    <h2>...</h2>-->
-    <a class="task" sec:authorize="hasAuthority('TEACHER')" th:each="cursus:${cursusFromDB}" th:href="'course/'+${cursus.getId()}+'/management'">
-        <i class="task-state material-icons-round md-small md-dark">brightness_1</i>
-
-        <div class="task-card"><span class="task-number" th:text="${cursus.id}">01</span><span
-                class="task-content" th:text="${cursus.getNaam()}">Ga naar de bakker en ............</span>
+    <h1>Geef uw feedback</h1>
+    <audio controls>
+        <source th:src="${audioPath}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+    <div class ="container-fluid">
+        <div class="row">
+            <div class="col">
+                <form th:action="@{'/user/' + ${opdracht.id} + '/' + ${user.id} + '/task-feedback'}" method="post">
+                    <div class="filters">
+                        <div class="filterrow mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="feedback">Feedback:</label>
+                                </div>
+                                <div class="col">
+                                    <textarea class="form-control" id="feedback" name="feedback" rows="5" placeholder="Geef hier je feedback."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterrow">
+                            <a th:href="'/user/overview-tasks'">
+                                <input type="button" class="btn btn-primary float-right" value="Annuleren">
+                            </a>
+                        </div>
+                        <div class="filterrow mb-2">
+                            <input type="submit" class="btn btn-primary" value="Bevestigen">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </a>
-
-    <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
-    <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
-        <i th:if="${opdracht.getInleveringen().isEmpty()}" class="task-state material-icons-round md-small md-dark">brightness_1</i>
-        <i th:unless="${opdracht.getInleveringen().isEmpty()}" class="task-state material-icons-round md-small md-dark">check</i>
-        <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
-                class="task-content" th:text="${opdracht.getTitel()}">Ga naar de bakker en ............</span>
-        </div>
-        <div th:if="${opdracht.getInleveringFromUsername(username) != null}" class="ml-3 d-flex align-items-center">
-            <p th:if="${opdracht.getInleveringFromUsername(username).getFeedback() != null}" th:text="'Feedback: ' + ${opdracht.getInleveringFromUsername(username).feedback}"></p>
-        </div>
-    </a>
-    <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

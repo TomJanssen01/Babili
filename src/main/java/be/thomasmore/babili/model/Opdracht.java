@@ -72,4 +72,11 @@ public class Opdracht {
     public Collection<Inlevering> getInleveringen() {
         return inleveringen;
     }
+    public Inlevering getInleveringFromUsername(String username){
+        Inlevering inleveringUser = null;
+        for (Inlevering inlevering:inleveringen){
+            if (inlevering.getUser().getUsername().equals(username)) inleveringUser = inlevering;
+        }
+        return inleveringUser;
+    }
 }
