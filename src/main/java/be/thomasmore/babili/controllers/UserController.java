@@ -54,6 +54,7 @@ public class UserController {
             }
         }
         Iterable<Cursus> cursussenFromDB = cursusRepository.findAllByDocent_Username(principal.getName());
+        model.addAttribute("username", principal.getName());
         model.addAttribute("opdrachtFromDB", opdrachtFromDB);
         model.addAttribute("cursusFromDB", cursussenFromDB);
         return "overview-tasks";
@@ -415,5 +416,37 @@ public class UserController {
             opdrachtFromDB = optionalOpdracht.get();
         }
         return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ", "").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ", "").toLowerCase();
+    }
+
+    @GetMapping("/{opdrachtId}/{userId}/task-feedback")
+    public String taskFeedback(Model model, @PathVariable int opdrachtId, @PathVariable int userId, Principal principal) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
+        Opdracht opdracht = null;
+        if (optionalOpdracht.isPresent()) opdracht = optionalOpdracht.get();
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User userFromDB = null;
+        if (optionalUser.isPresent()) userFromDB = optionalUser.get();
+        String user = userFromDB.getUsername();
+        model.addAttribute("user", userFromDB);
+        model.addAttribute("opdracht", opdracht);
+        model.addAttribute("audioPath", "/audioFiles/" + cursusPath(opdrachtId) + "/" + user + ".wav");
+        return "task-feedback";
+    }
+
+    @PostMapping({"/{opdrachtId}/{userId}/task-feedback"})
+    public String postTaskFeedback(@RequestParam String feedback,
+                                   @PathVariable int opdrachtId, @PathVariable int userId) {
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(opdrachtId);
+        Opdracht opdracht = null;
+        if (optionalOpdracht.isPresent()){
+            opdracht = optionalOpdracht.get();
+        }
+        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(userId, opdracht);
+        if (optionalInlevering.isPresent()){
+            Inlevering inlevering = optionalInlevering.get();
+            inlevering.setFeedback(feedback);
+            inleveringRepository.save(inlevering);
+        }
+        return "redirect:/user/overview-tasks";
     }
 }
