@@ -86,6 +86,10 @@ a.card:hover{
     text-decoration: none;
 }
 
+.card a:hover{
+    text-decoration: none;
+}
+
 html, body {
     background-color: var(--color-logo-light);
     text-align: left;
