@@ -71,6 +71,16 @@ playButton.addEventListener('click', () => {
    soundFile.play();
 });
 
-function inlevering() {
-    return soundFile;
+async function saveSoundFile() {
+    let formData = new FormData();
+    // let audioFile = soundFile.files[0];
+
+    formData.append("audioFile", soundFile);
+
+    try {
+        let r = await fetch('/soundUpload', {method: "POST", body: formData});
+        console.log('HTTP response code:', r.status);
+    } catch (e) {
+        console.log('Huston we have problem...:', e);
+    }
 }
