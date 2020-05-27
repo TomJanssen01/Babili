@@ -100,22 +100,33 @@ public class UserController {
 //    }
 
 //    @CrossOrigin(origins = "http://localhost:8081")
-//    @PostMapping("/user/soundUpload")
-//    public String soundUploadPost(@PathVariable MultipartFile soundFile,
+    @PostMapping("/soundUpload")
+    public String soundUploadPost(//eerst een int -- om eerst iets simpel te testen. Hiervan kan je een hidden field maken die de id bevat
+                                  @RequestParam int index,
+                                  //dan de audio file
+                                  //pas op het moet RequestParam zijn en de naam moet overeen komen met de naam in de form --> dus in de FormData
+                                  //ik heb dat op (required = false) gezet om te kunnen testen met de submit knop in de form,
+                                  // en misschien wil je dat zelf ook wel houden -- als de user op die knop duwt en nog niks gerecord heeft
+                                  @RequestParam(required = false)  MultipartFile audioFile,
 //                                  @PathVariable int id,
-//                                  Model model,
-//                                  Principal principal){
+                                  Model model,
+                                  Principal principal){
+        logger.info("soundUpload POST");
+        if (audioFile==null)         return "redirect:/user/task-details/2";
+        String soundName = "sound.wav";
+
+        //er is geen original filename volgens mij, het is niet geupload door de user, het is recorded door de javascript
 //        String soundName = soundFile.getOriginalFilename();
-//        File soundFileDir = new File(uploadSoundDirString);
-//        if (!soundFileDir.exists()) soundFileDir.mkdirs();
-//        File audioFile = new File(uploadSoundDirString, soundName);
-//        try{
-//            soundFile.transferTo(audioFile);
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        return "soundUpload";
-//    };
+        File soundFileDir = new File(uploadSoundDirString);
+        if (!soundFileDir.exists()) soundFileDir.mkdirs();
+        File audioFileHandler = new File(uploadSoundDirString, soundName);
+        try{
+            audioFile.transferTo(audioFileHandler);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return "redirect:/user/task-details/2";//tijdelijk hard-coded op 2 om te testen
+    };
 
 
     @GetMapping("/inlevering/{id}")

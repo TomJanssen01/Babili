@@ -42,7 +42,7 @@ function draw() {
         var amp = spectrum[i];
         var y = map(amp, 0, 256, height, 0);
         fill(i, 255, 255);
-        rect(i * w, y, w-2, height - y);
+        rect(i * w, y, w - 2, height - y);
     }
 };
 
@@ -68,7 +68,7 @@ stopButton.addEventListener('click', () => {
 
 playButton.addEventListener('click', () => {
     fft.setInput(soundFile);
-   soundFile.play();
+    soundFile.play();
 });
 
 async function saveSoundFile() {
@@ -83,4 +83,31 @@ async function saveSoundFile() {
     } catch (e) {
         console.log('Huston we have problem...:', e);
     }
+}
+
+const testOnHomeController = async function () {
+    console.log("test");
+    try {
+        const form = new FormData(document.getElementById('soundUploadTest'));
+        let r = await fetch('/soundUploadTest', {method: "POST",  body: form});
+        //NIET NODIG mode: "same-origin", referrerPolicy: "origin", credentials: 'include'
+        console.log('HTTP response code:', r.status);
+    } catch (e) {
+        console.log('Huston we have problem...:', e);
+    }
+
+}
+
+const testOnUserController = async function () {
+    console.log("test");
+    try {
+        const form = new FormData(document.getElementById('soundUpload'));
+        form.append("audioFile", soundFile.getBlob());//error: soundFile is not a blob
+         form.append("index", 55);
+        let r = await fetch('/user/soundUpload', {method: "POST",  body: form});
+        console.log('HTTP response code:', r.status);
+    } catch (e) {
+        console.log('Huston we have problem...:', e);
+    }
+
 }

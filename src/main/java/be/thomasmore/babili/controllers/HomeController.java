@@ -30,10 +30,10 @@ public class HomeController {
     @Value("${upload.sound.dir}")
     private String uploadSoundDirString;
 
-    @GetMapping({"/","/{error}"})
+    @GetMapping({"/", "/haha/{error}"})
     public String home(Principal principal, @PathVariable(required = false) String error, Model model) {
         String loggedInName = principal != null ? principal.getName() : "nobody";
-        if (error != null){
+        if (error != null) {
             model.addAttribute("error", "Gelieve een correcte gebruikersnaam en paswoord in te geven.");
         }
         logger.info("logged in: " + loggedInName);
@@ -45,21 +45,29 @@ public class HomeController {
         return "register";
     }
 
-    @PostMapping("/soundUpload")
-    public String soundUploadPost(@PathVariable MultipartFile soundFile,
-                                  @PathVariable int id,
-                                  Model model,
-                                  Principal principal){
-        String soundName = soundFile.getOriginalFilename();
-        File soundFileDir = new File(uploadSoundDirString);
-        if (!soundFileDir.exists()) soundFileDir.mkdirs();
-        File audioFile = new File(uploadSoundDirString, soundName);
-        try{
-            soundFile.transferTo(audioFile);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return "soundUpload";
-    };
+
+    //dit is een simpele get-mapping om te testen vanuit javascript
+    //werkt vanuit de form-submit en ook vanuit javascript
+    @GetMapping("/soundUploadTest")
+    public String soundUpload(
+            Model model,
+            Principal principal) {
+        logger.info("gelukt GET");
+        return "redirect:/user/task-details/2";//tijdelijk hard-coded op 2 om te testen
+
+    }
+
+    //dit is een simpele post-mapping om te testen vanuit javascript
+    //werkt vanuit de form-submit en ook vanuit javascript
+    @PostMapping("/soundUploadTest")
+    public String soundUploadPost(
+            Model model,
+            Principal principal) {
+        logger.info("gelukt POST");
+        return "redirect:/user/task-details/2";//tijdelijk hard-coded op 2 om te testen
+
+    }
+
+
 
 }

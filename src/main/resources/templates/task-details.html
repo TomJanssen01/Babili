@@ -89,5 +89,14 @@
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 <script src="/js/audio.js" type="text/javascript"></script>
+<button onclick="testOnHomeController()">test on HomeController</button>
+<form id="soundUploadTest" th:action="@{'/soundUploadTest'}" method="post">
+    <input type="submit" class="btn btn-primary" value="submit">
+</form>
+<button onclick="testOnUserController()">test on userController</button>
+<form id="soundUpload" th:action="@{'/user/soundUpload'}" method="post">
+    <input type="number" name="index" value="77">
+    <input type="submit" class="btn btn-primary" value="submit">
+</form>
 </body>
 </html>
