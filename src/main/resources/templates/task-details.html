@@ -30,10 +30,6 @@
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn">
-            <i class="material-icons-round md-small md-dark">person</i>
-            <span class="navbarName">Mijn account</span>
-        </a>
         <a class="navbarItem btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
@@ -56,7 +52,7 @@
         </div>
     </div>
     <a th:if="${taak == null}" id="rec" class="material-icons-round md-large md-dark" th:href="'/user/start/'+${opdracht.getId()}">mic</a>
-    <a th:if="${taak == null}" id="stop" class="tile-icon material-icons-round md-medium md-dark" th:href="'/user/stop/'+${opdracht.getId()}">mic_off</a>
+    <a th:if="${taak == null}" id="stop" class="material-icons-round round md-medium md-dark" th:href="'/user/stop/'+${opdracht.getId()}">mic_off</a>
     <br>
     <div th:if="${taak!=null}" class="mt-2">
         <span th:text="${taak}"></span>

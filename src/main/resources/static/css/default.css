@@ -25,6 +25,10 @@ h2{
 
 }
 
+.round{
+    width: 65px;
+}
+
 .material-icons-round {
     color: white;
     border-radius: 45px;
