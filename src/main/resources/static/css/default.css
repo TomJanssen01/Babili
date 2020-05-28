@@ -11,6 +11,8 @@
     body {
         grid-template-columns: [sidebar] max-content [content] auto [end];
         grid-template-rows: [header] 80px [content] auto [footer] auto [end];
+        /*TODO font-sizes pc*/
+        font-size: 1em;
     }
 
     header {
@@ -59,22 +61,10 @@
         max-width: 500px;
         min-width: 120px;
     }
-}
 
-p, a, button, input, span{
-    font-size: 80px;
-}
-
-h1, h2, h3, h4, h5, h6{
-    color: var(--color-logo-dark);
-}
-
-h1{
-    margin-bottom: 30px;
-}
-
-h2{
-    margin-bottom: 15px;
+    #navTitle{
+        display: block;
+    }
 }
 
 html, body {
@@ -86,6 +76,8 @@ body {
     display: grid;
     grid-template-columns: [start] 100% [end];
     grid-template-rows: [header] 150px [navbar] auto [content] auto [footer] auto [end];
+    /*TODO font-sizes mobile*/
+    font-size: 2em;
 }
 
 header {
@@ -106,6 +98,34 @@ footer {
     margin: 10px 40px 10px 40px;
 }
 
+h1, h2, h3, h4, h5, h6{
+    color: var(--color-logo-dark);
+}
+
+h1{
+    margin-bottom: 30px;
+}
+
+h2{
+    margin-bottom: 15px;
+}
+
+/*h3{
+    font-size: ;
+}
+
+h4{
+    font-size: ;
+}
+
+h5{
+    font-size: ;
+}
+
+h6{
+    font-size: ;
+}*/
+
 .delete{
     color: white !important;
     cursor: pointer;
@@ -117,6 +137,7 @@ footer {
     padding: 1px;
     border-width: 2px;
     border-style: solid;
+    margin-right: 20px;
 }
 
 .material-icons-round:hover {
@@ -199,6 +220,10 @@ a.card:hover{
     width: 400px;
 }
 
+#navTitle{
+    display: none;
+}
+
 #sidebar nav a {
     display: flex;
     width: fit-content;
@@ -210,6 +235,10 @@ a.card:hover{
 
 #sidebar nav a i {
     margin-right: 6px;
+}
+
+.btn{
+    font-size: 1em;
 }
 
 .btn-primary {
