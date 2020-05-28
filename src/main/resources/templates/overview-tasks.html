@@ -21,22 +21,22 @@
 <body>
 <header></header>
 <div id="sidebar">
-    <a href="/"><img id="logo" alt="Babili" th:src="'/images/babiligroen300.png'"></a>
+    <a href="/" class="logo-link"><img id="logo" alt="Babili" th:src="'/images/babiligroen300.png'"></a>
     <h1 id="navTitle">Navigatie</h1>
-    <nav id="navbar">
-        <a class="navbarItem btn" href="/">
+    <nav id="navbar" class="nav">
+        <a class="nav-item nav-link active btn" href="/">
             <i class="material-icons-round md-small md-dark">home</i>
             <span class="navbarName">Startpagina</span>
         </a>
-        <a class="navbarItem btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
+        <a class="nav-item nav-link btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Opdrachten</span>
         </a>
-        <a class="navbarItem btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
+        <a class="nav-item nav-link btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn" href="/user/logout">
+        <a class="nav-item nav-link btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
         </a>

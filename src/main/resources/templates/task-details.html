@@ -35,19 +35,19 @@
     </nav>
 </div>
 <main>
-    <div class="tile-icon float-right">
-        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i>
-        <audio controls>
-            <source th:src="${opdracht.getVoorbeeld()}" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
     <div class="task">
         <div class="task-card"><span class="task-number">02</span><span class="task-content"
                                                                         th:text="${opdracht.getOpgave()}"></span>
         </div>
+    </div>
+    <div id="audioExample">
+        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i>
+        <audio controls>
+            <source th:src="${opdracht.getVoorbeeld()}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
     </div>
     <a id="record" class="tile" th:href="'/user/start/'+${opdracht.getId()}">
         <div class="tile-icon">
@@ -59,7 +59,7 @@
         <div class="tile-icon">
             <i class="tile-icon material-icons-round md-medium md-dark">mic_off</i>
         </div>
-        <span>Stop opname</span>
+        <span class="tile-text">Stop opname</span>
     </a>
     <div th:if="${taak!=null}">
         <span th:text="${taak}"></span>
