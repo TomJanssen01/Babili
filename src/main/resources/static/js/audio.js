@@ -1,7 +1,5 @@
 const recordButton = document.getElementById('rec');
-const inleveringButton = document.getElementById('inlevering');
 const stopButton = document.getElementById('stop');
-const playButton = document.getElementById('play');
 let mic, recorder, soundFile;
 var fft;
 var w;
@@ -12,7 +10,6 @@ function setup() {
     cnv.position(recordButton.offsetLeft, recordButton.offsetTop);
     cnv.hide();
     stopButton.style.display = 'none';
-    playButton.style.display = 'none';
     colorMode(HSB);
     mic = new p5.AudioIn();
     fft = new p5.FFT(0.7, 64);
@@ -36,13 +33,12 @@ function setup() {
 function draw() {
     background('rgba(241, 202, 0, 1)');
     var spectrum = fft.analyze();
-    //console.log(spectrum);
     noStroke();
     for (var i = 0; i < spectrum.length; i++) {
         var amp = spectrum[i];
         var y = map(amp, 0, 256, height, 0);
         fill(i, 255, 255);
-        rect(i * w, y, w-2, height - y);
+        rect(i * w, y, w - 2, height - y);
     }
 };
 
@@ -51,7 +47,7 @@ recordButton.addEventListener('click', () => {
     cnv.show();
     stopButton.style.display = 'block';
     stopButton.style.marginLeft = 210 + 'px';
-    inleveringButton.style.marginTop = 170 + 'px';
+    // inleveringButton.style.marginTop = 170 + 'px';
     userStartAudio();
     if (mic.enabled) {
         recorder.record(soundFile);
@@ -62,25 +58,5 @@ stopButton.addEventListener('click', () => {
     recorder.stop();
     mic.stop();
     stopButton.style.display = 'none';
-    playButton.style.display = 'block';
-    playButton.style.marginLeft = 210 + 'px';
 });
 
-playButton.addEventListener('click', () => {
-    fft.setInput(soundFile);
-   soundFile.play();
-});
-
-async function saveSoundFile() {
-    let formData = new FormData();
-    // let audioFile = soundFile.files[0];
-
-    formData.append("audioFile", soundFile);
-
-    try {
-        let r = await fetch('/soundUpload', {method: "POST", body: formData});
-        console.log('HTTP response code:', r.status);
-    } catch (e) {
-        console.log('Huston we have problem...:', e);
-    }
-}

@@ -42,17 +42,6 @@ public class SoundController {
     @GetMapping("/stop/{id}")
     public String stopRec(@PathVariable(required = false) int id, Model model) {
         JavaSoundRecorder.stopRec();
-//        evictAllCaches();
         return "redirect:/user/task-details/" + id + "/opname/" + id;
     }
-
-//    @Autowired
-//    CacheManager cacheManager;
-//
-//    public void evictAllCaches() {
-//        cacheManager.getCacheNames().stream()
-//                .forEach(cacheName -> cacheManager.getCache(cacheName).clear());
-//    }
-
-
 }
