@@ -365,6 +365,7 @@ public class UserController {
             User givenUser = optionalUser.get();
             Collection<Inlevering> submissions = inleveringRepository.findAllByUser_Id(givenUser.getId());
             model.addAttribute("submissions", submissions);
+            model.addAttribute("userName", givenUser.getUsername());
         } else {
             return "home";
         }
