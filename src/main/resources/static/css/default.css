@@ -25,6 +25,10 @@ h2{
 
 }
 
+a{
+    color: initial;
+}
+
 .round{
     width: 65px;
 }

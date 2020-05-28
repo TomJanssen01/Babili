@@ -28,10 +28,6 @@
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn">
-            <i class="material-icons-round md-small md-dark">person</i>
-            <span class="navbarName">Mijn account</span>
-        </a>
         <a class="navbarItem btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
@@ -44,7 +40,7 @@
             <a th:href="'/user/' + ${submission.opdracht.id} + '/' + ${userId} + '/' + 'task-feedback'">
             <div class="card-body">
                 <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
-                <p class="card-text" th:text="${submission.getBeoordeling().isEmpty()}?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
+                <p class="card-text textColor" th:text="${submission.getBeoordeling().isEmpty()}?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
             </div>
             </a>
         </div>

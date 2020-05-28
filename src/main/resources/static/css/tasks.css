@@ -46,3 +46,11 @@ a.task:hover{
     text-align: justify;
     align-self: center;
 }
+
+.line{
+    margin-top: 10px;
+}
+
+.textColor{
+    color: initial;
+}
