@@ -30,7 +30,7 @@ main {
     grid-row: content / footer;
     grid-column: start / end;
     padding: 30px 20px 10px 20px;
-    min-height: 300px;
+    min-height: 500px;
 }
 
 footer {
@@ -234,10 +234,11 @@ a.card:hover{
 
 #audioExample{
     display: flex;
+    align-items: center;
 }
 
 .tile {
-    border: var(--color-logo-dark-transparant) solid 10px;
+    border: var(--color-logo-dark) solid 10px;
     border-radius: 15px;
     margin: 10px;
     text-align: center;
@@ -267,7 +268,7 @@ a.card:hover{
 }
 
 .tile:hover {
-    border-color: var(--color-logo-dark);
+    border-color: var(--color-logo-dark-darkened);
 }
 
 .tile input {
