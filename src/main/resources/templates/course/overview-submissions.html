@@ -35,13 +35,17 @@
     </nav>
 </div>
 <main>
+    <h1>Inleveringen van <span th:text="${userName}"></span></h1>
     <div>
         <div th:if="${submissions != null && !submissions.isEmpty()}" class="card" th:each="submission:${submissions}">
             <a th:href="'/user/' + ${submission.opdracht.id} + '/' + ${userId} + '/' + 'task-feedback'">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
-                <p class="card-text textColor" th:text="${submission.getBeoordeling().isEmpty()}?'geen beoordeling':'Beoordeling: '+${submission.getBeoordeling()}"></p>
-            </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
+                    <p class="card-text textColor">
+                        <b>Moeilijkheidsbeoordeling: </b><span th:text="${submission.getBeoordeling().isEmpty()}?'/':${submission.getBeoordeling()}"></span><br>
+                        <b>Feedback: </b><span th:text="${submission.getFeedback() != null}?${submission.getFeedback()}:'/'"></span>
+                    </p>
+                </div>
             </a>
         </div>
         <div th:unless="${submissions != null && !submissions.isEmpty()}">

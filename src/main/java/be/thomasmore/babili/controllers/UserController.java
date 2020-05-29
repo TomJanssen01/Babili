@@ -34,6 +34,16 @@ public class UserController {
     @Autowired
     private CursusRepository cursusRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final ArrayList<String> DIFFICULTIES;
+
+    public UserController() {
+        this.DIFFICULTIES = new ArrayList<>();
+        this.DIFFICULTIES.add("heel gemakkelijk");
+        this.DIFFICULTIES.add("gemakkelijk");
+        this.DIFFICULTIES.add("neutraal");
+        this.DIFFICULTIES.add("moeilijk");
+        this.DIFFICULTIES.add("heel moeilijk");
+    }
 
     // Logout form
     @RequestMapping("/logout")
@@ -124,9 +134,21 @@ public class UserController {
         if (rating != null) {
             if (optionalSubmission.isPresent()) {
                 Inlevering currentSubmission = optionalSubmission.get();
-                ++rating;
-                System.out.println(rating);
-                currentSubmission.setBeoordeling(rating.toString());
+                /*String difficultyRating = "";
+                switch (rating){
+                    case 0: difficultyRating = "heel gemakkelijk";
+                    break;
+                    case 1: difficultyRating = "gemakkelijk";
+                    break;
+                    case 2: difficultyRating = "neutraal";
+                    break;
+                    case 3: difficultyRating = "moeilijk";
+                    break;
+                    case 4: difficultyRating = "heel moeilijk";
+                    break;
+                    default: difficultyRating = "/";
+                }*/
+                currentSubmission.setBeoordeling(DIFFICULTIES.get(rating));
                 inleveringRepository.save(currentSubmission);
             }
             return "redirect:/user/overview-tasks";
@@ -365,6 +387,7 @@ public class UserController {
             User givenUser = optionalUser.get();
             Collection<Inlevering> submissions = inleveringRepository.findAllByUser_Id(givenUser.getId());
             model.addAttribute("submissions", submissions);
+            model.addAttribute("userName", givenUser.getUsername());
         } else {
             return "home";
         }
