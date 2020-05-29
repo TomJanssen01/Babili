@@ -449,6 +449,6 @@ public class UserController {
             inlevering.setFeedback(feedback);
             inleveringRepository.save(inlevering);
         }
-        return "redirect:/user/course/" + opdracht.getCursus().getId() + "/management";
+        return "redirect:/user/course/" + optionalInlevering.get().getOpdracht().getCursus().getId() + "/management/" + userId + "/overview-submissions";
     }
 }
