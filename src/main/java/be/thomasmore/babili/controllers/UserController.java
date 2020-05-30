@@ -231,6 +231,7 @@ public class UserController {
 //                                 @RequestParam String voorbeeldzin,
                                  Principal principal,
                                  @PathVariable(required = true) int courseId,
+                                 @RequestParam String voorbeeld,
                                  Model model) {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
@@ -242,10 +243,10 @@ public class UserController {
                 Opdracht opdracht = new Opdracht();
                 opdracht.setTitel(titel);
                 opdracht.setOpgave(opgave);
+                opdracht.setVoorbeeld(voorbeeld);
                 if (cursusRepository.findById(courseId).isPresent()) {
                     opdracht.setCursus(cursus);
                 }
-//                opdracht.setVoorbeeld(voorbeeldzin);
                 opdrachtRepository.save(opdracht);
                 File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + cursusPath + "/" + titel.replaceAll(" ", "").toLowerCase());
                 file.mkdir();
