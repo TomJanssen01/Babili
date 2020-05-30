@@ -54,3 +54,9 @@ a.task:hover{
 .textColor{
     color: initial;
 }
+
+.large{
+    font-size: 150%;
+    margin-top: 15px;
+    color: var(--color-logo-dark);
+}

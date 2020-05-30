@@ -39,10 +39,7 @@
 <main>
     <div class="tile-icon float-right">
         <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i>
-        <audio controls>
-            <source th:src="${opdracht.getVoorbeeld()}" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
+        <span class="font-weight-bold large" th:text="${opdracht.getVoorbeeld()}"></span>
     </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>

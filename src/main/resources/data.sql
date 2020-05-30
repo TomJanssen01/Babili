@@ -29,9 +29,9 @@ VALUES
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD,  CURSUS_ID)
 values
-(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 0),
-(nextval ('opdracht_seq'), 'Supermarkt', 'Ga naar een supermarkt in je beurt en vraag meer uitleg over een product dat je wil kopen.', '/audioFiles/bakkerexample/opdracht1.wav', 1),
-(nextval ('opdracht_seq'), 'Corona', 'Spreek met iemand uit je omgeving over het coronavirus.', '/audioFiles/bakkerexample/opdracht1.wav', 2)
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'Voor mij een groot grof brood alstublieft.', 0),
+(nextval ('opdracht_seq'), 'Supermarkt', 'Ga naar een supermarkt in je beurt en vraag meer uitleg over een product dat je wil kopen.', 'Hoeveel is het totaalbedrag?', 1),
+(nextval ('opdracht_seq'), 'Corona', 'Spreek met iemand uit je omgeving over het coronavirus.', 'Wat heb jij gedaan tijdens de lockdown?', 2)
 ;
 
 
