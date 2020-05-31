@@ -60,7 +60,7 @@
     </a>
 
     <h1 sec:authorize="hasAuthority('STUDENT')">Opdrachten</h1>
-    <a class="task" th:if="${opdrachtFromDB != null}" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="'task-details/'+${opdracht.getId()}">
+    <a class="task" sec:authorize="hasAuthority('STUDENT')" th:each="opdracht:${opdrachtFromDB}" th:href="${opdracht.getInleveringen().isEmpty()} ? 'task-details/'+${opdracht.getId()} : null">
         <i th:if="${opdracht.getInleveringen().isEmpty()}" class="task-state task-right material-icons-round md-small md-dark">brightness_1</i>
         <i th:unless="${opdracht.getInleveringen().isEmpty()}" class="task-state material-icons-round md-small md-dark">check</i>
         <div class="task-card"><span class="task-number" th:text="${opdracht.getId()}">01</span><span
