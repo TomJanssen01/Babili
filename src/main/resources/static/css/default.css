@@ -341,17 +341,5 @@ select {
     #rating {
         width: 100%;
     }
-
-    .babsDiv{
-        position: fixed;
-        bottom: 0;
-        right: 100px;
-        width: 290px;
-        height: 300px;
-    }
-    .babsImg{
-        width: 100%;
-        height: 100%;
-    }
 }
 
