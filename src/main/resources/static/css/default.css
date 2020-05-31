@@ -16,8 +16,6 @@ body {
     display: grid;
     grid-template-columns: [start] 100% [end];
     grid-template-rows: [header] 150px [navbar] auto [content] auto [footer] auto [end];
-    /*TODO font-sizes mobile*/
-    font-size: 2em;
 }
 
 header {
@@ -50,22 +48,6 @@ h1{
 h2{
     margin-bottom: 15px;
 }
-
-/*h3{
-    font-size: ;
-}
-
-h4{
-    font-size: ;
-}
-
-h5{
-    font-size: ;
-}
-
-h6{
-    font-size: ;
-}*/
 
 .delete{
     color: white !important;
@@ -115,15 +97,15 @@ h6{
 }
 
 .md-small {
-    font-size: 96px;
+    font-size: 36px;
 }
 
 .md-medium {
-    font-size: 144px;
+    font-size: 60px;
 }
 
 .md-large {
-    font-size: 204px;
+    font-size: 96px;
 }
 
 .card{
@@ -163,7 +145,7 @@ a.card:hover{
 }
 
 #sidebar #logo {
-    width: 400px;
+    width: 200px;
 }
 
 #navTitle{
@@ -181,10 +163,6 @@ a.card:hover{
 
 #sidebar nav a i {
     margin-right: 6px;
-}
-
-.btn{
-    font-size: 1em;
 }
 
 .btn-primary {
@@ -334,8 +312,6 @@ select {
     body {
         grid-template-columns: [sidebar] max-content [content] auto [end];
         grid-template-rows: [header] 80px [content] auto [footer] auto [end];
-        /*TODO font-sizes pc*/
-        font-size: 1em;
     }
 
     header {
@@ -360,29 +336,8 @@ select {
         margin-right: 30px;
     }
 
-    #sidebar #logo {
-        width: 200px;
-    }
-
     #rating {
         width: 40%;
-    }
-
-    .md-small {
-        font-size: 36px;
-    }
-
-    .md-medium {
-        font-size: 60px;
-    }
-
-    .md-large {
-        font-size: 96px;
-    }
-
-    .logo {
-        max-width: 500px;
-        min-width: 120px;
     }
 
     #sidebar nav {
