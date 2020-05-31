@@ -98,17 +98,22 @@ public class UserController {
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        User UserFromDB = null;
+        User userFromDB = null;
         if (principal != null) {
             userName = principal.getName();
             Optional<User> optionalUser = userRepository.findByUsername(userName);
             if (optionalUser.isPresent()) {
-                UserFromDB = optionalUser.get();
+                userFromDB = optionalUser.get();
             }
         }
         String pathName = "/audioFiles/" + cursusPath(id) + "/" + userName + ".wav";
-        Inlevering newInlevering = new Inlevering(pathName, opdrachtFromDB, UserFromDB);
-        inleveringRepository.save(newInlevering);
+        Inlevering newInlevering = null;
+        Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(userFromDB.getId(), opdrachtFromDB);
+        if (!optionalInlevering.isPresent()) {
+            System.out.println("Inlevering is nieuw");
+            newInlevering = new Inlevering(pathName, opdrachtFromDB, userFromDB);
+            inleveringRepository.save(newInlevering);
+        }
         return "redirect:/user/inlevering/{id}/confirmation";
     }
 
