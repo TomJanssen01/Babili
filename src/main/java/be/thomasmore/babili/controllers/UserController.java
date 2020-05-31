@@ -110,7 +110,6 @@ public class UserController {
         Inlevering newInlevering = null;
         Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(userFromDB.getId(), opdrachtFromDB);
         if (!optionalInlevering.isPresent()) {
-            System.out.println("Inlevering is nieuw");
             newInlevering = new Inlevering(pathName, opdrachtFromDB, userFromDB);
             inleveringRepository.save(newInlevering);
         }
