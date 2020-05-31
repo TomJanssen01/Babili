@@ -64,6 +64,9 @@
     <a th:href="'/user/inlevering/'+${opdracht.getId()}"><input id="hand-in" class="btn btn-primary-outline"
                                                                 type="submit" value="Inleveren"></a>
     </div>
+    <div class="babsDiv">
+        <img class="babsImg" th:src="'/images/Babs_CloseUp_v001.png'" alt="Babs">
+    </div>
 </main>
 <script th:if="${taak == null}" src="/js/audio.js" type="text/javascript"></script>
 <footer th:replace="fragments/footer.html :: footer"></footer>
