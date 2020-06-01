@@ -208,13 +208,17 @@ public class UserController {
     public String postEditCourse(Model model,
                                  @PathVariable(required = true) Integer id,
                                  @PathVariable(required = true) int courseId,
-                                 @RequestParam(required = false) String opgave) {
+                                 @RequestParam(required = false) String opgave,
+                                 @RequestParam(required = false) String voorbeeld,
+                                 @RequestParam(required = false) String titel) {
         Opdracht opdrachtFromDB = null;
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
         opdrachtFromDB.setOpgave(opgave);
+        opdrachtFromDB.setVoorbeeld(voorbeeld);
+        opdrachtFromDB.setTitel(titel);
         opdrachtRepository.save(opdrachtFromDB);
         model.addAttribute("opdracht", opdrachtFromDB);
         return "redirect:/user/course/"+courseId+"/management";
@@ -283,11 +287,12 @@ public class UserController {
     @PostMapping({"/course/{courseId}/management/edit-course"})
     public String editCourse(@PathVariable(required = false) int courseId,
                              @RequestParam String beschrijving,
+                             @RequestParam String naam,
                              Model model) {
         Optional<Cursus> cursusFromDb = cursusRepository.findById(courseId);
         if (cursusFromDb.isPresent()) {
             Cursus cursus = cursusFromDb.get();
-            //cursus.setNaam(naam);
+            cursus.setNaam(naam);
             cursus.setBeschrijving(beschrijving);
             cursusRepository.save(cursus);
         }
