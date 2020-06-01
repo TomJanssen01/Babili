@@ -86,9 +86,9 @@
         </div>
     </a>
     <p sec:authorize="hasAuthority('STUDENT')" th:unless="${opdrachtFromDB != null}"> Je hebt geen opdrachten.</p>
-    <div class="babsDiv">
-        <img class="babsImg" th:src="'/images/Babs_CloseUp_v001.png'" alt="Babs">
-    </div>
+<!--    <div class="babsDiv">-->
+<!--        <img class="babsImg" th:src="'/images/Babs_CloseUp_v001.png'" alt="Babs">-->
+<!--    </div>-->
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>

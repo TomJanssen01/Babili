@@ -12,6 +12,8 @@ html, body {
     text-align: left;
 }
 
+
+
 body {
     display: grid;
     grid-template-columns: [start] 100% [end];
@@ -324,6 +326,14 @@ select {
     body {
         grid-template-columns: [sidebar] max-content [content] auto [end];
         grid-template-rows: [header] 80px [content] auto [footer] auto [end];
+    }
+
+    main{
+        background-image: url("../images/Babs_CloseUp_v001.png");
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        background-size: 20%;
+        height: 90vh;
     }
 
     header {
