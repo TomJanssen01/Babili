@@ -13,6 +13,7 @@ function setup() {
     cnv.hide();
     stopButton.style.display = 'none';
     playButton.style.display = 'none';
+    inleveringButton.style.display = 'none';
     colorMode(HSB);
     mic = new p5.AudioIn();
     fft = new p5.FFT(0.7, 64);
@@ -64,6 +65,8 @@ stopButton.addEventListener('click', () => {
     stopButton.style.display = 'none';
     playButton.style.display = 'block';
     playButton.style.marginLeft = 210 + 'px';
+    inleveringButton.style.display = 'block';
+
 });
 
 playButton.addEventListener('click', () => {
@@ -71,32 +74,7 @@ playButton.addEventListener('click', () => {
     soundFile.play();
 });
 
-async function saveSoundFile() {
-    let formData = new FormData();
-    // let audioFile = soundFile.files[0];
 
-    formData.append("audioFile", soundFile);
-
-    try {
-        let r = await fetch('/soundUpload', {method: "POST", body: formData});
-        console.log('HTTP response code:', r.status);
-    } catch (e) {
-        console.log('Huston we have problem...:', e);
-    }
-}
-
-// const testOnHomeController = async function () {
-//     console.log("test");
-//     try {
-//         const form = new FormData(document.getElementById('soundUploadTest'));
-//         let r = await fetch('/soundUploadTest', {method: "POST",  body: form});
-//         //NIET NODIG mode: "same-origin", referrerPolicy: "origin", credentials: 'include'
-//         console.log('HTTP response code:', r.status);
-//     } catch (e) {
-//         console.log('Huston we have problem...:', e);
-//     }
-//
-// }
 
 const testOnUserController = async function () {
     console.log("test");

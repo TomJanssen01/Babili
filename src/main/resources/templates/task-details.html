@@ -42,11 +42,7 @@
 </div>
 <main>
     <div class="tile-icon float-right">
-        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i>
-        <audio controls>
-            <source th:src="${opdracht.getVoorbeeld()}" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
+        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i><span th:text="${opdracht.getVoorbeeld()}"></span>
     </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>
@@ -60,7 +56,7 @@
     <button id="play" class="tile-icon material-icons-round md-medium md-dark">play_circle_filled</button>
     <br>
     <div id="inlevering">
-        <a th:href="'/user/inlevering/'+${opdracht.getId()}"><button onclick="testOnUserController()" class="btn btn-primary-outline">test on userController</button></a>
+        <a th:href="'/user/inlevering/'+${opdracht.getId()}"><button onclick="testOnUserController()" class="btn btn-primary-outline">Inleveren</button></a>
     </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>

@@ -27,8 +27,6 @@ import java.util.Optional;
 public class HomeController {
 
     private Logger logger = LoggerFactory.getLogger(HomeController.class);
-    @Value("${upload.sound.dir}")
-    private String uploadSoundDirString;
 
     @GetMapping({"/","/{error}"})
     public String home(Principal principal, @PathVariable(required = false) String error, Model model) {
@@ -44,22 +42,5 @@ public class HomeController {
     public String register() {
         return "register";
     }
-
-    @PostMapping("/soundUpload")
-    public String soundUploadPost(@PathVariable MultipartFile soundFile,
-                                  @PathVariable int id,
-                                  Model model,
-                                  Principal principal){
-        String soundName = soundFile.getOriginalFilename();
-        File soundFileDir = new File(uploadSoundDirString);
-        if (!soundFileDir.exists()) soundFileDir.mkdirs();
-        File audioFile = new File(uploadSoundDirString, soundName);
-        try{
-            soundFile.transferTo(audioFile);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return "soundUpload";
-    };
 
 }

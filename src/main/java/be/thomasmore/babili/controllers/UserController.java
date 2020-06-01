@@ -11,12 +11,15 @@ import be.thomasmore.babili.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -33,6 +36,8 @@ public class UserController {
     private InleveringRepository inleveringRepository;
     @Autowired
     private CursusRepository cursusRepository;
+    @Value("${upload.sound.dir}")
+    private String uploadSoundDirString;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
     private final ArrayList<String> DIFFICULTIES;
 
@@ -479,4 +484,31 @@ public class UserController {
         }
         return "redirect:/user/course/" + optionalInlevering.get().getOpdracht().getCursus().getId() + "/management/" + userId + "/overview-submissions";
     }
+
+    @PostMapping("/soundUpload")
+    public String soundUploadPost(//eerst een int -- om eerst iets simpel te testen. Hiervan kan je een hidden field maken die de id bevat
+                                  @RequestParam int index,
+                                  //dan de audio file
+                                  //pas op het moet RequestParam zijn en de naam moet overeen komen met de naam in de form --> dus in de FormData
+                                  //ik heb dat op (required = false) gezet om te kunnen testen met de submit knop in de form,
+                                  // en misschien wil je dat zelf ook wel houden -- als de user op die knop duwt en nog niks gerecord heeft
+                                  @RequestParam(required = false) MultipartFile audioFile,
+                                  Model model,
+                                  Principal principal){
+        logger.info("soundUpload POST");
+        if (audioFile==null)         return "redirect:/user/task-details/2";
+        String soundName = "sound.wav";
+
+        //er is geen original filename volgens mij, het is niet geupload door de user, het is recorded door de javascript
+//        String soundName = soundFile.getOriginalFilename();
+        File soundFileDir = new File(uploadSoundDirString);
+        if (!soundFileDir.exists()) soundFileDir.mkdirs();
+        File audioFileHandler = new File(uploadSoundDirString, soundName);
+        try{
+            audioFile.transferTo(audioFileHandler);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return "redirect:/user/inlevering/"+index;//tijdelijk hard-coded op 2 om te testen
+    };
 }
