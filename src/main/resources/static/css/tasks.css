@@ -1,5 +1,6 @@
 .task{
     display: flex;
+    margin-bottom: 10px;
 }
 
 a.task{
