@@ -49,6 +49,10 @@ h2{
     margin-bottom: 15px;
 }
 
+.navbar{
+    padding: 2px;
+}
+
 .delete{
     color: white !important;
     cursor: pointer;
@@ -341,10 +345,18 @@ select {
     }
 
     #sidebar nav {
-        flex-direction: column;
+        /*flex-direction: column;*/
     }
 
     #navTitle{
+        display: block;
+    }
+
+    #btnToggle{
+        display: none;
+    }
+
+    #collapseToggle{
         display: block;
     }
 }
