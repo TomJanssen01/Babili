@@ -1,5 +1,7 @@
 const recordButton = document.getElementById('rec');
+const inleveringButton = document.getElementById('inlevering');
 const stopButton = document.getElementById('stop');
+const playButton = document.getElementById('play');
 let mic, recorder, soundFile;
 var fft;
 var w;
@@ -10,6 +12,7 @@ function setup() {
     cnv.position(recordButton.offsetLeft, recordButton.offsetTop);
     cnv.hide();
     stopButton.style.display = 'none';
+    playButton.style.display = 'none';
     colorMode(HSB);
     mic = new p5.AudioIn();
     fft = new p5.FFT(0.7, 64);
@@ -33,6 +36,7 @@ function setup() {
 function draw() {
     background('rgba(241, 202, 0, 1)');
     var spectrum = fft.analyze();
+    //console.log(spectrum);
     noStroke();
     for (var i = 0; i < spectrum.length; i++) {
         var amp = spectrum[i];
@@ -47,7 +51,7 @@ recordButton.addEventListener('click', () => {
     cnv.show();
     stopButton.style.display = 'block';
     stopButton.style.marginLeft = 210 + 'px';
-    // inleveringButton.style.marginTop = 170 + 'px';
+    inleveringButton.style.marginTop = 170 + 'px';
     userStartAudio();
     if (mic.enabled) {
         recorder.record(soundFile);
@@ -58,5 +62,53 @@ stopButton.addEventListener('click', () => {
     recorder.stop();
     mic.stop();
     stopButton.style.display = 'none';
+    playButton.style.display = 'block';
+    playButton.style.marginLeft = 210 + 'px';
 });
 
+playButton.addEventListener('click', () => {
+    fft.setInput(soundFile);
+    soundFile.play();
+});
+
+async function saveSoundFile() {
+    let formData = new FormData();
+    // let audioFile = soundFile.files[0];
+
+    formData.append("audioFile", soundFile);
+
+    try {
+        let r = await fetch('/soundUpload', {method: "POST", body: formData});
+        console.log('HTTP response code:', r.status);
+    } catch (e) {
+        console.log('Huston we have problem...:', e);
+    }
+}
+
+// const testOnHomeController = async function () {
+//     console.log("test");
+//     try {
+//         const form = new FormData(document.getElementById('soundUploadTest'));
+//         let r = await fetch('/soundUploadTest', {method: "POST",  body: form});
+//         //NIET NODIG mode: "same-origin", referrerPolicy: "origin", credentials: 'include'
+//         console.log('HTTP response code:', r.status);
+//     } catch (e) {
+//         console.log('Huston we have problem...:', e);
+//     }
+//
+// }
+
+const testOnUserController = async function () {
+    console.log("test");
+    try {
+        const form = new FormData(document.getElementById('soundUpload'));
+        if (soundFile.getBlob() == null) console.log('soundfile is null');
+        form.append("audioFile", soundFile.getBlob());//error: soundFile is not a blob
+        form.append("index", 55);
+        let r = await fetch('/user/soundUpload', {method: "POST",  body: form});
+        console.log('HTTP response code:', r.status);
+    } catch (e) {
+        console.log('Huston we have problem...:', e);
+    }
+
+}
