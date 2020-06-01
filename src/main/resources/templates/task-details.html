@@ -30,10 +30,6 @@
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn">
-            <i class="material-icons-round md-small md-dark">person</i>
-            <span class="navbarName">Mijn account</span>
-        </a>
         <a class="navbarItem btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
@@ -42,7 +38,7 @@
 </div>
 <main>
     <div class="tile-icon float-right">
-        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i><span th:text="${opdracht.getVoorbeeld()}"></span>
+        <i class="tile-icon material-icons-round md-medium md-dark mr-1">help</i><span class="font-weight-bold large" th:text="${opdracht.getVoorbeeld()}"></span>
     </div>
     <h1 id="taskName">Opdracht</h1>
     <h2 th:text="${opdracht.getTitel()}"></h2>

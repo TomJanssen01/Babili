@@ -81,15 +81,8 @@ public class UserController {
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(id);
         Opdracht opdrachtFromDB = null;
         String user = null;
-        if (principal != null) {
-            user = principal.getName();
-        }
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
-        }
-        if (opname != null) {
-            model.addAttribute("taak", "Jouw opname is bewaard.");
-            model.addAttribute("audioPath", "/audioFiles/" + cursusPath(id) + "/" + user + ".wav");
         }
         model.addAttribute("opdracht", opdrachtFromDB);
         return "task-details";
@@ -111,7 +104,7 @@ public class UserController {
                 userFromDB = optionalUser.get();
             }
         }
-        String pathName = "/audioFiles/" + cursusPath(id) + "/" + userName + ".wav";
+        String pathName = cursusPath(id) + "/" + userName + ".wav";
         Inlevering newInlevering = null;
         Optional<Inlevering> optionalInlevering = inleveringRepository.findByUser_IdAndOpdracht(userFromDB.getId(), opdrachtFromDB);
         if (!optionalInlevering.isPresent()) {
@@ -192,7 +185,7 @@ public class UserController {
                 cursus.setBeschrijving(beschrijving);
                 cursusRepository.save(cursus);
                 String path = naam.replaceAll(" ", "").toLowerCase();
-                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + path);
+                File file = new File(uploadSoundDirString + "/" + cursus.getId());
                 file.mkdir();
             }
         }
@@ -245,7 +238,6 @@ public class UserController {
         Iterable<Opdracht> alleOpdrachten = opdrachtRepository.findAll();
         model.addAttribute("task", alleOpdrachten);
         Cursus cursus = cursusRepository.findById(courseId).get();
-        String cursusPath = cursus.getNaam().replaceAll(" ", "").toLowerCase();
         Optional<Opdracht> optionalOpdracht = opdrachtRepository.findOpdrachtByTitel(titel);
         if (optionalOpdracht.isEmpty()) {
             if (titel != null) {
@@ -257,7 +249,7 @@ public class UserController {
                     opdracht.setCursus(cursus);
                 }
                 opdrachtRepository.save(opdracht);
-                File file = new File("src/main/resources/static/audioFiles/" + cursus.getId() + cursusPath + "/" + titel.replaceAll(" ", "").toLowerCase());
+                File file = new File(uploadSoundDirString + "/" + cursus.getId() + "/" + opdracht.getId());
                 file.mkdir();
             }
         }
@@ -345,7 +337,7 @@ public class UserController {
                 inleveringRepository.deleteByOpdracht(task);
                 opdrachtRepository.delete(task);
 
-                File index = new File("src/main/resources/static/audioFiles/" + course.getId() + course.getNaam().replaceAll(" ", "").toLowerCase() + "/" + task.getTitel().replaceAll(" ", "").toLowerCase());
+                File index = new File(uploadSoundDirString+ "/" + course.getId() + "/" + taskId);
                 if (index.exists()) {
                     String[] entries = index.list();
                     for (String s : entries) {
@@ -450,7 +442,7 @@ public class UserController {
         if (optionalOpdracht.isPresent()) {
             opdrachtFromDB = optionalOpdracht.get();
         }
-        return opdrachtFromDB.getCursus().getId() + opdrachtFromDB.getCursus().getNaam().replaceAll(" ", "").toLowerCase() + "/" + opdrachtFromDB.getTitel().replaceAll(" ", "").toLowerCase();
+        return uploadSoundDirString + "/" + opdrachtFromDB.getCursus().getId() + "/" + opdrachtFromDB.getId();
     }
 
     @GetMapping("/{opdrachtId}/{userId}/task-feedback")
@@ -464,7 +456,7 @@ public class UserController {
         String user = userFromDB.getUsername();
         model.addAttribute("user", userFromDB);
         model.addAttribute("opdracht", opdracht);
-        model.addAttribute("audioPath", "/audioFiles/" + cursusPath(opdrachtId) + "/" + user + ".wav");
+        model.addAttribute("audioPath", cursusPath(opdrachtId) + "/" + user + ".wav");
         return "task-feedback";
     }
 
@@ -495,20 +487,21 @@ public class UserController {
                                   @RequestParam(required = false) MultipartFile audioFile,
                                   Model model,
                                   Principal principal){
-        logger.info("soundUpload POST");
-        if (audioFile==null)         return "redirect:/user/task-details/2";
-        String soundName = "sound.wav";
+        logger.info("Meegegeven index: "+index);
+        Opdracht opdrachtFromDB = null;
+        Optional<Opdracht> optionalOpdracht = opdrachtRepository.findById(index);
+        if (optionalOpdracht.isPresent()) opdrachtFromDB = optionalOpdracht.get();
+        String soundName = principal.getName() + ".wav";
 
-        //er is geen original filename volgens mij, het is niet geupload door de user, het is recorded door de javascript
-//        String soundName = soundFile.getOriginalFilename();
-        File soundFileDir = new File(uploadSoundDirString);
+        String pathDir = uploadSoundDirString + "/" + opdrachtFromDB.getCursus().getId() + "/" + opdrachtFromDB.getId() + "/";
+        File soundFileDir = new File(pathDir);
         if (!soundFileDir.exists()) soundFileDir.mkdirs();
-        File audioFileHandler = new File(uploadSoundDirString, soundName);
+        File audioFileHandler = new File(pathDir, soundName);
         try{
             audioFile.transferTo(audioFileHandler);
         }catch (IOException e){
             e.printStackTrace();
         }
-        return "redirect:/user/inlevering/"+index;//tijdelijk hard-coded op 2 om te testen
+        return "redirect:/user/inlevering/"+index;
     };
 }
