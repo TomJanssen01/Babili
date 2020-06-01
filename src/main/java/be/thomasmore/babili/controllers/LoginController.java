@@ -57,7 +57,7 @@ public class LoginController {
                 model.addAttribute("classDanger", "form-control border-danger");
             } else if (filter.equals("userAndEmailInUse")) {
                 model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
-                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+                model.addAttribute("emailInUse", "Dit e-mail adres is reeds gebruikt. Gebruik een ander e-mail adres.");
             } else if (filter.equals("emailInUsePasswordNotMatching")) {
                 model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
                 model.addAttribute("classDanger", "form-control border-danger");
@@ -128,7 +128,7 @@ public class LoginController {
             if (filter.equals("userName")) {
                 model.addAttribute("userAlreadyInUse", "Deze gebruikersnaam is al reeds gekozen. Kies een andere gebruikersnaam!");
             } else if (filter.equals("emailInUse")) {
-                model.addAttribute("emailInUse", "Dit e-mail adres is al reeds gebruikt. Gebruik een ander e-mail adres.");
+                model.addAttribute("emailInUse", "Dit e-mail adres is reeds gebruikt. Gebruik een ander e-mail adres.");
             } else if (filter.equals("PasswordNotMatching")) {
                 model.addAttribute("passwordNotOK", "Het ingegeven paswoord komt niet overeen.");
                 model.addAttribute("classDanger", "form-control border-danger");

@@ -23,15 +23,15 @@ VALUES
 (nextval('USER_SEQ'), 'marc_student', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Marc Decaluwe', 'marc.decaluwe@student.thomasmore.be', 'STUDENT', 0),
 (nextval('USER_SEQ'), 'vera_student', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Vera Peeters', 'vera.peeters@student.thomasmore.be', 'STUDENT',2),
 (nextval('USER_SEQ'), 'Tom', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Tom De Boeck', 'Tom@Tom.be', 'STUDENT', null),
-(nextval('USER_SEQ'), 'Sara', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Sara van der Heyden', 'saravdh@hotmail.be', 'STUDENT', null)
+(nextval('USER_SEQ'), 'Sara', '$2a$10$jwHSeW.gbG5SUEuN9XmnweGobyQFj.vZU0xwVf0jrrE1t7jYwy2Hy', 'Sara van der Heyden', 'saravdh@hotmail.be', 'STUDENT', 2)
 ;
 
 insert into opdracht
 (ID, TITEL, OPGAVE, VOORBEELD,  CURSUS_ID)
 values
-(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', '/audioFiles/bakkerexample/opdracht1.wav', 0),
-(nextval ('opdracht_seq'), 'Supermarkt', 'Ga naar een supermarkt in je beurt en vraag meer uitleg over een product dat je wil kopen.', '/audioFiles/bakkerexample/opdracht1.wav', 1),
-(nextval ('opdracht_seq'), 'Corona', 'Spreek met iemand uit je omgeving over het coronavirus.', '/audioFiles/bakkerexample/opdracht1.wav', 2)
+(nextval ('opdracht_seq'), 'Bakker', 'Ga naar de bakker in jouw buurt en koop een brood en iets lekkers voor jezelf of jouw gezin', 'Voor mij een groot grof brood alstublieft.', 0),
+(nextval ('opdracht_seq'), 'Supermarkt', 'Ga naar een supermarkt in je beurt en vraag meer uitleg over een product dat je wil kopen.', 'Hoeveel is het totaalbedrag?', 1),
+(nextval ('opdracht_seq'), 'Corona', 'Spreek met iemand uit je omgeving over het coronavirus.', 'Wat heb jij gedaan tijdens de lockdown?', 2)
 ;
 
 

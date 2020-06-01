@@ -36,10 +36,6 @@
             <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
             <span class="navbarName">Cursussen</span>
         </a>
-        <a class="navbarItem btn">
-            <i class="material-icons-round md-small md-dark">person</i>
-            <span class="navbarName">Mijn account</span>
-        </a>
         <a class="navbarItem btn" href="/user/logout">
             <i class="material-icons-round md-small md-dark">exit_to_app</i>
             <span class="navbarName">Afmelden</span>
@@ -68,7 +64,7 @@
                             </div>
                         </div>
                         <div class="filterrow">
-                            <a th:href="'/user/overview-tasks'">
+                            <a th:href="'/user/course/'+${opdracht.id}+'/management'">
                                 <input type="button" class="btn btn-primary float-right" value="Annuleren">
                             </a>
                         </div>

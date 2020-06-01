@@ -58,6 +58,14 @@ h2{
     cursor: pointer;
 }
 
+a{
+    color: initial;
+}
+
+.round{
+    width: 65px;
+}
+
 .material-icons-round {
     color: white;
     border-radius: 100px;

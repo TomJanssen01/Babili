@@ -9,6 +9,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="/css/default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/>
+    <style>
+        .babsDiv{
+            position: fixed;
+            bottom: 0;
+            right: 100px;
+            width: 290px;
+            height: 300px;
+        }
+        .babsImg{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <header></header>
@@ -37,6 +50,9 @@
     <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
         <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>
     </p>
+    <div class="babsDiv">
+        <img class="babsImg" th:src="'/images/Babs_CloseUp_v001.png'" alt="Babs">
+    </div>
 </main>
 <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
